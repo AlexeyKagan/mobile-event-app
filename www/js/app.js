@@ -5,7 +5,8 @@ angular.module('mainApp',
     'app.routes',
     'loginCtrl',
     'signupCtrl',
-    'homeCtrl'
+    'homeCtrl',
+    'taskCtrl'
   ]);
 
 

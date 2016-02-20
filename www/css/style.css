@@ -165,12 +165,21 @@ body {
     .main-signup__back {
       display: none; } }
 
+ion-side-menus {
+  background: url("../img/background/background-home.png") no-repeat;
+  background-size: 100% 100%;
+  transition: all 0.5s; }
+
+.sss {
+  background-size: 100% 100%;
+  transition: all 0.5s; }
+
 .main-home {
   width: 100%;
   height: 100%;
   background: inherit; }
   .main-home__side-menu-content {
-    background: url("../img/background/background-home.png");
+    background: inherit;
     background-size: 100% 100%;
     transition: all 0.5s; }
   .main-home__top {
@@ -209,23 +218,66 @@ body {
         padding-top: 15%; }
 
 .nav {
-  color: white;
-  font-size: 3rem;
   position: absolute;
-  padding-top: 7px;
-  padding-left: 19px;
   width: 4rem;
   height: 4rem;
-  background: #ff3366;
   border-radius: 50%;
   right: 5%;
-  bottom: 11%; }
+  bottom: 11%;
+  transition: all 0.3s; }
+  .nav:before {
+    content: '';
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transition: all .3s;
+    background: #ff3366; }
+  .nav .nav-plus-scale {
+    transition: all 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    padding-top: 7px;
+    padding-left: 20px;
+    border-radius: 50%;
+    color: #fff;
+    background: #ff3366;
+    z-index: 99; }
+  .nav .nav-item {
+    font-size: 2rem;
+    color: white;
+    padding-top: 7px;
+    padding-left: 19px;
+    transition: all 0.3s;
+    position: absolute;
+    z-index: 5; }
+  .nav.active:before {
+    width: 320px;
+    height: 320px;
+    top: -100px;
+    left: -100px;
+    z-index: 1; }
+  .nav.active .nav-plus-scale {
+    transform: rotate(135deg);
+    background: #cf0e3f;
+    z-index: 99; }
+  .nav.active .nav-item-1 {
+    transform: translate(10px, -80px); }
+  .nav.active .nav-item-2 {
+    transform: translate(-55px, -45px); }
+  .nav.active .nav-item-3 {
+    transform: translate(-80px, 25px); }
 
 .task {
   width: 100%;
   color: white;
   margin-top: 13%;
-  font-weight: 100; }
+  font-weight: 100;
+  background: inherit; }
   .task p {
     margin: 0;
     padding: 0; }
@@ -248,8 +300,10 @@ body {
     color: #bfbbd2; }
 
 .main-addTask {
-  background: inherit;
-  color: white; }
+  color: white;
+  background: inherit; }
+  .main-addTask .sss {
+    background: white !important; }
   .main-addTask__title {
     margin-left: 4%;
     margin-top: 5%;

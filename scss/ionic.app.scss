@@ -224,7 +224,16 @@ body{
 }
 
 //####### HOME PAGE #######//
-
+ion-side-menus{
+    background: url("../img/background/background-home.png") no-repeat;
+    background-size: 100% 100%;
+    transition: all 0.5s;
+}
+.sss{
+  //background: url("../img/background/background-home.png") no-repeat;
+  background-size: 100% 100%;
+  transition: all 0.5s;
+}
 .main-home{
   width: 100%;
   height: 100%;
@@ -232,7 +241,8 @@ body{
 
 
   &__side-menu-content{
-    background: url("../img/background/background-home.png");
+   //background: url("../img/background/background-home.png") no-repeat;
+    background: inherit;
     background-size: 100% 100%;
     transition: all 0.5s;
 
@@ -292,18 +302,104 @@ body{
 
 //#### NAV ITEMS ####//
 .nav{
-  color: white;
-  font-size: 3rem;
+
+  //color: white;
+  //font-size: 3rem;
   position: absolute;
-  padding-top: 7px;
-  padding-left: 19px;
+
   width: 4rem;
   height: 4rem;
-  background: #ff3366;
+  //background: #ff3366;
   border-radius: 50%;
   right: 5%;
   bottom: 11%;
+  //transition:all 0.5s;
+  //z-index: 20;
+  transition: all 0.3s;
+  &:before{
+
+    content: '';
+    left: 0;
+    top:0;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transition:all .3s;
+    background: #ff3366;
+
+  }
+
+  .nav-plus-scale{
+    transition:all 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    padding-top: 7px;
+    padding-left: 20px;
+
+    border-radius: 50%;
+    color: #fff;
+    background: #ff3366;
+    z-index: 99;
+  }
+
+
+  & .nav-item{
+    font-size: 2rem;
+    color: white;
+    padding-top: 7px;
+    padding-left: 19px;
+    transition:all 0.3s;
+    position: absolute;
+    z-index: 5;
+
+  }
+
+
+  //ANIMATION ON CLICK
+  &.active{
+    //background: #000;
+
+    //transition: all 1s;
+    //transform: scale(2);
+    &:before{
+      width: 320px;
+      height: 320px;
+      top: -100px;
+      left:-100px;
+
+      z-index: 1;
+
+    }
+
+    .nav-plus-scale {
+      //transition:all 1s;
+      transform: rotate(135deg);
+      background: #cf0e3f;
+      z-index: 99;
+      //padding-left: 13px;
+
+      //transform-origin:0 0 ;
+    //background: yellow;
+  }
+
+    .nav-item-1{
+
+      transform: translate(10px,-80px);
+    }
+    .nav-item-2{
+      transform: translate(-55px,-45px);
+    }
+    .nav-item-3{
+      transform: translate(-80px,25px);
+    }
+
+  }
 }
+
+
 
 
 
@@ -313,6 +409,8 @@ body{
   color:white;
   margin-top: 13%;
   font-weight: 100;
+  background: inherit;
+
   //overflow-scrolling: 40px;
   p{
     margin: 0;
@@ -346,8 +444,13 @@ body{
 
 //####### TASK ADD PAGE ########//
 .main-addTask{
-  background: inherit;
+  //background: inherit !important;
   color:white;
+  background: inherit;
+  .sss{
+    background: white !important;
+  }
+
 
 
   &__title{
