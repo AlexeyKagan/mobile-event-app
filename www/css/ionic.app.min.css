@@ -1,0 +1,1 @@
+body{font-size:100%;height:100%;width:100%}*,:after,:before{box-sizing:border-box;margin:0;padding:0}.main-login{width:100%;height:100%;position:relative;background:url(../img/background/background-login.png);background-size:100% 100%}.main-login__ok{width:150px;height:150px;background:red;position:absolute;left:50%;margin-left:-75px}.main-login__form{position:absolute;bottom:0}

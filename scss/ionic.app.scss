@@ -1,0 +1,431 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+//$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+//@import "../www/lib/ionic/scss/ionic";
+
+body{
+  font-size:100%;
+  height: 100%;
+  width: 100%;
+
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.clearfix:before{
+    content: '';
+    clear: both;
+    display: table;
+
+}
+
+//##### LOGIN PAGE ######//
+.main-login{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: url('../img/background/background-login.png');
+  background-size: 100% 100%;
+
+  &__ok{
+    width: 43%;
+    height: 5.5%;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top:20%;
+    margin-left: -13%;
+    transform: rotate(-45deg);
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    &:before{
+      position: absolute;
+      content: '';
+      height: 150%;
+
+      width: 23%;
+      top: -150%;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: inset -0.2rem -2rem 2rem rgba(0,0,0,0.2);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+
+    }
+    @media screen and(max-height: 479px) {
+      &{
+        display: none;
+      }
+    }
+  }
+  &__form{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  &__form-row{
+    color:#b3b3bc;
+    margin-bottom: 5%;
+
+    span{
+      display: inline-block;
+      font-size: 1.6rem;
+      margin-left: 8%;
+      margin-right: 6%;
+      float: left;
+
+      padding-top: 4px;
+      min-width: 20px;
+
+    }
+    input{
+      color:white;
+      display: block;
+
+      border: none;
+      background: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding: 0;
+      margin: 0;
+      width: 70%;
+
+        &::-webkit-input-placeholder {
+          font-size: 1rem;
+          color:#b3b3bc;
+
+          font-weight: 200;
+          padding-bottom: 40px;
+          margin-bottom: 40px;
+          line-height: 12px;
+
+        };
+    }
+
+  }
+  &__form-button{
+    width: 100%;
+    height: auto;
+    padding: 0 6%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  &__button{
+    font-size: 1.2rem;
+    font-weight: 100;
+    color:white;
+    background: #ff3366;
+    border: none;
+    border-radius: 40px;
+    width: 100%;
+    height: auto;
+    padding: 4% 0;
+    margin: 0;
+  }
+  &__href{
+    font-size: 0.8rem;
+    text-align: center;
+    color: #939294;
+    margin-bottom: 6%;
+    a{
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+//####### SIGNUP-PAGE #######//
+.main-signup{
+  background: url("../img/background/background-signup.png");
+  background-size: 100% 100%;
+  width: 100%;
+  height: auto;
+  a{
+    color:white;
+    text-decoration: none;
+  }
+
+  & input[type="date"]{
+    color: #b3b3bc;
+  }
+  &__back{
+    font-size: 1.7rem;
+    color: white;
+    font-weight: 100;
+    margin-top: 6%;
+    margin-left: 4%;
+    cursor: pointer;
+  }
+
+  &__title{
+    margin-top: 4%;
+    margin-left: 9%;
+    h2{
+      color: white;
+      font-weight: 100;
+
+    }
+  }
+  &__add-photo{
+    cursor: pointer;
+    margin-top: 12%;
+    color:#c2bfce;
+    font-size: 3.5rem;
+
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    margin-left: 35%;
+    text-align: center;
+    padding-top: 1.7rem;
+
+  }
+  .main-login__form-row{
+    margin-bottom: 5%;
+  }
+  .main-login__form-button{
+    margin-top: 13%;
+  }
+  @media screen and (max-height: 550px) {
+
+    &__add-photo{
+      display: none;
+    }
+  }
+  @media screen and (max-height: 440px){
+    &__title{
+      display: none;
+    }
+    &__back{
+      display: none;
+    }
+  }
+}
+
+//####### HOME PAGE #######//
+
+.main-home{
+  width: 100%;
+  height: 100%;
+  background: inherit;
+
+
+  &__side-menu-content{
+    background: url("../img/background/background-home.png");
+    background-size: 100% 100%;
+    transition: all 0.5s;
+
+  }
+
+  &__top{
+    width: 100%;
+    color: white;
+    font-size: 1.8rem;
+    padding-top: 6%;
+
+  }
+  &__menu{
+    display: block;
+    float: left;
+    margin-left: 4%;
+  }
+  &__search{
+    display: block;
+    float: right;
+    margin-right: 4%;
+  }
+
+  &__about-day{
+    padding-top: 6%;
+    h2{
+      color:white;
+      padding: 0;
+      margin: 0;
+      font-weight: 100;
+    }
+    p{
+
+      padding: 0;
+      margin: 0;
+      padding-top: 5%;
+      color:#bfbbd2;
+      font-size: 0.8rem;
+    }
+
+    &__current{
+      float:left;
+      margin-left: 6%;
+    }
+
+    &__weather{
+      float:right;
+      //padding-top: 0%;
+      margin-right: 4%;
+      p{
+        padding-top: 15%;
+      }
+    }
+
+  }
+}
+
+//#### NAV ITEMS ####//
+.nav{
+  color: white;
+  font-size: 3rem;
+  position: absolute;
+  padding-top: 7px;
+  padding-left: 19px;
+  width: 4rem;
+  height: 4rem;
+  background: #ff3366;
+  border-radius: 50%;
+  right: 5%;
+  bottom: 11%;
+}
+
+
+
+//#### TASKS  ##### /
+.task{
+  width: 100%;
+  color:white;
+  margin-top: 13%;
+  font-weight: 100;
+  //overflow-scrolling: 40px;
+  p{
+    margin: 0;
+    padding: 0;
+  }
+  &__row{
+    margin-left: 6%;
+    margin-bottom: 5%;
+    cursor: pointer;
+  }
+  &__when{
+    float:left;
+    font-size: 1.2rem;
+    padding-top: 2%;
+  }
+  &__about{
+    float:left;
+    margin-left: 6%;
+    width: 81%;
+    border-bottom: 1px #736e92 solid;
+    padding-bottom: 3%;
+  }
+  &__title{
+
+  }
+  &__description{
+    font-size: 0.8rem;
+    color:#bfbbd2;
+  }
+}
+
+//####### TASK ADD PAGE ########//
+.main-addTask{
+  background: inherit;
+  color:white;
+
+
+  &__title{
+    h2{
+      color:white;
+      font-weight: 100;
+    }
+    margin-left: 4%;
+    margin-top: 5%;
+    margin-bottom: 6%;
+  }
+
+  &__row{
+    font-size: 1.2rem;
+    margin-bottom: 5%;
+    margin-left: 4%;
+    width: 100%;
+    font-weight: 100;
+    span{
+      margin-right: 5%;
+    }
+    &__left{
+      float: left;
+      padding-top: 2%;
+      padding-right: 4%;
+      width: 140px;
+    }
+
+    &__right{
+      float:left;
+      width: 50%;
+    }
+
+    input{
+      color:white;
+      display: block;
+
+      border: none;
+      background: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding: 0;
+      margin: 0;
+      width: 100%;
+
+      &::-webkit-input-placeholder {
+        font-size: 1rem;
+        color:#b3b3bc;
+        font-weight: 200;
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+        line-height: 12px;
+      };
+    }
+
+    &__description-title{
+      span{
+        margin-right: 2%;
+      }
+
+    }
+    &__description-text{
+
+
+    }
+    textarea{
+      margin-top: 4%;
+      width: 190%;
+      background: none;
+      //overflow: hidden;
+      resize: none;
+      color:white;
+      border-bottom: 1px solid #59516f;
+    }
+
+
+
+  }
+}
+
+
+

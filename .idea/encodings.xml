@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/gulpfile.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scss/ionic.app.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/css/style.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/app.routes.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/controllers/addTaskCtrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/controllers/auth/loginCtrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/controllers/auth/signupCtrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/controllers/homeCtrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/addTask.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/auth/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/auth/signup.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/home.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/task.html" charset="UTF-8" />
+  </component>
+</project>
