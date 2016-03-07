@@ -26,10 +26,25 @@ angular.module('taskService', [])
          return [];
 
        };
+      taskFactory.deleteId = (id) => {
+        var all = taskFactory.all();
 
-    taskFactory.weather = () => {
+        for (var i=0;i<all.length;i++){
+          if (all[i].id == id) {
+            console.log(all[i]);
+            all.splice(i,1)
+          }
+        }
+        
+        window.localStorage['tasks'] = angular.toJson(all);
 
-    };
+
+        //return window.localStorage['tasks'];
+
+
+      };
+
+
 
     return taskFactory;
 

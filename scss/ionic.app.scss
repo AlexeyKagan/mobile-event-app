@@ -427,6 +427,9 @@ ion-side-menus{
     margin-left: 6%;
     margin-bottom: 5%;
     cursor: pointer;
+    position: relative;
+
+
   }
   &__when{
     float:left;
@@ -439,6 +442,9 @@ ion-side-menus{
     width: 81%;
     border-bottom: 1px #736e92 solid;
     padding-bottom: 3%;
+    &:hover{
+      border-bottom: 1px solid #7f6f9f;
+    }
   }
   &__title{
 
@@ -447,6 +453,15 @@ ion-side-menus{
     font-size: 0.8rem;
     color:#bfbbd2;
   }
+  &__btn-delete{
+    width: 60px;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    right: 40px;
+  }
+
 }
 
 //####### TASK ADD PAGE ########//
@@ -542,14 +557,31 @@ ion-side-menus{
 
   height: 45px;
   padding-top: 0;
+}
 
+.main-about-task{
+  background: inherit;
+  color:white;
 
+  &__container{
+    padding-left: 6%;
+    margin-top: 5%;
+  }
 
+  h1{
+    color:white;
+    font-weight: 100;
+  }
 
+  h3{
+    color:white;
+    font-weight: 100;
+  }
 
-
-
-
+  &__text{
+    color:white;
+    margin-top: 7%;
+  }
 }
 
 

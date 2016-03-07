@@ -23,11 +23,10 @@ angular.module('taskCtrl', [])
 
             var icon = res.data.weather[0].icon;
 
-            vm.temp = Math.round(res.data.main.temp - 273.15)  + " °C";
+            vm.temp = Math.round(res.data.main.temp - 273.15) + " °C";
             var img = document.querySelector("#img-weather");
 
             console.log(angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png'));
-
 
 
           }, function errorCallback(res) {
@@ -55,12 +54,11 @@ angular.module('taskCtrl', [])
 
         if (vm.title == null || vm.description == null) return false;
 
-        function dateFilt(data){
+        function dateFilt(data) { //### FUNCTION FOR FILTER TIMEAT
 
-          if (date.getHours()){ //if date is not NAN then return date
-
-            if (date.getHours()<10) //if hourse<10 add 0 before hourse. will look like : 09:13;
-              return "0"+ date.getHours() + ":" + date.getMinutes();
+          if (date.getHours()) { //if date is not NAN then return date
+            if (date.getHours() < 10) //if hourse<10 add 0 before hourse. will look like : 09:13;
+              return "0" + date.getHours() + ":" + date.getMinutes();
             else
               return date.getHours() + ":" + date.getMinutes()
           }
@@ -75,7 +73,7 @@ angular.module('taskCtrl', [])
           description: vm.description,
           //timeAt:new Date(vm.time).getHours()<10 ? "asd" : 1 +":" + new Date(vm.time).getMinutes(),
           //timeAt: date.getHours() ? date.getHours() + ":" + date.getMinutes() : "", //if date is NaN return empty
-          timeAt : dateFilt(date),
+          timeAt: dateFilt(date),
 
 
           dateAt: new Date(vm.date)
@@ -101,26 +99,26 @@ angular.module('taskCtrl', [])
       //## about our task
       //##########
 
-      vm.zxc = taskFactory.aboutTaskId($stateParams.id);
+      vm.aboutTaskId = taskFactory.aboutTaskId($stateParams.id);
 
       vm.aboutTask = (id) => {
-
-        vm.zxc = taskFactory.aboutTaskId(id);
-        $scope.c = taskFactory.aboutTaskId(id);
-
-
-
+        vm.aboutTaskId = taskFactory.aboutTaskId(id);
         $location.path('/home/about/' + id);
 
+      };
 
+      vm.DeleteTaskId = (id) => {
+        taskFactory.deleteId(id);
+        console.log(id);
+        $location.path('/home/task')
       }
 
 
     }])
 
-  .filter('timeFilter', function(){
+  .filter('timeFilter', function () {
 
-    return function(data){
+    return function (data) {
 
       return data
     }
@@ -138,6 +136,9 @@ angular.module('taskCtrl', [])
         })
       }
     }
+  }])
+  .directive('ngDeleteTask', [function(){
+
   }]);
 
 console.log('taskCtrl');

@@ -287,7 +287,8 @@ ion-side-menus {
   .task__row {
     margin-left: 6%;
     margin-bottom: 5%;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
   .task__when {
     float: left;
     font-size: 1.2rem;
@@ -298,9 +299,18 @@ ion-side-menus {
     width: 81%;
     border-bottom: 1px #736e92 solid;
     padding-bottom: 3%; }
+    .task__about:hover {
+      border-bottom: 1px solid #7f6f9f; }
   .task__description {
     font-size: 0.8rem;
     color: #bfbbd2; }
+  .task__btn-delete {
+    width: 60px;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    right: 40px; }
 
 .main-addTask {
   color: white;
@@ -359,3 +369,19 @@ ion-side-menus {
   vertical-align: top;
   height: 45px;
   padding-top: 0; }
+
+.main-about-task {
+  background: inherit;
+  color: white; }
+  .main-about-task__container {
+    padding-left: 6%;
+    margin-top: 5%; }
+  .main-about-task h1 {
+    color: white;
+    font-weight: 100; }
+  .main-about-task h3 {
+    color: white;
+    font-weight: 100; }
+  .main-about-task__text {
+    color: white;
+    margin-top: 7%; }
