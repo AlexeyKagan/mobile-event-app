@@ -12,7 +12,7 @@
           <span class="ion-clock"></span> Время
       </div>
       <div class="main-addTask__row__right">
-        <input type="time" placeholder=""/>
+        <input type="time" placeholder="" ng-model="task.time"/>
       </div>
     </div>
 
@@ -21,7 +21,7 @@
         <span class="ion-calendar"></span> Дата
       </div>
       <div class="main-addTask__row__right">
-        <input type="date" placeholder=""/>
+        <input type="date" placeholder="" ng-model="task.date"/>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
         <span class="ion-ios-paper-outline"></span> Заголовок
       </div>
       <div class="main-addTask__row__right">
-        <input type="text" placeholder=""/>
+        <input type="text" placeholder="" ng-model="task.title"/>
       </div>
     </div>
 
@@ -39,15 +39,26 @@
         <span class="ion-ios-list-outline"></span> Описание
       </div>
       <div class="main-addTask__row__right">
-        <textarea name="asd" rows="2"></textarea>
+        <textarea name="asd" rows="2" ng-model="task.description"></textarea>
       </div>
     </div>
 
     <div class="main-login__form-button">
-        <button class="main-login__button" ng-click="addTask.addTask()">
+        <button class="main-login__button" ng-click="task.addTask()">
           Добавить задачу
         </button>
     </div>
+  </div>
+
+
+
+  <div class="nav" id="task-button" ng-Menu-Dir>
+    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>
+    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>
+
+    <a href="#/home/task" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>
+
+    <span class="ion-ios-plus-empty nav-plus-scale"></span>
   </div>
 
 

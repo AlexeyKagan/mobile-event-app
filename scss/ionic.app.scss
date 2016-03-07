@@ -291,9 +291,16 @@ ion-side-menus{
     &__weather{
       float:right;
       //padding-top: 0%;
+      padding-top: 0;
+      margin: 0;
+      h2{
+        padding-top: 0;
+        margin: 0;
+
+      }
       margin-right: 4%;
       p{
-        padding-top: 15%;
+        //padding-top: 15%;
       }
     }
 
@@ -446,10 +453,10 @@ ion-side-menus{
 .main-addTask{
   //background: inherit !important;
   color:white;
-  background: inherit;
-  .sss{
-    background: white !important;
-  }
+  background: inherit !important;
+  //-webkit-background-image: image();
+
+
 
 
 
@@ -528,6 +535,21 @@ ion-side-menus{
 
 
   }
+}
+#img-weather{
+  display:inline-block;
+  vertical-align: top;
+
+  height: 45px;
+  padding-top: 0;
+
+
+
+
+
+
+
+
 }
 
 

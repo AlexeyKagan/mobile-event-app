@@ -6,7 +6,8 @@ angular.module('mainApp',
     'loginCtrl',
     'signupCtrl',
     'homeCtrl',
-    'taskCtrl'
+    'taskCtrl',
+    'taskService'
   ]);
 
 

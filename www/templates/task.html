@@ -2,53 +2,42 @@
 
   <div class="main-home__about-day clearfix">
     <div class="main-home__about-day__current">
-      <h2>Воскресенье</h2>
-      <p>February 14, 2016</p>
+      <h2>{{task.getDay}}</h2>
+      <p>{{task.monthNow +" "+task.dateNow + ", " + task.yearNow }}</p>
+
     </div>
     <div class="main-home__about-day__weather">
-      <h2><span class="ion-android-sunny"></span>  33</h2>
-      <p>Гродно</p>
+      <h2><img src="" id="img-weather"> {{task.temp}}</h2>
+      <p class="main-home__about-day__weather--country">Гродно</p>
     </div>
   </div>
 
   <div class="task">
     <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
-      <div class="task__row clearfix">
+
+      <!--
+      ########
+      ## Our Tasks here
+      ########  -->
+      <div class="task__row clearfix" ng-repeat="tas in task.tasks | orderBy:'timeAt'" ng-click="task.aboutTask(tas.id)">
         <div class="task__when">
-          13:00
+          {{tas.timeAt}}
         </div>
         <div class="task__about">
-          <p class="task__title">Проект : Task manager</p>
-          <p class="task__description">Написать добавление задачи</p>
+          <p class="task__title">{{tas.title}}</p>
+          <p class="task__description">{{tas.description}}</p>
         </div>
       </div>
 
-      <div class="task__row clearfix">
-        <div class="task__when">
-          17:00
-        </div>
-        <div class="task__about">
-          <p class="task__title">Обед</p>
-          <p class="task__description">сходить поесть :D</p>
-        </div>
-      </div>
-      <div class="task__row clearfix">
-        <div class="task__when">
-          23:00
-        </div>
-        <div class="task__about">
-          <p class="task__title">Спать</p>
-          <p class="task__description">Лечь спать(нет)</p>
-        </div>
-      </div>
     </ion-scroll>
   </div>
 
+  <!-- Menu -->
   <div class="nav" id="task-button" ng-Menu-Dir>
     <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>
     <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>
 
-    <a href="#" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>
+    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>
 
     <span class="ion-ios-plus-empty nav-plus-scale"></span>
   </div>

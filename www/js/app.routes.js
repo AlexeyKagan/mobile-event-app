@@ -28,7 +28,9 @@ angular.module('app.routes', [])
         url:'/addTask',
         views: {
           'menuContent': {
-            templateUrl: 'templates/addTask.html'
+            templateUrl: 'templates/addTask.html',
+            controller:'taskController',
+            controllerAs:'task'
           }
         }
       })
@@ -37,7 +39,20 @@ angular.module('app.routes', [])
         url: '/task',
         views: {
           'menuContent':{
-            templateUrl: 'templates/task.html'
+            templateUrl: 'templates/task.html',
+            controller:'taskController',
+            controllerAs:'task'
+          }
+        }
+      })
+
+      .state('home.aboutTask', {
+        url: '/about/:id',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/aboutTask.html',
+            controller:'taskController',
+            controllerAs: 'task'
           }
         }
       });

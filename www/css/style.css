@@ -213,9 +213,12 @@ ion-side-menus {
       margin-left: 6%; }
     .main-home__about-day__weather {
       float: right;
+      padding-top: 0;
+      margin: 0;
       margin-right: 4%; }
-      .main-home__about-day__weather p {
-        padding-top: 15%; }
+      .main-home__about-day__weather h2 {
+        padding-top: 0;
+        margin: 0; }
 
 .nav {
   position: absolute;
@@ -301,9 +304,7 @@ ion-side-menus {
 
 .main-addTask {
   color: white;
-  background: inherit; }
-  .main-addTask .sss {
-    background: white !important; }
+  background: inherit !important; }
   .main-addTask__title {
     margin-left: 4%;
     margin-top: 5%;
@@ -352,3 +353,9 @@ ion-side-menus {
       resize: none;
       color: white;
       border-bottom: 1px solid #59516f; }
+
+#img-weather {
+  display: inline-block;
+  vertical-align: top;
+  height: 45px;
+  padding-top: 0; }

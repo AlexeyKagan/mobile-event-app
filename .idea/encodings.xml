@@ -16,6 +16,8 @@
     <file url="file://$PROJECT_DIR$/www/js/controllers/homeCtrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/js/controllers/taskCtrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/js/services/authService.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/services/taskService.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/aboutTask.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/addTask.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/auth/login.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/templates/auth/signup.html" charset="UTF-8" />
