@@ -26,6 +26,7 @@ angular.module('taskService', [])
          return [];
 
        };
+
       taskFactory.deleteId = (id) => {
         var all = taskFactory.all();
 
@@ -35,7 +36,7 @@ angular.module('taskService', [])
             all.splice(i,1)
           }
         }
-        
+
         window.localStorage['tasks'] = angular.toJson(all);
 
 

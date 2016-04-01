@@ -16,17 +16,19 @@ angular.module('taskCtrl', [])
 
         var lat = res.data.lat;
         var lon = res.data.lon;
+        console.log('lat : ' + lat);
+        console.log('lon : ' + lon);
 
 
-        $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=44db6a862fba0b067b1930da0d769e98")
+        $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
           .then(function successCallback(res) {
 
             var icon = res.data.weather[0].icon;
 
-            vm.temp = Math.round(res.data.main.temp - 273.15) + " °C";
+            vm.temp = Math.round(res.data.main.temp - 275) + " °C";
             var img = document.querySelector("#img-weather");
 
-            console.log(angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png'));
+            angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png');
 
 
           }, function errorCallback(res) {
@@ -55,15 +57,22 @@ angular.module('taskCtrl', [])
         if (vm.title == null || vm.description == null) return false;
 
         function dateFilt(data) { //### FUNCTION FOR FILTER TIMEAT
+          var hours;
+          var min;
 
-          if (date.getHours()) { //if date is not NAN then return date
-            if (date.getHours() < 10) //if hourse<10 add 0 before hourse. will look like : 09:13;
-              return "0" + date.getHours() + ":" + date.getMinutes();
-            else
-              return date.getHours() + ":" + date.getMinutes()
-          }
+          if (!date.getHours()) return ""; //if date is not NAN then return date
 
-          else return "";
+          if (date.getHours() < 10) //if hourse<10 add 0 before hourse. will look like : 09:13;
+            hours = "0" + date.getHours();
+          else
+            hours = date.getHours();
+
+          if (date.getMinutes()<10)
+            min = "0" + date.getMinutes();
+          else
+            min = date.getMinutes();
+
+          return hours + ":" + min;
         }
 
 
@@ -74,8 +83,6 @@ angular.module('taskCtrl', [])
           //timeAt:new Date(vm.time).getHours()<10 ? "asd" : 1 +":" + new Date(vm.time).getMinutes(),
           //timeAt: date.getHours() ? date.getHours() + ":" + date.getMinutes() : "", //if date is NaN return empty
           timeAt: dateFilt(date),
-
-
           dateAt: new Date(vm.date)
         };
 
