@@ -8,37 +8,48 @@ angular.module('taskCtrl', [])
       //## weather and day(day now) || WEATHER API
       //##########
       var date = new Date();
-      var location = "http://ip-api.com/json";
+
 
       vm.temp = 0;
 
-      $http.get(location).then(function successCallback(res) {
 
-        var lat = res.data.lat;
-        var lon = res.data.lon;
+
+
+
+      //###### USE CORDOVA API FOR GET LAT and LON coordoinats
+      navigator.geolocation.getCurrentPosition(function (position) {
+
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
         console.log('lat : ' + lat);
         console.log('lon : ' + lon);
 
-
+        //##### USE WEATHER API FOR GET CURRENT WEATHER
         $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
           .then(function successCallback(res) {
+
+            console.log(res);
 
             var icon = res.data.weather[0].icon;
 
             vm.temp = Math.round(res.data.main.temp - 275) + " °C";
+
             var img = document.querySelector("#img-weather");
-
+            //set weather img in img tag with id #img-weather
             angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png');
-
 
           }, function errorCallback(res) {
             console.log(res);
           });
 
-
-      }, function errorCallback(res) {
-        console.log('error : ' + res);
+      }, function (error) {
+        console.log('code: ' + error.code + '\n' +
+          'message: ' + error.message + '\n');
       });
+
+
+
+
 
       vm.getDay = dayName(date.getDay());
       vm.dateNow = date.getDate();
@@ -62,12 +73,13 @@ angular.module('taskCtrl', [])
 
           if (!date.getHours()) return ""; //if date is not NAN then return date
 
-          if (date.getHours() < 10) //if hourse<10 add 0 before hourse. will look like : 09:13;
-            hours = "0" + date.getHours();
+          if (date.getHours() < 10)
+            hours = "0" + date.getHours(); //if hourse<10 add 0 before hourse. will look like : 09:13;
+
           else
             hours = date.getHours();
 
-          if (date.getMinutes()<10)
+          if (date.getMinutes() < 10)
             min = "0" + date.getMinutes();
           else
             min = date.getMinutes();
@@ -144,7 +156,7 @@ angular.module('taskCtrl', [])
       }
     }
   }])
-  .directive('ngDeleteTask', [function(){
+  .directive('ngDeleteTask', [function () {
 
   }]);
 
