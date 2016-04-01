@@ -1,5 +1,5 @@
 # Cordova-ionic-mobile-task-manager-app
-<<<<<<< HEAD
+
 Using for this app :cordova, ionic, angular, sass
 Comming soon.
 =======
@@ -14,6 +14,6 @@ UI images:
 </br>
 And others..
 </br>
-Full app willbe soon.
->>>>>>> e5813b628b074dbc9403cfbfde36b51ee28184ad
+
+
 
