@@ -278,7 +278,7 @@ ion-side-menus{
 
       padding: 0;
       margin: 0;
-      padding-top: 5%;
+      padding-top: 8%;
       color:#bfbbd2;
       font-size: 0.8rem;
     }
@@ -286,6 +286,7 @@ ion-side-menus{
     &__current{
       float:left;
       margin-left: 6%;
+
     }
 
     &__weather{
@@ -300,7 +301,8 @@ ion-side-menus{
       }
       margin-right: 4%;
       p{
-        //padding-top: 15%;
+        margin-top: 0;
+        padding-top: 0;
       }
     }
 
@@ -309,6 +311,12 @@ ion-side-menus{
 
 //#### NAV ITEMS ####//
 .nav{
+  @media screen and (max-height: 512px) {
+    .nav {
+      display:none;
+    }
+
+  }
 
   //color: white;
   //font-size: 3rem;

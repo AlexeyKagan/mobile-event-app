@@ -9,6 +9,10 @@ angular.module('homeCtrl', [])
       $ionicSideMenuDelegate.toggleLeft();
     };
 
+    vm.exit = ()=>{
+      ionic.Platform.exitApp();
+    }
+
 
 
   }]);

@@ -205,7 +205,7 @@ ion-side-menus {
     .main-home__about-day p {
       padding: 0;
       margin: 0;
-      padding-top: 5%;
+      padding-top: 8%;
       color: #bfbbd2;
       font-size: 0.8rem; }
     .main-home__about-day__current {
@@ -219,6 +219,9 @@ ion-side-menus {
       .main-home__about-day__weather h2 {
         padding-top: 0;
         margin: 0; }
+      .main-home__about-day__weather p {
+        margin-top: 0;
+        padding-top: 0; }
 
 .nav {
   position: absolute;
@@ -385,3 +388,9 @@ ion-side-menus {
   .main-about-task__text {
     color: white;
     margin-top: 7%; }
+@media screen and (max-height: 512px) {
+  .nav {
+    display:none;
+  }
+
+}

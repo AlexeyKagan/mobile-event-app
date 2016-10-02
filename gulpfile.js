@@ -7,29 +7,10 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
-var paths = {
-  sass: ['./scss/**/*.scss']
-};
-
-gulp.task('default', ['sass']);
-
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(concat('style.css'))
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
-});
-
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-});
+var babel = require("gulp-babel");
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
@@ -50,3 +31,41 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+var paths = {
+  sass: ['./scss/**/*.scss'],
+  es6: ['./www/app/**/**/*.js', './www/index.js']
+};
+
+gulp.task('sass', function(done) {
+  gulp.src('./scss/ionic.app.scss')
+    .pipe(sass())
+    .on('error', sass.logError)
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest('./www/css/'))
+    .pipe(minifyCss({
+      keepSpecialComments: 0
+    }))
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(gulp.dest('./www/css/'))
+    .on('end', done);
+});
+
+gulp.task('js', function () {
+  var bundler = browserify('./www/index.js', { debug: false });
+  bundler.transform(babelify);
+
+  bundler.bundle()
+    .on('error', function (err) { console.error(err); })
+    .pipe(source('build.js'))
+    .pipe(gulp.dest('./www/build'));
+});
+
+gulp.task('watch', function() {
+  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.es6, ['js']);
+});
+
+
+
+gulp.task('default', ['sass']);

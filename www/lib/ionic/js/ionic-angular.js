@@ -2,7 +2,7 @@
  * Copyright 2015 Drifty Co.
  * http://drifty.com/
  *
- * Ionic, v1.2.4
+ * Ionic, v1.2.4-nightly-1917
  * A powerful HTML5 mobile app framework.
  * http://ionicframework.com/
  *
@@ -4324,7 +4324,7 @@ IonicModule
  *         url: "/tab",
  *         abstract: true,
  *         prefetchTemplate: false,
- *         templateUrl: "tabs-templates/home.html"
+ *         templateUrl: "tabs-templates/tabs.html"
  *       })
  *       .state('tabs.home', {
  *         url: "/home",

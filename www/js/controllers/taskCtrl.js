@@ -7,23 +7,18 @@ angular.module('taskCtrl', [])
       //##########
       //## weather and day(day now) || WEATHER API
       //##########
+      vm.log = 'nothing';
       var date = new Date();
-
-
       vm.temp = 0;
-
-
-
-
-
       //###### USE CORDOVA API FOR GET LAT and LON coordoinats
       navigator.geolocation.getCurrentPosition(function (position) {
 
+        console.log('vmlog',vm.log);
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
         console.log('lat : ' + lat);
         console.log('lon : ' + lon);
-
+        vm.log = position.coords.latitude;
         //##### USE WEATHER API FOR GET CURRENT WEATHER
         $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
           .then(function successCallback(res) {
@@ -45,6 +40,7 @@ angular.module('taskCtrl', [])
       }, function (error) {
         console.log('code: ' + error.code + '\n' +
           'message: ' + error.message + '\n');
+        vm.log = error;
       });
 
 
@@ -107,7 +103,8 @@ angular.module('taskCtrl', [])
       vm.tasks = taskFactory.all();
 
       //watch our localstorage for changes
-      $scope.$watch(function () {
+
+      $scope.$watchCollection(function () {
         return window.localStorage['tasks'];
       }, function (newData, oldData) {
         vm.tasks = taskFactory.all();
@@ -196,7 +193,7 @@ function monthName(number) {
       return "Сентябрь";
       break;
     case 9 :
-      return "Октебярь";
+      return "Октябрь";
       break;
     case 10 :
       return "Ноябрь";
