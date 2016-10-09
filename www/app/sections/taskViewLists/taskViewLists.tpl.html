@@ -1,0 +1,49 @@
+<div class="main-home">
+
+  <div class="main-home__about-day clearfix">
+    <div class="main-home__about-day__current">
+      <h2>{{ getDay() }}</h2>
+      <p>{{ getMonthNow() +" "+ getDateNow() + ", " + getYearNow() }}</p>
+
+    </div>
+    <div class="main-home__about-day__weather">
+      <h2><img src="" id="img-weather"> {{ getTemp() }}</h2>
+      <p class="main-home__about-day__weather--country">Гродно</p>
+    </div>
+  </div>
+
+  <div class="task">
+
+    <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+
+      <!--
+      ########
+      ## Our Tasks here
+      ########  -->
+      <div class="task__row clearfix"
+           ng-repeat="t in getTasks() | orderBy:'timeAt'"
+           ng-click="task.aboutTask(t.id)" >
+        <div class="task__when">
+          {{t.timeAt}}
+        </div>
+        <div class="task__about">
+          <p class="task__title">{{t.title}}</p>
+          <p class="task__description">{{t.description}}</p>
+        </div>
+
+      </div>
+
+    </ion-scroll>
+  </div>
+
+  <!-- Menu -->
+  <div class="nav" id="task-button" ng-Menu-Dir>
+    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>
+    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>
+
+    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>
+
+    <span class="ion-ios-plus-empty nav-plus-scale"></span>
+  </div>
+
+</div>

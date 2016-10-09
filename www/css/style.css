@@ -121,7 +121,7 @@ body {
   background: url("../img/background/background-signup.png");
   background-size: 100% 100%;
   width: 100%;
-  height: auto; }
+  height: 100%; }
   .main-signup a {
     color: white;
     text-decoration: none; }
@@ -131,7 +131,7 @@ body {
     font-size: 1.7rem;
     color: white;
     font-weight: 100;
-    margin-top: 6%;
+    padding-top: 6%;
     margin-left: 4%;
     cursor: pointer; }
   .main-signup__title {
@@ -231,6 +231,9 @@ ion-side-menus {
   right: 5%;
   bottom: 11%;
   transition: all 0.3s; }
+  @media screen and (max-height: 512px) {
+    .nav .nav {
+      display: none; } }
   .nav:before {
     content: '';
     left: 0;
@@ -388,9 +391,3 @@ ion-side-menus {
   .main-about-task__text {
     color: white;
     margin-top: 7%; }
-@media screen and (max-height: 512px) {
-  .nav {
-    display:none;
-  }
-
-}

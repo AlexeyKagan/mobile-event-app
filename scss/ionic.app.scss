@@ -159,7 +159,7 @@ body{
   background: url("../img/background/background-signup.png");
   background-size: 100% 100%;
   width: 100%;
-  height: auto;
+  height: 100%;
   a{
     color:white;
     text-decoration: none;
@@ -172,7 +172,7 @@ body{
     font-size: 1.7rem;
     color: white;
     font-weight: 100;
-    margin-top: 6%;
+    padding-top: 6%;
     margin-left: 4%;
     cursor: pointer;
   }
@@ -241,7 +241,7 @@ ion-side-menus{
 
 
   &__side-menu-content{
-   //background: url("../img/background/background-home.png") no-repeat;
+    //background: url("../img/background/background-home.png") no-repeat;
     background: inherit;
     background-size: 100% 100%;
     transition: all 0.5s;

@@ -41242,63 +41242,64 @@ module.exports = angular;
 
 require('./app.routes.js');
 
-require('./sections/login/login.js');
+require('./sections/login/login.component.js');
 
+require('./sections/signUp/signup.component.js');
+
+require('./sections/taskView/taskView.component.js');
+
+require('./sections/taskViewLists/taskViewLists.component.js');
+
+require('./sections/editTask/editTask.component.js');
+
+require('./sections/addTask/addTask.component.js');
+
+// Components
 angular.module('mainApp', ['ionic', 'app.routes',
 // 'loginCtrl',
-'signupCtrl', 'homeCtrl', 'taskCtrl', 'taskService',
+// 'signupCtrl',
+// 'homeCtrl',
+'taskCtrl', 'taskService',
 
-// new structure
-'task.login']);
+// components
+'task.login', 'task.signUp', 'task.view', 'task.view.lists', 'task.edit', 'task.addTask']);
 
-},{"./app.routes.js":9,"./sections/login/login.js":11}],9:[function(require,module,exports){
+},{"./app.routes.js":9,"./sections/addTask/addTask.component.js":10,"./sections/editTask/editTask.component.js":12,"./sections/login/login.component.js":14,"./sections/signUp/signup.component.js":16,"./sections/taskView/taskView.component.js":20,"./sections/taskViewLists/taskViewLists.component.js":18}],9:[function(require,module,exports){
 'use strict';
 
 angular.module('app.routes', []).config(function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('login', {
     url: '/login',
-    // sticky: true
-    // views: {
-    //   // template: '<div> <task-login /> </div>',
-    //   '': { template: '<div> HEY <task-login /> </div>' }
-    // }
     template: '<task-login> </task-login>'
   }).state('signup', {
     url: '/signup',
-    templateUrl: 'templates/auth/signup.html',
-    controller: 'signupController',
-    controllerAs: 'signup'
+    template: '<sign-up> </sign-up>'
   }).state('home', {
     url: '/home',
-    templateUrl: 'templates/home.html',
-    controller: 'homeController',
-    controllerAs: 'home'
+    template: '<task-view> </task-view>'
   }).state('home.addTask', {
     url: '/addTask',
     views: {
       'menuContent': {
-        templateUrl: 'templates/addTask.html',
-        controller: 'taskController',
-        controllerAs: 'task'
+        // templateUrl: 'templates/addTask.html',
+        // controller: 'taskController',
+        // controllerAs: 'task'
+        template: '<add-task />'
       }
     }
   }).state('home.task', {
     url: '/task',
     views: {
       'menuContent': {
-        templateUrl: 'templates/task.html',
-        controller: 'taskController',
-        controllerAs: 'task'
+        template: '<task-view-lists> </task-view-lists>'
       }
     }
-  }).state('home.aboutTask', {
-    url: '/about/:id',
+  }).state('home.edit', {
+    url: '/edit/:id',
     views: {
       'menuContent': {
-        templateUrl: 'templates/aboutTask.html',
-        controller: 'taskController',
-        controllerAs: 'task'
+        template: '<task-edit />'
       }
     }
   });
@@ -41309,64 +41310,537 @@ angular.module('app.routes', []).config(function ($stateProvider, $urlRouterProv
 },{}],10:[function(require,module,exports){
 'use strict';
 
-// angular.module('login.ctrl', [])
-//   .controller('loginController', ['$location', function ($location) {
-//     var vm = this;
-//     console.warn('loginController2');
-//     vm.a = 'Hey';
-//     vm.signIn = function () {
-//       console.log('asd');
-//       $location.path('/home/task');
-//     }
+var _addTaskCtrl = require('./addTask.ctrl.js');
 
-//   }]);
+var _addTaskCtrl2 = _interopRequireDefault(_addTaskCtrl);
 
-angular.module('login.ctrl', []).controller('loginController', ['$location', function ($location) {
-  var vm = this;
-  console.warn('loginController2');
-  vm.a = 'Hey';
-  this.hello = 'Hello asddddddd';
-  vm.signIn = function () {
-    console.log('asd');
-    $location.path('/home/task');
-  };
-}]);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{}],11:[function(require,module,exports){
-'use strict';
+var TEMPLATE = '\r\n<div class="main-addTask">\r\n\r\n  <div class="main-addTask__title">\r\n    <h2>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443:</h2>\r\n  </div>\r\n\r\n  <div class="main-addTask__add">\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-clock"></span> \u0412\u0440\u0435\u043C\u044F\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="time" placeholder="" ng-model="$ctrl.time"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-calendar"></span> \u0414\u0430\u0442\u0430\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="date" placeholder="" ng-model="$ctrl.date"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-ios-paper-outline"></span> \u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="text" placeholder="" ng-model="$ctrl.title"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__description-title">\r\n        <span class="ion-ios-list-outline"></span> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <textarea name="asd" rows="2" ng-model="$ctrl.description"></textarea>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.addTask()">\r\n        \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home/task" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>\r\n\r\n';
+// import './addTask.scss';
 
-require('./login.ctrl.js');
-
-var TEMPLATE = '<div class="main-login">\n  <div class="main-login__ok">\n\n  </div>\n  \n  <div class="main-login__form">\n    <form ng-submit="$ctrl.signIn()">\n\n      <div class="main-login__form-row clearfix">\n        <span class="ion-android-person"></span>\n        <input type="text" placeholder="\u041B\u043E\u0433\u0438\u043D" />\n      </div>\n\n      <div class="main-login__form-row clearfix">\n        <span class="ion-android-lock"></span>\n        <input type="password" placeholder="\u041F\u0430\u0440\u043E\u043B\u044C" />\n      </div>\n\n      <div class="main-login__form-button">\n        <button type="submit" class="main-login__button">\u0412\u043E\u0439\u0442\u0438 </button>\n      </div>\n\n    </form>\n    <div class="main-login__href">\n      <p>\n        \u041D\u0435\u0442 \u0443\u0447\u0435\u0442\u043D\u043E\u0439 \u0437\u0430\u043F\u0438\u0441\u0438? <a href="#/signup"> \u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F  </a>\n      </p>\n    </div>\n\n  </div>\n</div>\n';
-
-
-function dd($location) {
-  var vm = this;
-
-  console.warn('loginController2', $location);
-
-  vm.a = 'Hey';
-
-  this.hello = 'Hello asddddddd';
-
-  vm.signIn = function () {
-    console.log('asd');
-    $location.path('/home/task');
-  };
-}
-
-angular.module('task.login', [
-  // 'login.ctrl'
-]).component('taskLogin', {
+angular.module('task.addTask', []).component('addTask', {
+  bindings: {},
   template: TEMPLATE,
-  // controllerAs: 'loginController as login',
-  controller: dd,
-  bindings: {}
+  controller: _addTaskCtrl2.default
 });
 
-console.warn('angular2', angular);
+},{"./addTask.ctrl.js":11}],11:[function(require,module,exports){
+"use strict";
 
-},{"./login.ctrl.js":10}],12:[function(require,module,exports){
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AddTask = function () {
+    function AddTask($state, taskFactory) {
+        _classCallCheck(this, AddTask);
+
+        Object.assign(this, { $state: $state, taskFactory: taskFactory });
+    }
+
+    _createClass(AddTask, [{
+        key: "$onInit",
+        value: function $onInit() {}
+    }, {
+        key: "addTask",
+        value: function addTask() {
+            var vm = this;
+
+            var tasks = this.taskFactory.all();
+            var time = new Date(vm.time);
+
+            if (!vm.title || !vm.description) {
+
+                return false;
+            }
+
+            var task = {
+                id: tasks.length++, // increment id
+                title: vm.title,
+                description: vm.description,
+                timeAt: this.stringifyTime(time),
+                dateAt: new Date(vm.date)
+            };
+
+            tasks.push(task);
+
+            this.taskFactory.save(tasks);
+
+            this.$state.go('home.task');
+        }
+    }, {
+        key: "stringifyTime",
+        value: function stringifyTime(time) {
+            var hours;
+            var min;
+
+            //if date is not NAN then return date
+            if (!time.getHours()) return "";
+
+            //if hourse<10 add 0 before hourse. will look like : 09:13;
+            if (time.getHours() < 10) {
+
+                hours = "0" + time.getHours();
+            } else {
+
+                hours = time.getHours();
+            }
+
+            if (time.getMinutes() < 10) {
+
+                min = "0" + time.getMinutes();
+            } else {
+
+                min = time.getMinutes();
+            }
+
+            return hours + ":" + min;
+        }
+    }]);
+
+    return AddTask;
+}();
+
+exports.default = AddTask;
+
+},{}],12:[function(require,module,exports){
+'use strict';
+
+var _editTaskCtrl = require('./editTask.ctrl.js');
+
+var _editTaskCtrl2 = _interopRequireDefault(_editTaskCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<div class="main-about-task">\r\n\r\n  <div class="main-about-task__container">\r\n    <h1>\u041E \u0437\u0430\u0434\u0430\u0447\u0435:</h1>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3>\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 : </h3>\r\n      {{$ctrl.task.title}}\r\n    </div>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435:</h3>\r\n      {{$ctrl.task.description}}\r\n    </div>\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.deleteTask()">\r\n        \u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>';
+// import './editTask.scss';
+
+angular.module('task.edit', []).component('taskEdit', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _editTaskCtrl2.default
+});
+
+},{"./editTask.ctrl.js":13}],13:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EditTask = function () {
+  function EditTask($state, taskFactory) {
+    _classCallCheck(this, EditTask);
+
+    Object.assign(this, { $state: $state, taskFactory: taskFactory });
+
+    console.log('EditTask', $state.params.id);
+    console.log('EditTask2', window.location);
+  }
+
+  _createClass(EditTask, [{
+    key: '$onInit',
+    value: function $onInit() {
+
+      this.task = this.taskFactory.aboutTaskId(this.$state.params.id);
+    }
+  }, {
+    key: 'deleteTask',
+    value: function deleteTask() {
+
+      this.taskFactory.deleteId(this.task.id);
+
+      this.$state.go('home.task');
+    }
+  }]);
+
+  return EditTask;
+}();
+
+exports.default = EditTask;
+
+},{}],14:[function(require,module,exports){
+'use strict';
+
+var _loginCtrl = require('./login.ctrl.js');
+
+var _loginCtrl2 = _interopRequireDefault(_loginCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<div class="main-login">\r\n  <div class="main-login__ok">\r\n\r\n  </div>\r\n  \r\n  <div class="main-login__form">\r\n    <form ng-submit="$ctrl.signIn()">\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-android-person"></span>\r\n        <input type="text" placeholder="\u041B\u043E\u0433\u0438\u043D" />\r\n      </div>\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-android-lock"></span>\r\n        <input type="password" placeholder="\u041F\u0430\u0440\u043E\u043B\u044C" />\r\n      </div>\r\n\r\n      <div class="main-login__form-button">\r\n        <button type="submit" class="main-login__button">\u0412\u043E\u0439\u0442\u0438 </button>\r\n      </div>\r\n\r\n    </form>\r\n    <div class="main-login__href">\r\n      <p>\r\n        \u041D\u0435\u0442 \u0443\u0447\u0435\u0442\u043D\u043E\u0439 \u0437\u0430\u043F\u0438\u0441\u0438? <a href="#/signup"> \u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F  </a>\r\n      </p>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n';
+// import './login.scss';
+
+angular.module('task.login', []).component('taskLogin', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _loginCtrl2.default
+});
+
+},{"./login.ctrl.js":15}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Login = function () {
+  function Login($location) {
+    _classCallCheck(this, Login);
+
+    Object.assign(this, { $location: $location });
+  }
+
+  _createClass(Login, [{
+    key: '$onInit',
+    value: function $onInit() {}
+  }, {
+    key: 'signIn',
+    value: function signIn() {
+
+      this.$location.path('/home/task');
+    }
+  }]);
+
+  return Login;
+}();
+
+exports.default = Login;
+
+},{}],16:[function(require,module,exports){
+'use strict';
+
+var _signupCtrl = require('./signup.ctrl.js');
+
+var _signupCtrl2 = _interopRequireDefault(_signupCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<div class="main-signup">\r\n\r\n  <div class="main-signup__back">\r\n    <a href="#/login"> <span class="ion-android-arrow-back"></span> </a>\r\n  </div>\r\n\r\n  <div class="main-signup__title">\r\n    <h2>\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F</h2>\r\n  </div>\r\n\r\n  <div class="main-signup__add-photo">\r\n    <span class="ion-ios-camera-outline"></span>\r\n  </div>\r\n\r\n  <div class="main-login__form">\r\n\r\n    <form ng-submit="$ctrl.signUp()">\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-android-person"></span>\r\n        <input type="text" placeholder="\u041B\u043E\u0433\u0438\u043D" />\r\n      </div>\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-email"></span>\r\n        <input type="email" placeholder="\u0412\u0430\u0448 e-mail" />\r\n      </div>\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-android-lock"></span>\r\n        <input type="password" placeholder="\u041F\u0430\u0440\u043E\u043B\u044C" />\r\n      </div>\r\n\r\n      <div class="main-login__form-row clearfix">\r\n        <span class="ion-calendar"></span>\r\n        <input type="date" placeholder="\u0414\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F" />\r\n      </div>\r\n\r\n      <div class="main-login__form-button">\r\n        <button type="submit" class="main-login__button">\u0421\u043E\u0437\u0434\u0430\u0442\u044C </button>\r\n      </div>\r\n\r\n    </form>\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n';
+// import './signup.scss';
+
+angular.module('task.signUp', []).component('signUp', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _signupCtrl2.default
+});
+
+},{"./signup.ctrl.js":17}],17:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SignUp = function () {
+  function SignUp($location) {
+    _classCallCheck(this, SignUp);
+
+    Object.assign(this, { $location: $location });
+  }
+
+  _createClass(SignUp, [{
+    key: '$onInit',
+    value: function $onInit() {}
+  }, {
+    key: 'signUp',
+    value: function signUp() {
+
+      this.$location.path('/home/task');
+    }
+  }]);
+
+  return SignUp;
+}();
+
+exports.default = SignUp;
+
+},{}],18:[function(require,module,exports){
+'use strict';
+
+var _taskViewListsCtrl = require('./taskViewLists.ctrl.js');
+
+var _taskViewListsCtrl2 = _interopRequireDefault(_taskViewListsCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<div class="main-home">\r\n\r\n  <div class="main-home__about-day clearfix">\r\n    <div class="main-home__about-day__current">\r\n      <h2>{{ getDay() }}</h2>\r\n      <p>{{ getMonthNow() +" "+ getDateNow() + ", " + getYearNow() }}</p>\r\n\r\n    </div>\r\n    <div class="main-home__about-day__weather">\r\n      <h2><img src="" id="img-weather"> {{ getTemp() }}</h2>\r\n      <p class="main-home__about-day__weather--country">\u0413\u0440\u043E\u0434\u043D\u043E</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class="task">\r\n\r\n    <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">\r\n\r\n      <!--\r\n      ########\r\n      ## Our Tasks here\r\n      ########  -->\r\n      <div class="task__row clearfix"\r\n           ng-repeat="t in getTasks() | orderBy:\'timeAt\'"\r\n           ng-click="task.aboutTask(t.id)" >\r\n        <div class="task__when">\r\n          {{t.timeAt}}\r\n        </div>\r\n        <div class="task__about">\r\n          <p class="task__title">{{t.title}}</p>\r\n          <p class="task__description">{{t.description}}</p>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </ion-scroll>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>\r\n';
+// import './taskViewLists.scss';
+
+angular.module('task.view.lists', []).component('taskViewLists', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _taskViewListsCtrl2.default,
+  controllerAs: 'task'
+});
+
+},{"./taskViewLists.ctrl.js":19}],19:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TaskViewLists = function () {
+  function TaskViewLists($scope, $http, taskFactory, $state) {
+    _classCallCheck(this, TaskViewLists);
+
+    Object.assign(this, { $scope: $scope, $http: $http, taskFactory: taskFactory, $state: $state });
+  }
+
+  _createClass(TaskViewLists, [{
+    key: "$onInit",
+    value: function $onInit() {
+
+      this.getWeather();
+      this.setCurrentDateTime();
+
+      this.update({ tasks: this.taskFactory.all() });
+    }
+  }, {
+    key: "setCurrentDateTime",
+    value: function setCurrentDateTime() {
+
+      var date = new Date();
+
+      var dateTime = {
+        day: dayName(date.getDay()),
+        dateNow: date.getDate(),
+        monthNow: monthName(date.getMonth()),
+        yearNow: date.getFullYear()
+      };
+
+      this.update(dateTime);
+    }
+  }, {
+    key: "getWeather",
+    value: function getWeather() {
+      var _this = this;
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+
+        //##### USE WEATHER API FOR GET CURRENT WEATHER
+        _this.$http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a").then(function (res) {
+
+          var icon = res.data.weather[0].icon;
+          var temp = Math.round(res.data.main.temp - 275) + " °C";
+          var img = document.querySelector("#img-weather");
+
+          angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png');
+
+          _this.update({ temp: temp });
+        }, function errorCallback(res) {
+          console.log(res);
+        });
+      }, function (error) {
+        console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+      });
+    }
+  }, {
+    key: "toUpperCase",
+    value: function toUpperCase(str) {
+      return str[0].toUpperCase() + str.slice(1);
+    }
+
+    /**
+     * Simple Update method.
+     * Bind value to this.
+     * Create getter for this value.
+     * @example
+     * this.update({ foo: 5 });
+     * this.getFoo() => 5;
+     * this.foo => 5
+     * @template
+     * getFoo() => 5
+     *
+     * @param {object} value
+     */
+
+  }, {
+    key: "update",
+    value: function update(value) {
+      var _this2 = this;
+
+      Object.assign(this, value);
+
+      Object.keys(value).map(function (v) {
+
+        var gValue = "get" + _this2.toUpperCase(v);
+
+        _this2.$scope[gValue] = function () {
+          return value[v];
+        };
+        _this2[gValue] = function () {
+          return value[v];
+        };
+      });
+    }
+  }, {
+    key: "aboutTask",
+    value: function aboutTask(id) {
+      console.log('aboutTask', id, this.$state);
+      // vm.aboutTaskId = taskFactory.aboutTaskId(id);
+      // $location.path('/home/about/' + id);
+      // this.$state.go(`task/edit/${id}`)
+      this.$state.go('home.edit', { id: id });
+    }
+  }]);
+
+  return TaskViewLists;
+}();
+
+//function for get name of day and month
+
+exports.default = TaskViewLists;
+function monthName(number) {
+
+  switch (number) {
+    case 0:
+      return "Январь";
+      break;
+    case 1:
+      return "Февраль";
+      break;
+    case 2:
+      return "Март";
+      break;
+    case 3:
+      return "Апрель";
+      break;
+    case 4:
+      return "Май";
+      break;
+    case 5:
+      return "Июнь";
+      break;
+    case 6:
+      return "Июль";
+      break;
+    case 7:
+      return "Август";
+      break;
+    case 8:
+      return "Сентябрь";
+      break;
+    case 9:
+      return "Октябрь";
+      break;
+    case 10:
+      return "Ноябрь";
+      break;
+    case 11:
+      return "Декабрь";
+      break;
+  }
+}
+
+function dayName(number) {
+
+  switch (number) {
+    case 0:
+      return "Воскресенье";
+      break;
+    case 1:
+      return "Понедельник";
+      break;
+    case 2:
+      return "Вторник";
+      break;
+    case 3:
+      return "Среда";
+      break;
+    case 4:
+      return "Четверг";
+      break;
+    case 5:
+      return "Пятница";
+      break;
+    case 6:
+      return "Суббота";
+      break;
+  }
+}
+
+},{}],20:[function(require,module,exports){
+'use strict';
+
+var _taskViewCtrl = require('./taskView.ctrl.js');
+
+var _taskViewCtrl2 = _interopRequireDefault(_taskViewCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<ion-side-menus>\r\n  <ion-side-menu side="left">\r\n    <ion-list>\r\n      <ion-item menu-close href="#/home/task"> \u0413\u043B\u0430\u0432\u043D\u0430\u044F</ion-item>\r\n\r\n      <ion-item menu-close href="#/home/addTask"> \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443</ion-item>\r\n\r\n      <ion-item ng-click="$ctrl.exit()"> \u0412\u044B\u0445\u043E\u0434</ion-item>\r\n    </ion-list>\r\n\r\n  </ion-side-menu>\r\n\r\n  <ion-side-menu-content class="main-home__side-menu-content">\r\n\r\n    <div class="main-home__top clearfix">\r\n      <span class="main-home__menu ion-android-menu" id="menu" ng-click="$ctrl.toggleLeft()"></span>\r\n      <span class="main-home__search ion-android-search" id="search"></span>\r\n    </div>\r\n\r\n    <ion-nav-view name="menuContent" class="sss"></ion-nav-view>\r\n\r\n  </ion-side-menu-content>\r\n</ion-side-menus>';
+// import './taskView.scss';
+
+angular.module('task.view', []).component('taskView', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _taskViewCtrl2.default
+});
+
+},{"./taskView.ctrl.js":21}],21:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TaskView = function () {
+  function TaskView($ionicSideMenuDelegate) {
+    _classCallCheck(this, TaskView);
+
+    Object.assign(this, { $ionicSideMenuDelegate: $ionicSideMenuDelegate });
+  }
+
+  _createClass(TaskView, [{
+    key: "exit",
+    value: function exit() {
+
+      ionic.Platform.exitApp();
+    }
+  }, {
+    key: "toggleLeft",
+    value: function toggleLeft() {
+
+      this.$ionicSideMenuDelegate.toggleLeft();
+    }
+  }]);
+
+  return TaskView;
+}();
+
+exports.default = TaskView;
+
+},{}],22:[function(require,module,exports){
 'use strict';
 
 require('angular');
@@ -41383,7 +41857,7 @@ require('./lib/ionic/js/ionic-angular.js');
 
 require('./app/app.js');
 
-},{"./app/app.js":8,"./lib/ionic/js/ionic-angular.js":13,"./lib/ionic/js/ionic.js":14,"angular":7,"angular-animate":2,"angular-sanitize":4,"angular-ui-router":5}],13:[function(require,module,exports){
+},{"./app/app.js":8,"./lib/ionic/js/ionic-angular.js":23,"./lib/ionic/js/ionic.js":24,"angular":7,"angular-animate":2,"angular-sanitize":4,"angular-ui-router":5}],23:[function(require,module,exports){
 'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/*!
  * Copyright 2015 Drifty Co.
  * http://drifty.com/
@@ -45802,7 +46276,7 @@ tabsCtrl.select(0);}}}};}]);/**
  * {@link ionic.directive:ionNavBar} by default.
  */IonicModule.directive('ionView',function(){return{restrict:'EA',priority:1000,controller:'$ionicView',compile:function compile(tElement){tElement.addClass('pane');tElement[0].removeAttribute('title');return function link($scope,$element,$attrs,viewCtrl){viewCtrl.init();};}};});})();
 
-},{}],14:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/*!
  * Copyright 2015 Drifty Co.
  * http://drifty.com/
@@ -48349,4 +48823,4 @@ if(self._dragInfo.initialState){if(px<self.triggerThreshold){self.setOpenPercent
 if(px<self._dragInfo.triggerX){self.setOpenPercent(0);}else if(px>mx){self.setOpenPercent(100);}}});},endDrag:function endDrag(){this._dragInfo=null;},hold:function hold(){this.el.classList.add('dragging');},release:function release(e){this.el.classList.remove('dragging');this.endDrag(e);},setOpenPercent:function setOpenPercent(openPercent){// only make a change if the new open percent has changed
 if(this.openPercent<0||openPercent<this.openPercent-3||openPercent>this.openPercent+3){this.openPercent=openPercent;if(openPercent===0){this.val(false);}else if(openPercent===100){this.val(true);}else{var openPixel=Math.round(openPercent/100*this.track.offsetWidth-this.handle.offsetWidth);openPixel=openPixel<1?0:openPixel;this.handle.style[ionic.CSS.TRANSFORM]='translate3d('+openPixel+'px,0,0)';}}},val:function val(value){if(value===true||value===false){if(this.handle.style[ionic.CSS.TRANSFORM]!==""){this.handle.style[ionic.CSS.TRANSFORM]="";}this.checkbox.checked=value;this.openPercent=value?100:0;this.onChange&&this.onChange();}return this.checkbox.checked;}});})(ionic);})();
 
-},{}]},{},[12]);
+},{}]},{},[22]);

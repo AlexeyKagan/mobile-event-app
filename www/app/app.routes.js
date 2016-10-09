@@ -4,40 +4,27 @@ angular.module('app.routes', [])
     $stateProvider
       .state('login', {
         url: '/login',
-        // sticky: true
-        // views: {
-        //   // template: '<div> <task-login /> </div>',
-        //   '': { template: '<div> HEY <task-login /> </div>' }
-        // }
-        template: '<task-login> </task-login>',
-        // component: 'taskLogin' 
-
-        // templateUrl: 'templates/auth/login.html',
-        // controller: 'loginController',
-        // controllerAs: 'login'
+        template: '<task-login> </task-login>'
       })
 
       .state('signup', {
         url: '/signup',
-        templateUrl: 'templates/auth/signup.html',
-        controller: 'signupController',
-        controllerAs: 'signup'
+        template: '<sign-up> </sign-up>'
       })
 
       .state('home', {
         url: '/home',
-        templateUrl: 'templates/home.html',
-        controller: 'homeController',
-        controllerAs: 'home'
-      }) 
+        template: '<task-view> </task-view>'
+      })
 
       .state('home.addTask', {
         url: '/addTask',
         views: {
           'menuContent': {
-            templateUrl: 'templates/addTask.html',
-            controller: 'taskController',
-            controllerAs: 'task'
+            // templateUrl: 'templates/addTask.html',
+            // controller: 'taskController',
+            // controllerAs: 'task'
+            template: '<add-task />'
           }
         }
       })
@@ -46,20 +33,16 @@ angular.module('app.routes', [])
         url: '/task',
         views: {
           'menuContent': {
-            templateUrl: 'templates/task.html',
-            controller: 'taskController',
-            controllerAs: 'task'
+            template: '<task-view-lists> </task-view-lists>'
           }
         }
       })
 
-      .state('home.aboutTask', {
-        url: '/about/:id',
+      .state('home.edit', {
+        url: '/edit/:id',
         views: {
           'menuContent': {
-            templateUrl: 'templates/aboutTask.html',
-            controller: 'taskController',
-            controllerAs: 'task'
+            template: '<task-edit />'
           }
         }
       });

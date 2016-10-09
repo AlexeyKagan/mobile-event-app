@@ -1,50 +1,47 @@
-
-
 angular.module('taskService', [])
-  .factory('taskFactory',[ function(){  //factory for angular
-       var taskFactory = {};
+  .factory('taskFactory', [function () {  //factory for angular
+    var taskFactory = {};
 
-       taskFactory.all = () => {
-          var tasks = window.localStorage['tasks'];
-          if (tasks) {
-            return angular.fromJson(tasks);
-          }
-          return [];
-        };
+    taskFactory.all = () => {
+      var tasks = window.localStorage['tasks'];
 
-       taskFactory.save = (task) => {
-          window.localStorage['tasks'] = angular.toJson(task);
-       };
+      if (tasks) {
+        return angular.fromJson(tasks);
+      }
 
-       taskFactory.aboutTaskId = (id) => {
-         var all = taskFactory.all();
+      return [];
+    };
 
-         for (var i=0;i<all.length;i++){
-           if (all[i].id == id) return all[i];
-         }
+    taskFactory.save = (task) => {
+      window.localStorage['tasks'] = angular.toJson(task);
+    };
 
-         return [];
+    taskFactory.aboutTaskId = (id) => {
+      var all = taskFactory.all();
 
-       };
+      for (var i = 0; i < all.length; i++) {
+        if (all[i].id == id) return all[i];
+      }
 
-      taskFactory.deleteId = (id) => {
-        var all = taskFactory.all();
+      return [];
 
-        for (var i=0;i<all.length;i++){
-          if (all[i].id == id) {
-            console.log(all[i]);
-            all.splice(i,1)
-          }
+    };
+
+    taskFactory.deleteId = (id) => {
+      
+      var all = taskFactory.all();
+
+      for (var i = 0; i < all.length; i++) {
+        if (all[i].id == id) {
+          console.log(all[i]);
+          all.splice(i, 1)
         }
+      }
 
-        window.localStorage['tasks'] = angular.toJson(all);
+      window.localStorage['tasks'] = angular.toJson(all);
 
-
-        //return window.localStorage['tasks'];
-
-
-      };
-
+      //return window.localStorage['tasks'];
+    };
 
 
     return taskFactory;

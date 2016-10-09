@@ -1,5 +1,5 @@
 
-export default class Login {
+export default class SignUp {
 
   constructor($location) {
 
@@ -8,7 +8,7 @@ export default class Login {
 
   $onInit() { }
 
-  signIn() { 
+  signUp() {
 
     this.$location.path('/home/task');
   }

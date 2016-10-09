@@ -133,12 +133,9 @@ angular.module('taskCtrl', [])
     }])
 
   .filter('timeFilter', function () {
-
     return function (data) {
-
       return data
     }
-
   })
 
 
