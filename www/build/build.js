@@ -41254,17 +41254,23 @@ require('./sections/editTask/editTask.component.js');
 
 require('./sections/addTask/addTask.component.js');
 
-// Components
-angular.module('mainApp', ['ionic', 'app.routes',
-// 'loginCtrl',
-// 'signupCtrl',
-// 'homeCtrl',
-'taskCtrl', 'taskService',
+require('./components/app.uiComponents.js');
+
+require('./services/taskService.js');
+
+// Ui Components
+
+
+// View Components
+angular.module('mainApp', ['ionic', 'app.routes', 'app.ui.components',
 
 // components
-'task.login', 'task.signUp', 'task.view', 'task.view.lists', 'task.edit', 'task.addTask']);
+'task.login', 'task.signUp', 'task.view', 'task.view.lists', 'task.edit', 'task.addTask',
 
-},{"./app.routes.js":9,"./sections/addTask/addTask.component.js":10,"./sections/editTask/editTask.component.js":12,"./sections/login/login.component.js":14,"./sections/signUp/signup.component.js":16,"./sections/taskView/taskView.component.js":20,"./sections/taskViewLists/taskViewLists.component.js":18}],9:[function(require,module,exports){
+// services
+'taskService']);
+
+},{"./app.routes.js":9,"./components/app.uiComponents.js":10,"./sections/addTask/addTask.component.js":13,"./sections/editTask/editTask.component.js":15,"./sections/login/login.component.js":17,"./sections/signUp/signup.component.js":19,"./sections/taskView/taskView.component.js":23,"./sections/taskViewLists/taskViewLists.component.js":21,"./services/taskService.js":25}],9:[function(require,module,exports){
 'use strict';
 
 angular.module('app.routes', []).config(function ($stateProvider, $urlRouterProvider) {
@@ -41310,13 +41316,69 @@ angular.module('app.routes', []).config(function ($stateProvider, $urlRouterProv
 },{}],10:[function(require,module,exports){
 'use strict';
 
+require('./uiNavButton/uiNavButton.component.js');
+
+angular.module('app.ui.components', ['app.ui.navButton']);
+
+},{"./uiNavButton/uiNavButton.component.js":11}],11:[function(require,module,exports){
+'use strict';
+
+var _uiNavButtonCtrl = require('./uiNavButton.ctrl.js');
+
+var _uiNavButtonCtrl2 = _interopRequireDefault(_uiNavButtonCtrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TEMPLATE = '<div class="nav" ng-class="{ \'active\': $ctrl.isShown}" id="task-button" ng-click="$ctrl.openNav($event)">\r\n\r\n  <a href="#" class="nav-item nav-item-1">\r\n    <span class="ion-ios-person-outline"></span>\r\n  </a>\r\n\r\n  <a href="#/home/addTask" class="nav-item nav-item-2">\r\n    <span class="ion-compose"></span>\r\n  </a>\r\n\r\n  <a href="#/home/task" class="nav-item nav-item-3">\r\n    <span class="ion-clipboard"></span>\r\n  </a>\r\n\r\n  <span class="ion-ios-plus-empty nav-plus-scale">\r\n\r\n  </span>\r\n</div>';
+
+
+angular.module('app.ui.navButton', []).component('uiNavButton', {
+  bindings: {},
+  template: TEMPLATE,
+  controller: _uiNavButtonCtrl2.default
+});
+
+},{"./uiNavButton.ctrl.js":12}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var UiNavButton = function () {
+  function UiNavButton() {
+    _classCallCheck(this, UiNavButton);
+  }
+
+  _createClass(UiNavButton, [{
+    key: 'openNav',
+    value: function openNav(e) {
+      // 'active'
+      console.warn('UiNavButton', e);
+
+      this.isShown = !this.isShown;
+    }
+  }]);
+
+  return UiNavButton;
+}();
+
+exports.default = UiNavButton;
+
+},{}],13:[function(require,module,exports){
+'use strict';
+
 var _addTaskCtrl = require('./addTask.ctrl.js');
 
 var _addTaskCtrl2 = _interopRequireDefault(_addTaskCtrl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TEMPLATE = '\r\n<div class="main-addTask">\r\n\r\n  <div class="main-addTask__title">\r\n    <h2>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443:</h2>\r\n  </div>\r\n\r\n  <div class="main-addTask__add">\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-clock"></span> \u0412\u0440\u0435\u043C\u044F\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="time" placeholder="" ng-model="$ctrl.time"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-calendar"></span> \u0414\u0430\u0442\u0430\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="date" placeholder="" ng-model="$ctrl.date"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-ios-paper-outline"></span> \u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="text" placeholder="" ng-model="$ctrl.title"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__description-title">\r\n        <span class="ion-ios-list-outline"></span> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <textarea name="asd" rows="2" ng-model="$ctrl.description"></textarea>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.addTask()">\r\n        \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home/task" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>\r\n\r\n';
+var TEMPLATE = '\r\n<div class="main-addTask">\r\n\r\n  <div class="main-addTask__title">\r\n    <h2>\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443:</h2>\r\n  </div>\r\n\r\n  <div class="main-addTask__add">\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-clock"></span> \u0412\u0440\u0435\u043C\u044F\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="time" placeholder="" ng-model="$ctrl.time"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-calendar"></span> \u0414\u0430\u0442\u0430\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="date" placeholder="" ng-model="$ctrl.date"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__left">\r\n        <span class="ion-ios-paper-outline"></span> \u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <input type="text" placeholder="" ng-model="$ctrl.title"/>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-addTask__row clearfix">\r\n      <div class="main-addTask__row__description-title">\r\n        <span class="ion-ios-list-outline"></span> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435\r\n      </div>\r\n      <div class="main-addTask__row__right">\r\n        <textarea name="asd" rows="2" ng-model="$ctrl.description"></textarea>\r\n      </div>\r\n    </div>\r\n\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.addTask()">\r\n        \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <ui-nav-button></ui-nav-button>\r\n\r\n</div>\r\n\r\n';
 // import './addTask.scss';
 
 angular.module('task.addTask', []).component('addTask', {
@@ -41325,14 +41387,16 @@ angular.module('task.addTask', []).component('addTask', {
   controller: _addTaskCtrl2.default
 });
 
-},{"./addTask.ctrl.js":11}],11:[function(require,module,exports){
-"use strict";
+},{"./addTask.ctrl.js":14}],14:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _utils = require('../../../core/utils.js');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41344,14 +41408,14 @@ var AddTask = function () {
     }
 
     _createClass(AddTask, [{
-        key: "$onInit",
+        key: '$onInit',
         value: function $onInit() {}
     }, {
-        key: "addTask",
+        key: 'addTask',
         value: function addTask() {
             var vm = this;
 
-            var tasks = this.taskFactory.all();
+            var tasks = this.taskFactory.all() || [];
             var time = new Date(vm.time);
 
             if (!vm.title || !vm.description) {
@@ -41360,7 +41424,7 @@ var AddTask = function () {
             }
 
             var task = {
-                id: tasks.length++, // increment id
+                id: (0, _utils.uuid)(),
                 title: vm.title,
                 description: vm.description,
                 timeAt: this.stringifyTime(time),
@@ -41374,12 +41438,11 @@ var AddTask = function () {
             this.$state.go('home.task');
         }
     }, {
-        key: "stringifyTime",
+        key: 'stringifyTime',
         value: function stringifyTime(time) {
-            var hours;
-            var min;
+            var hours = void 0;
+            var min = void 0;
 
-            //if date is not NAN then return date
             if (!time.getHours()) return "";
 
             //if hourse<10 add 0 before hourse. will look like : 09:13;
@@ -41408,7 +41471,7 @@ var AddTask = function () {
 
 exports.default = AddTask;
 
-},{}],12:[function(require,module,exports){
+},{"../../../core/utils.js":27}],15:[function(require,module,exports){
 'use strict';
 
 var _editTaskCtrl = require('./editTask.ctrl.js');
@@ -41417,7 +41480,7 @@ var _editTaskCtrl2 = _interopRequireDefault(_editTaskCtrl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TEMPLATE = '<div class="main-about-task">\r\n\r\n  <div class="main-about-task__container">\r\n    <h1>\u041E \u0437\u0430\u0434\u0430\u0447\u0435:</h1>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3>\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 : </h3>\r\n      {{$ctrl.task.title}}\r\n    </div>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435:</h3>\r\n      {{$ctrl.task.description}}\r\n    </div>\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.deleteTask()">\r\n        \u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>';
+var TEMPLATE = '<div class="main-about-task">\r\n\r\n  <div class="main-about-task__container">\r\n    <h1>\u041E \u0437\u0430\u0434\u0430\u0447\u0435:</h1>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3>\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 : </h3>\r\n      {{$ctrl.task.title}}\r\n    </div>\r\n\r\n    <div class="main-about-task__text">\r\n      <h3> \u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435:</h3>\r\n      {{$ctrl.task.description}}\r\n    </div>\r\n    <div class="main-login__form-button">\r\n      <button class="main-login__button" ng-click="$ctrl.deleteTask()">\r\n        \u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u0447\u0443\r\n      </button>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n  <ui-nav-button></ui-nav-button>\r\n\r\n</div>';
 // import './editTask.scss';
 
 angular.module('task.edit', []).component('taskEdit', {
@@ -41426,7 +41489,7 @@ angular.module('task.edit', []).component('taskEdit', {
   controller: _editTaskCtrl2.default
 });
 
-},{"./editTask.ctrl.js":13}],13:[function(require,module,exports){
+},{"./editTask.ctrl.js":16}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41468,7 +41531,7 @@ var EditTask = function () {
 
 exports.default = EditTask;
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var _loginCtrl = require('./login.ctrl.js');
@@ -41486,7 +41549,7 @@ angular.module('task.login', []).component('taskLogin', {
   controller: _loginCtrl2.default
 });
 
-},{"./login.ctrl.js":15}],15:[function(require,module,exports){
+},{"./login.ctrl.js":18}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41520,7 +41583,7 @@ var Login = function () {
 
 exports.default = Login;
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var _signupCtrl = require('./signup.ctrl.js');
@@ -41538,7 +41601,7 @@ angular.module('task.signUp', []).component('signUp', {
   controller: _signupCtrl2.default
 });
 
-},{"./signup.ctrl.js":17}],17:[function(require,module,exports){
+},{"./signup.ctrl.js":20}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41572,7 +41635,7 @@ var SignUp = function () {
 
 exports.default = SignUp;
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var _taskViewListsCtrl = require('./taskViewLists.ctrl.js');
@@ -41581,7 +41644,7 @@ var _taskViewListsCtrl2 = _interopRequireDefault(_taskViewListsCtrl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TEMPLATE = '<div class="main-home">\r\n\r\n  <div class="main-home__about-day clearfix">\r\n    <div class="main-home__about-day__current">\r\n      <h2>{{ getDay() }}</h2>\r\n      <p>{{ getMonthNow() +" "+ getDateNow() + ", " + getYearNow() }}</p>\r\n\r\n    </div>\r\n    <div class="main-home__about-day__weather">\r\n      <h2><img src="" id="img-weather"> {{ getTemp() }}</h2>\r\n      <p class="main-home__about-day__weather--country">\u0413\u0440\u043E\u0434\u043D\u043E</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class="task">\r\n\r\n    <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">\r\n\r\n      <!--\r\n      ########\r\n      ## Our Tasks here\r\n      ########  -->\r\n      <div class="task__row clearfix"\r\n           ng-repeat="t in getTasks() | orderBy:\'timeAt\'"\r\n           ng-click="task.aboutTask(t.id)" >\r\n        <div class="task__when">\r\n          {{t.timeAt}}\r\n        </div>\r\n        <div class="task__about">\r\n          <p class="task__title">{{t.title}}</p>\r\n          <p class="task__description">{{t.description}}</p>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </ion-scroll>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n  <div class="nav" id="task-button" ng-Menu-Dir>\r\n    <a href="#" class="nav-item nav-item-1"><span class="ion-ios-person-outline"></span></a>\r\n    <a href="#/home/addTask" class="nav-item nav-item-2"><span class="ion-compose"></span></a>\r\n\r\n    <a href="#/home" class="nav-item nav-item-3"><span class="ion-clipboard"></span></a>\r\n\r\n    <span class="ion-ios-plus-empty nav-plus-scale"></span>\r\n  </div>\r\n\r\n</div>\r\n';
+var TEMPLATE = '<div class="main-home">\r\n\r\n  <div class="main-home__about-day clearfix">\r\n    <div class="main-home__about-day__current">\r\n      <h2>{{ getDay() }}</h2>\r\n      <p>{{ getMonthNow() +" "+ getDateNow() + ", " + getYearNow() }}</p>\r\n\r\n    </div>\r\n    <div class="main-home__about-day__weather">\r\n      <h2><img src="" id="img-weather"> {{ getTemp() }}</h2>\r\n      <p class="main-home__about-day__weather--country">\u0413\u0440\u043E\u0434\u043D\u043E</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class="task">\r\n\r\n    <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">\r\n\r\n      <!--\r\n      ########\r\n      ## Our Tasks here\r\n      ########  -->\r\n      <div class="task__row clearfix"\r\n           ng-repeat="t in getTasks() | orderBy:\'timeAt\'"\r\n           ng-click="task.aboutTask(t.id)" >\r\n        <div class="task__when">\r\n          {{t.timeAt}}\r\n        </div>\r\n        <div class="task__about">\r\n          <p class="task__title">{{t.title}}</p>\r\n          <p class="task__description">{{t.description}}</p>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </ion-scroll>\r\n  </div>\r\n\r\n  <!-- Menu -->\r\n\r\n  <ui-nav-button></ui-nav-button>\r\n\r\n</div>\r\n';
 // import './taskViewLists.scss';
 
 angular.module('task.view.lists', []).component('taskViewLists', {
@@ -41591,7 +41654,7 @@ angular.module('task.view.lists', []).component('taskViewLists', {
   controllerAs: 'task'
 });
 
-},{"./taskViewLists.ctrl.js":19}],19:[function(require,module,exports){
+},{"./taskViewLists.ctrl.js":22}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41599,6 +41662,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dateUtils = require("../../../core/date.utils.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41625,9 +41690,9 @@ var TaskViewLists = function () {
       var date = new Date();
 
       var dateTime = {
-        day: dayName(date.getDay()),
+        day: (0, _dateUtils.dayName)(date.getDay()),
         dateNow: date.getDate(),
-        monthNow: monthName(date.getMonth()),
+        monthNow: (0, _dateUtils.monthName)(date.getMonth()),
         yearNow: date.getFullYear()
       };
 
@@ -41702,10 +41767,7 @@ var TaskViewLists = function () {
   }, {
     key: "aboutTask",
     value: function aboutTask(id) {
-      console.log('aboutTask', id, this.$state);
-      // vm.aboutTaskId = taskFactory.aboutTaskId(id);
-      // $location.path('/home/about/' + id);
-      // this.$state.go(`task/edit/${id}`)
+
       this.$state.go('home.edit', { id: id });
     }
   }]);
@@ -41715,77 +41777,79 @@ var TaskViewLists = function () {
 
 //function for get name of day and month
 
+// function monthName(number) {
+//
+//   switch (number) {
+//     case 0 :
+//       return "Январь";
+//       break;
+//     case 1 :
+//       return "Февраль";
+//       break;
+//     case 2 :
+//       return "Март";
+//       break;
+//     case 3 :
+//       return "Апрель";
+//       break;
+//     case 4 :
+//       return "Май";
+//       break;
+//     case 5 :
+//       return "Июнь";
+//       break;
+//     case 6 :
+//       return "Июль";
+//       break;
+//     case 7 :
+//       return "Август";
+//       break;
+//     case 8 :
+//       return "Сентябрь";
+//       break;
+//     case 9 :
+//       return "Октябрь";
+//       break;
+//     case 10 :
+//       return "Ноябрь";
+//       break;
+//     case 11 :
+//       return "Декабрь";
+//       break;
+//   }
+// }
+//
+// function dayName(number) {
+//
+//   switch (number) {
+//     case 0 :
+//       return "Воскресенье";
+//       break;
+//     case 1 :
+//       return "Понедельник";
+//       break;
+//     case 2 :
+//       return "Вторник";
+//       break;
+//     case 3 :
+//       return "Среда";
+//       break;
+//     case 4 :
+//       return "Четверг";
+//       break;
+//     case 5 :
+//       return "Пятница";
+//       break;
+//     case 6 :
+//       return "Суббота";
+//       break;
+//   }
+// }
+
+
 exports.default = TaskViewLists;
-function monthName(number) {
 
-  switch (number) {
-    case 0:
-      return "Январь";
-      break;
-    case 1:
-      return "Февраль";
-      break;
-    case 2:
-      return "Март";
-      break;
-    case 3:
-      return "Апрель";
-      break;
-    case 4:
-      return "Май";
-      break;
-    case 5:
-      return "Июнь";
-      break;
-    case 6:
-      return "Июль";
-      break;
-    case 7:
-      return "Август";
-      break;
-    case 8:
-      return "Сентябрь";
-      break;
-    case 9:
-      return "Октябрь";
-      break;
-    case 10:
-      return "Ноябрь";
-      break;
-    case 11:
-      return "Декабрь";
-      break;
-  }
-}
-
-function dayName(number) {
-
-  switch (number) {
-    case 0:
-      return "Воскресенье";
-      break;
-    case 1:
-      return "Понедельник";
-      break;
-    case 2:
-      return "Вторник";
-      break;
-    case 3:
-      return "Среда";
-      break;
-    case 4:
-      return "Четверг";
-      break;
-    case 5:
-      return "Пятница";
-      break;
-    case 6:
-      return "Суббота";
-      break;
-  }
-}
-
-},{}],20:[function(require,module,exports){
+},{"../../../core/date.utils.js":26}],23:[function(require,module,exports){
 'use strict';
 
 var _taskViewCtrl = require('./taskView.ctrl.js');
@@ -41803,7 +41867,7 @@ angular.module('task.view', []).component('taskView', {
   controller: _taskViewCtrl2.default
 });
 
-},{"./taskView.ctrl.js":21}],21:[function(require,module,exports){
+},{"./taskView.ctrl.js":24}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41840,7 +41904,137 @@ var TaskView = function () {
 
 exports.default = TaskView;
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
+'use strict';
+
+angular.module('taskService', []).factory('taskFactory', [function () {
+  //factory for angular
+  var taskFactory = {};
+
+  taskFactory.all = function () {
+    var tasks = window.localStorage['tasks'];
+
+    if (tasks) {
+      return angular.fromJson(tasks);
+    }
+
+    return [];
+  };
+
+  taskFactory.save = function (task) {
+    window.localStorage['tasks'] = angular.toJson(task);
+  };
+
+  taskFactory.aboutTaskId = function (id) {
+    var all = taskFactory.all();
+
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].id == id) return all[i];
+    }
+
+    return [];
+  };
+
+  taskFactory.deleteId = function (id) {
+
+    var all = taskFactory.all();
+
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].id == id) {
+        console.log(all[i]);
+        all.splice(i, 1);
+      }
+    }
+
+    window.localStorage['tasks'] = angular.toJson(all);
+
+    //return window.localStorage['tasks'];
+  };
+
+  return taskFactory;
+}]);
+
+},{}],26:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.monthName = monthName;
+exports.dayName = dayName;
+/**
+ * Use prefix for metadata like "RU", "ENG", etc...
+ * In future willbe localized.
+ *
+ */
+var MONTH_NAME_RU = {
+  0: 'Январь',
+  1: 'Февраль',
+  2: 'Март',
+  3: 'Апрель',
+  4: 'Май',
+  5: 'Июнь',
+  6: 'Июль',
+  7: 'Август',
+  8: 'Сентябрь',
+  9: 'Октябрь',
+  10: 'Ноябрь',
+  11: 'Декабрь'
+};
+
+var DAY_NAME_RU = {
+  0: 'Воскресенье',
+  1: 'Понедельник',
+  2: 'Вторник',
+  3: 'Среда',
+  4: 'Четверг',
+  5: 'Пятница',
+  6: 'Суббота'
+};
+
+function monthName(number) {
+  var preffix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'RU';
+
+  // willbe use getter here
+  return MONTH_NAME_RU[number] || 'Mounth with  this ' + number + ' not found';
+}
+
+function dayName(number) {
+  var preffix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'RU';
+
+
+  return DAY_NAME_RU[number] || 'Day with this ' + number + ' not found';
+}
+
+},{}],27:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.uuid = uuid;
+function uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+        v = c == 'x' ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  });
+}
+
+/** TODO: @ Write Get method which will get metadata by dots.
+ *
+ * @example
+ * const obj = {
+ *  foo: {
+ *    bar: 4
+ *  }
+ * }
+ *
+ * get('foo.bar') => 4
+ */
+function get(key) {}
+
+},{}],28:[function(require,module,exports){
 'use strict';
 
 require('angular');
@@ -41857,7 +42051,7 @@ require('./lib/ionic/js/ionic-angular.js');
 
 require('./app/app.js');
 
-},{"./app/app.js":8,"./lib/ionic/js/ionic-angular.js":23,"./lib/ionic/js/ionic.js":24,"angular":7,"angular-animate":2,"angular-sanitize":4,"angular-ui-router":5}],23:[function(require,module,exports){
+},{"./app/app.js":8,"./lib/ionic/js/ionic-angular.js":29,"./lib/ionic/js/ionic.js":30,"angular":7,"angular-animate":2,"angular-sanitize":4,"angular-ui-router":5}],29:[function(require,module,exports){
 'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/*!
  * Copyright 2015 Drifty Co.
  * http://drifty.com/
@@ -46276,7 +46470,7 @@ tabsCtrl.select(0);}}}};}]);/**
  * {@link ionic.directive:ionNavBar} by default.
  */IonicModule.directive('ionView',function(){return{restrict:'EA',priority:1000,controller:'$ionicView',compile:function compile(tElement){tElement.addClass('pane');tElement[0].removeAttribute('title');return function link($scope,$element,$attrs,viewCtrl){viewCtrl.init();};}};});})();
 
-},{}],24:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/*!
  * Copyright 2015 Drifty Co.
  * http://drifty.com/
@@ -48823,4 +49017,4 @@ if(self._dragInfo.initialState){if(px<self.triggerThreshold){self.setOpenPercent
 if(px<self._dragInfo.triggerX){self.setOpenPercent(0);}else if(px>mx){self.setOpenPercent(100);}}});},endDrag:function endDrag(){this._dragInfo=null;},hold:function hold(){this.el.classList.add('dragging');},release:function release(e){this.el.classList.remove('dragging');this.endDrag(e);},setOpenPercent:function setOpenPercent(openPercent){// only make a change if the new open percent has changed
 if(this.openPercent<0||openPercent<this.openPercent-3||openPercent>this.openPercent+3){this.openPercent=openPercent;if(openPercent===0){this.val(false);}else if(openPercent===100){this.val(true);}else{var openPixel=Math.round(openPercent/100*this.track.offsetWidth-this.handle.offsetWidth);openPixel=openPixel<1?0:openPixel;this.handle.style[ionic.CSS.TRANSFORM]='translate3d('+openPixel+'px,0,0)';}}},val:function val(value){if(value===true||value===false){if(this.handle.style[ionic.CSS.TRANSFORM]!==""){this.handle.style[ionic.CSS.TRANSFORM]="";}this.checkbox.checked=value;this.openPercent=value?100:0;this.onChange&&this.onChange();}return this.checkbox.checked;}});})(ionic);})();
 
-},{}]},{},[22]);
+},{}]},{},[28]);

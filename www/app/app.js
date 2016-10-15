@@ -1,7 +1,6 @@
 import './app.routes.js';
 
-
-// Components
+// View Components
 import './sections/login/login.component.js';
 import './sections/signUp/signup.component.js';
 import './sections/taskView/taskView.component.js'
@@ -9,14 +8,15 @@ import './sections/taskViewLists/taskViewLists.component.js';
 import './sections/editTask/editTask.component.js';
 import './sections/addTask/addTask.component.js';
 
+// Ui Components
+import './components/app.uiComponents.js';
+
+import './services/taskService.js';
+
 angular.module('mainApp', [
   'ionic',
   'app.routes',
-  // 'loginCtrl',
-  // 'signupCtrl',
-  // 'homeCtrl',
-  'taskCtrl',
-  'taskService',
+  'app.ui.components',
 
   // components
   'task.login',
@@ -24,7 +24,10 @@ angular.module('mainApp', [
   'task.view',
   'task.view.lists',
   'task.edit',
-  'task.addTask'
+  'task.addTask',
+
+  // services
+  'taskService'
 ]);
 
  

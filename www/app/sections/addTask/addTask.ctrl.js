@@ -1,3 +1,4 @@
+import { uuid } from '../../../core/utils.js';
 
 export default class AddTask {
 
@@ -12,7 +13,7 @@ export default class AddTask {
   addTask() {
     const vm = this;
 
-    const tasks = this.taskFactory.all();
+    const tasks = this.taskFactory.all() || [];
     const time = new Date(vm.time);
 
     if (!vm.title || !vm.description) {
@@ -21,7 +22,7 @@ export default class AddTask {
     }
 
     var task = {
-      id: tasks.length++, // increment id
+      id: uuid(),
       title: vm.title,
       description: vm.description,
       timeAt: this.stringifyTime(time),
@@ -36,10 +37,10 @@ export default class AddTask {
   }
 
   stringifyTime(time) {
-    var hours;
-    var min;
+    let hours;
+    let min;
 
-    //if date is not NAN then return date
+
     if (!time.getHours()) return "";
 
     //if hourse<10 add 0 before hourse. will look like : 09:13;

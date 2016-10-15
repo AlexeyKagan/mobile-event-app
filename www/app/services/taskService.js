@@ -28,7 +28,7 @@ angular.module('taskService', [])
     };
 
     taskFactory.deleteId = (id) => {
-      
+
       var all = taskFactory.all();
 
       for (var i = 0; i < all.length; i++) {
