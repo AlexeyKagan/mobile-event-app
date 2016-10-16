@@ -1,38 +1,18 @@
 <!DOCTYPE html>
-<html  ng-app="mainApp">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <!--<link href="css/style.css" rel="stylesheet"> -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- builded file -->
-    <script src="build/build.js"></script>
-
-    <!-- CONTROLLERS -->
-
-    <!--<script src="js/controllers/auth/loginCtrl.js"></script>-->
-    <!--<script src="js/controllers/auth/signupCtrl.js"></script>-->
-    <!--<script src="js/controllers/homeCtrl.js"></script>-->
-    <!--<script src="js/controllers/taskCtrl.js"></script>-->
-    <!--<script src="js/controllers/addTaskCtrl.js"></script>-->
-
-    <!-- Services -->
-    <!--<script src="js/services/taskService.js"></script>-->
-
-
+    <link href="ionic.app.css" rel="stylesheet">
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <script src="cordova.js"></script>  
 
+    <script src="bundle.js"></script> 
   </head>
-  <body>
-
-  <ion-nav-view>  </ion-nav-view>
-
+  <body ng-app="mainApp">
+    <ion-nav-view>  </ion-nav-view>
   </body>
 </html>

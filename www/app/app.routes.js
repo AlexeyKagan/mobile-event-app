@@ -21,9 +21,6 @@ angular.module('app.routes', [])
         url: '/addTask',
         views: {
           'menuContent': {
-            // templateUrl: 'templates/addTask.html',
-            // controller: 'taskController',
-            // controllerAs: 'task'
             template: '<add-task />'
           }
         }
