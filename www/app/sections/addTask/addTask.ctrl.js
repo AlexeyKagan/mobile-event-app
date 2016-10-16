@@ -1,16 +1,29 @@
-import { uuid } from '../../../core/utils.js';
+import { uuid } from 'core/utils.js';
+import TasksActions from 'actions/tasks.actions.js';
 
 export default class AddTask {
 
-  constructor($state, taskFactory) {
+  constructor($state, taskFactory, $ngRedux) {
 
-    Object.assign(this, {$state, taskFactory });
-    
+    Object.assign(this, { $state, taskFactory });
+
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
   }
 
   $onInit() {  }
 
-  addTask() {
+  $onDestroy() {
+    this.unsubscribe();
+  }
+
+  mapStateToThis(state) {
+    
+    return {
+      tasks: state.tasks
+    }
+  }
+
+  submitTask() {
     const vm = this;
 
     const tasks = this.taskFactory.all() || [];
@@ -29,9 +42,11 @@ export default class AddTask {
       dateAt: new Date(vm.date)
     };
 
-    tasks.push(task);
+    // tasks.push(task);
+    //
+    // this.taskFactory.save(tasks);
 
-    this.taskFactory.save(tasks);
+    this.addTask(task);
 
     this.$state.go('home.task');
   }

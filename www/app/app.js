@@ -1,10 +1,10 @@
-/**
- * Core liberaries
-*/
+/* Core libraries */
 import 'angular';
 import '../lib/angular-animate';
 import '../lib/angular-sanitize';
 import '../lib/angular-ui-router/release/angular-ui-router.min.js';
+
+import ngRedux from 'ng-redux';
 
 import '../lib/ionic/js/ionic.js';
 import '../lib/ionic/js/ionic-angular.js';
@@ -29,10 +29,16 @@ import './components/app.uiComponents.js';
 
 import './services/taskService.js';
 
+// Root Reducer
+import { RootReducer } from './reducers';
+
+
 angular.module('mainApp', [
   'ionic',
   'app.routes',
   'app.ui.components',
+
+  ngRedux,
 
   // components
   'task.login',
@@ -46,7 +52,7 @@ angular.module('mainApp', [
   'taskService'
 ])
 
-.run(function($ionicPlatform) {
+.run(($ionicPlatform, $ngRedux, $rootScope) => {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -62,8 +68,24 @@ angular.module('mainApp', [
       StatusBar.styleDefault();
     }
   });
+
+
+
 })
-// .config(router); // TODO that
+.config(($ngReduxProvider) => {
+  "ngInject";
+  console.warn('redux', $ngReduxProvider, RootReducer);
+
+  $ngReduxProvider.createStoreWith(RootReducer);
+})
+.run( ($ngRedux, $rootScope) => {
+
+  //To reflect state changes when disabling/enabling actions via the monitor
+  //there is probably a smarter way to achieve that
+  // $ngRedux.subscribe(_ => {
+  //   setTimeout($rootScope.$apply, 100);
+  // });
+});
 
 
 

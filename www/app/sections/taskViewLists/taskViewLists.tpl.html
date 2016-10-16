@@ -17,11 +17,13 @@
     <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
 
       <div class="task__row clearfix"
-           ng-repeat="t in getTasks() | orderBy:'timeAt'"
+           ng-repeat="t in $ctrl.tasks | orderBy:'timeAt'"
            ng-click="task.aboutTask(t.id)">
+
         <div class="task__when">
           {{t.timeAt}}
         </div>
+
         <div class="task__about">
           <p class="task__title">{{t.title}}</p>
           <p class="task__description">{{t.description}}</p>
@@ -33,6 +35,11 @@
   </div>
 
   <!-- Menu -->
+  <div>
+  a: {{tasks}} <br/>
+  b: {{$ctrl.getTasks() }} <br/>
+  c: {{ this }}
+  </div>
 
   <ui-nav-button></ui-nav-button>
 

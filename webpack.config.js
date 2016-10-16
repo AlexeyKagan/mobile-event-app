@@ -63,6 +63,8 @@ module.exports = {
               test: /\.html$/,
               loader: "raw-loader"
             },
+
+            //
             {
               test: /.*\.(gif|png|jpe?g|svg)$/i,
               loaders: [
@@ -82,7 +84,7 @@ module.exports = {
    // so you won't need to wrie relative paths to them
     resolve: {
         root: __dirname + "/www/",
-        modulesDirectories: ["node_modules", "lib", "scss"],
+        modulesDirectories: ["node_modules", "lib", "scss", "app", "core"],
         // you can add here scss extension if you want.
         // this will allow you to require('somejsfile') with out the .js extension
         extensions: ['', '.js']

@@ -1,11 +1,29 @@
 import { monthName, dayName } from '../../../core/date.utils.js';
+import TasksActions from 'actions/tasks.actions.js';
 
 export default class TaskViewLists {
 
-  constructor($scope, $http, taskFactory, $state) {
+  constructor($scope, $http, taskFactory, $state, $ngRedux) {
 
-    Object.assign(this, { $scope, $http, taskFactory, $state });
+    Object.assign(this, { $http, taskFactory, $state });
+    this.$scope = $scope;
+    $scope.$ctrl = this;
 
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
+
+    $ngRedux.subscribe(_ => {
+      console.warn('TaskViewLists', this.tasks, $scope);
+      // setTimeout($scope.$apply(), 100);
+      // $scope.$apply();
+      // $scope.tasks = this.tasks;
+    });
+  }
+
+  mapStateToThis(state) {
+
+    return {
+      tasks: state.tasks
+    }
   }
 
   $onInit() {
@@ -13,8 +31,15 @@ export default class TaskViewLists {
     this.getWeather();
     this.setCurrentDateTime();
 
-    this.update({ tasks: this.taskFactory.all() });
+  }
 
+  $onDestroy() {
+    this.unsubscribe();
+  }
+
+  getTasks() {
+    console.warn('getTasks', this.tasks);
+    return this.tasks;
   }
 
   setCurrentDateTime() {
@@ -38,9 +63,8 @@ export default class TaskViewLists {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
 
-      //##### USE WEATHER API FOR GET CURRENT WEATHER
       this.$http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
-        .then((res) => {
+        .then(res => {
 
           const icon = res.data.weather[0].icon;
           const temp = Math.round(res.data.main.temp - 275) + " °C";
@@ -61,6 +85,7 @@ export default class TaskViewLists {
   }
 
   toUpperCase(str) {
+
     return str[0].toUpperCase() + str.slice(1);
   }
 
@@ -97,77 +122,5 @@ export default class TaskViewLists {
   }
 
 }
-
-
-//function for get name of day and month
-
-// function monthName(number) {
-//
-//   switch (number) {
-//     case 0 :
-//       return "Январь";
-//       break;
-//     case 1 :
-//       return "Февраль";
-//       break;
-//     case 2 :
-//       return "Март";
-//       break;
-//     case 3 :
-//       return "Апрель";
-//       break;
-//     case 4 :
-//       return "Май";
-//       break;
-//     case 5 :
-//       return "Июнь";
-//       break;
-//     case 6 :
-//       return "Июль";
-//       break;
-//     case 7 :
-//       return "Август";
-//       break;
-//     case 8 :
-//       return "Сентябрь";
-//       break;
-//     case 9 :
-//       return "Октябрь";
-//       break;
-//     case 10 :
-//       return "Ноябрь";
-//       break;
-//     case 11 :
-//       return "Декабрь";
-//       break;
-//   }
-// }
-//
-// function dayName(number) {
-//
-//   switch (number) {
-//     case 0 :
-//       return "Воскресенье";
-//       break;
-//     case 1 :
-//       return "Понедельник";
-//       break;
-//     case 2 :
-//       return "Вторник";
-//       break;
-//     case 3 :
-//       return "Среда";
-//       break;
-//     case 4 :
-//       return "Четверг";
-//       break;
-//     case 5 :
-//       return "Пятница";
-//       break;
-//     case 6 :
-//       return "Суббота";
-//       break;
-//   }
-// }
 
 
