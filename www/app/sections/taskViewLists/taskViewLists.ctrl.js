@@ -3,20 +3,14 @@ import TasksActions from 'actions/tasks.actions.js';
 
 export default class TaskViewLists {
 
-  constructor($scope, $http, taskFactory, $state, $ngRedux) {
+  constructor($scope, $http, $state, $ngRedux) {
 
-    Object.assign(this, { $http, taskFactory, $state });
+    Object.assign(this, { $http, $state });
     this.$scope = $scope;
     $scope.$ctrl = this;
 
     this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
 
-    $ngRedux.subscribe(_ => {
-      console.warn('TaskViewLists', this.tasks, $scope);
-      // setTimeout($scope.$apply(), 100);
-      // $scope.$apply();
-      // $scope.tasks = this.tasks;
-    });
   }
 
   mapStateToThis(state) {
@@ -31,6 +25,8 @@ export default class TaskViewLists {
     this.getWeather();
     this.setCurrentDateTime();
 
+    this.fetchTasks();
+
   }
 
   $onDestroy() {
@@ -38,7 +34,7 @@ export default class TaskViewLists {
   }
 
   getTasks() {
-    console.warn('getTasks', this.tasks);
+
     return this.tasks;
   }
 

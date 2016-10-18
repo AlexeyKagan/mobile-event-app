@@ -1,25 +1,39 @@
+import TasksActions from 'actions/tasks.actions.js';
 
 export default class EditTask {
 
-  constructor($state, taskFactory) {
+  constructor($state, $ngRedux) {
 
-    Object.assign(this, { $state, taskFactory });
+    Object.assign(this, { $state });
 
-    console.log('EditTask', $state.params.id);
-    console.log('EditTask2', window.location);
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis.bind(this), TasksActions)(this);
   }
+
+  mapStateToThis(state = []) {
+    return {
+      task: state.tasks.find(t => t.id === this.$state.params.id)
+    }
+  }
+
 
   $onInit() {
 
-    this.task = this.taskFactory.aboutTaskId(this.$state.params.id);
+    // this.task = this.taskFactory.aboutTaskId(this.$state.params.id);
+  }
+
+  $onDestroy() {
+
+    this.unsubscribe();
   }
 
   deleteTask() {
 
-    this.taskFactory.deleteId(this.task.id);
+    this.removeTask(this.task.id);
 
     this.$state.go('home.task');
   }
 
+
 }
+
 

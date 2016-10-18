@@ -3,9 +3,9 @@ import TasksActions from 'actions/tasks.actions.js';
 
 export default class AddTask {
 
-  constructor($state, taskFactory, $ngRedux) {
+  constructor($state, $ngRedux) {
 
-    Object.assign(this, { $state, taskFactory });
+    Object.assign(this, { $state });
 
     this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
   }
@@ -26,7 +26,6 @@ export default class AddTask {
   submitTask() {
     const vm = this;
 
-    const tasks = this.taskFactory.all() || [];
     const time = new Date(vm.time);
 
     if (!vm.title || !vm.description) {
@@ -41,10 +40,6 @@ export default class AddTask {
       timeAt: this.stringifyTime(time),
       dateAt: new Date(vm.date)
     };
-
-    // tasks.push(task);
-    //
-    // this.taskFactory.save(tasks);
 
     this.addTask(task);
 

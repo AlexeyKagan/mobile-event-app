@@ -8,10 +8,11 @@ export function TasksReducer(state = initialState, action) {
 
       return [...state, action.payload];
     case TASKS.REMOVE_TASK:
-      return [
-        ...state.slice(0, action.payload),
-        ...state.slice(action.payload + 1)
-      ];
+
+      return [...action.payload];
+    case TASKS.GET_TASKS_SUCCESS:
+
+      return [...action.payload];
     default:
       return state;
   }
