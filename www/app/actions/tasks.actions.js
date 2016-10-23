@@ -1,45 +1,100 @@
 import { TASKS } from '../constants/tasks.js';
+import getAuthService from 'services/AuthService.js';
 
-function addTask(task){
-
-  const tasks = getAllTasks();
-
-  tasks.push(task);
-  saveTasks(tasks);
-
+export function selectTask(task) {
   return {
-    type: TASKS.ADD_TASK,
-    payload: task
+    type: TASKS.SELECT_TASK,
+    task
   }
 }
 
-function removeTask(id){
-  const tasks = getAllTasks().filter(d => d.id !== id);
-
-  saveTasks(tasks);
-
+export function invalidateTask(task) {
   return {
-    type: TASKS.REMOVE_TASK,
-    payload: tasks
-  };
-}
-
-function fetchTasks() {
-
-  return {
-    type: TASKS.GET_TASKS_SUCCESS,
-    payload: getAllTasks()
+    type: TASKS.INVALIDATE_TASK,
+    task
   }
 }
 
-function getAllTasks() {
-
-  return JSON.parse(window.localStorage['tasks'] || "[]");
+export function requestTasks() {
+  return {
+    type: TASKS.REQUEST_TASKS    
+  }
 }
 
-function saveTasks(tasks) {
-
-  window.localStorage['tasks'] = JSON.stringify(tasks);
+export function receiveTasks(data) {
+  return {
+    type: TASKS.RECEIVE_TASKS,    
+    tasks: data.tasks || [],
+  }
 }
 
-export default { addTask, removeTask, fetchTasks };
+export function updateAddedTask(task) {
+  console.warn('updateAddedTask', task);
+  return {
+    type: TASKS.UPDATE_ADDED_TASK,
+    task: task
+  }
+}
+
+export function saveTask(task) {
+  return dispatch => {
+    dispatch(requestTasks());
+
+    return fetch(`api/notes`, {
+      method: 'POST',
+      ...getHeadersForRequest(),
+      body: JSON.stringify(task)
+    })
+    .then(response => response.json())
+    .then(data => {
+      
+      return data.success && dispatch(updateAddedTask(task))
+    })
+  }
+}
+
+export function fetchTasks() {
+
+	return dispatch => {    
+
+		dispatch(requestTasks())	
+
+		return fetch(`api/notes`, getHeadersForRequest())
+	    .then(response => response.json())
+      .then(data => dispatch(receiveTasks(data)))
+      .catch(err => console.log('fetch api/notes err:', err))
+	}
+}
+
+export function deleteTask(id) {
+  return dispatch => {
+
+    dispatch(requestTasks())
+
+    return fetch(`api/notes/${id}`, {
+      method: 'DELETE',
+      ...getHeadersForRequest()
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('deleteTask', data);
+
+      return data.success && dispatch(receiveTasks(data))
+    })
+
+  }
+}
+
+
+function getHeadersForRequest() {
+  // TODO delete it.
+  const authService = getAuthService();
+  const headers = {
+    headers: { 
+      authorization: authService.isLoggedIn(), 
+      'content-type': 'application/json; charset=utf-8' 
+    }
+  }
+
+  return headers;
+}

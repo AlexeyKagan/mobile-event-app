@@ -1,5 +1,5 @@
 import { monthName, dayName } from '../../../core/date.utils.js';
-import TasksActions from 'actions/tasks.actions.js';
+import * as TasksActions from 'actions/tasks.actions.js';
 
 export default class TaskViewLists {
 
@@ -10,13 +10,15 @@ export default class TaskViewLists {
     $scope.$ctrl = this;
 
     this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
-
   }
 
-  mapStateToThis(state) {
+  mapStateToThis({ tasks = {} }) {
+    
+    console.log('mapStateToThis', tasks);
 
     return {
-      tasks: state.tasks
+      state: tasks,
+      tasks: tasks.tasks
     }
   }
 
@@ -30,7 +32,8 @@ export default class TaskViewLists {
   }
 
   $onDestroy() {
-    this.unsubscribe();
+    // this.unsubscribe();
+    this.unsubscribe2();
   }
 
   getTasks() {
@@ -54,6 +57,7 @@ export default class TaskViewLists {
 
   getWeather() {
 
+    // TODO Delete it from here.
     navigator.geolocation.getCurrentPosition((position) => {
 
       const lat = position.coords.latitude;
@@ -86,9 +90,7 @@ export default class TaskViewLists {
   }
 
   /**
-   * Simple Update method.
-   * Bind value to this.
-   * Create getter for this value.
+   * Simple Update method. Bind value to this. Create getter for this value.
    * @example
    * this.update({ foo: 5 });
    * this.getFoo() => 5;

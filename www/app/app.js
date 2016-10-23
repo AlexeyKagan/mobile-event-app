@@ -27,11 +27,13 @@ import './sections/addTask/addTask.component.js';
 // Ui Components
 import './components/app.uiComponents.js';
 
-import './services/taskService.js';
+import './services/AuthService.js';
 
 // Root Reducer
 import { RootReducer } from './reducers';
 
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 
 angular.module('mainApp', [
   'ionic',
@@ -49,10 +51,11 @@ angular.module('mainApp', [
   'task.addTask',
 
   // services
-  'taskService'
+  'app.auth'
+
 ])
 
-.run(($ionicPlatform, $ngRedux, $rootScope) => {
+.run(($ionicPlatform, $ngRedux, $rootScope, AuthService, $state) => {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -69,23 +72,33 @@ angular.module('mainApp', [
     }
   });
 
+  // @TODO create redux auth
+  $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
 
+    if (!AuthService.isLoggedIn()) {
+      
+      console.log('$stateChangeStart', next.name);
+
+      if (next.name !== 'login' && next.name !== 'signup') {
+        event.preventDefault();
+        $state.go('login');
+      }
+    }
+  });
 
 })
+.run(function (AuthService) {})
 .config(($ngReduxProvider) => {
-  "ngInject";
-  console.warn('redux', $ngReduxProvider, RootReducer);
 
-  $ngReduxProvider.createStoreWith(RootReducer);
+  $ngReduxProvider.createStoreWith(RootReducer, [thunk, createLogger()]);
 })
-.run( ($ngRedux, $rootScope) => {
+.config(($httpProvider) => {
 
-  //To reflect state changes when disabling/enabling actions via the monitor
-  //there is probably a smarter way to achieve that
-  // $ngRedux.subscribe(_ => {
-  //   setTimeout($rootScope.$apply, 100);
-  // });
-});
+  // @TODO create redux auth
+  $httpProvider.interceptors.push('AuthInterceptor');
+})
+
+
 
 
 

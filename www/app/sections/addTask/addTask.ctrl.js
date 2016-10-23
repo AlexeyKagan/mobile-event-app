@@ -1,5 +1,5 @@
 import { uuid } from 'core/utils.js';
-import TasksActions from 'actions/tasks.actions.js';
+import * as TasksActions from 'actions/tasks.actions.js';
 
 export default class AddTask {
 
@@ -7,7 +7,7 @@ export default class AddTask {
 
     Object.assign(this, { $state });
 
-    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
+    this.unsubscribe = $ngRedux.connect(null, TasksActions)(this);
   }
 
   $onInit() {  }
@@ -16,16 +16,9 @@ export default class AddTask {
     this.unsubscribe();
   }
 
-  mapStateToThis(state) {
-    
-    return {
-      tasks: state.tasks
-    }
-  }
-
   submitTask() {
-    const vm = this;
 
+    const vm = this;
     const time = new Date(vm.time);
 
     if (!vm.title || !vm.description) {
@@ -33,7 +26,7 @@ export default class AddTask {
       return false;
     }
 
-    var task = {
+    const task = {
       id: uuid(),
       title: vm.title,
       description: vm.description,
@@ -41,15 +34,16 @@ export default class AddTask {
       dateAt: new Date(vm.date)
     };
 
-    this.addTask(task);
+    this.saveTask(task);
 
     this.$state.go('home.task');
   }
-
+  
+  // TODO Rewrite this. shitty logic
   stringifyTime(time) {
+
     let hours;
     let min;
-
 
     if (!time.getHours()) return "";
 

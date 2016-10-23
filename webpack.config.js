@@ -5,6 +5,14 @@ module.exports = {
     // You can specify multiple entry files using array.
     entry: "./www/app/app.js",
 
+    devServer: {
+      /* Send API requests on localhost to API server get around CORS */
+      proxy: {
+        '/api': 'http://localhost:8085'
+      }
+      // headers: {"Access-Control-Allow-Origin": "*"},
+    },
+
     // will output to our source files after budnled, very useful during development
     // Suggested to turn it of for production bundling
     devtool: 'source-map',
@@ -63,15 +71,20 @@ module.exports = {
               test: /\.html$/,
               loader: "raw-loader"
             },
-
-            //
             {
-              test: /.*\.(gif|png|jpe?g|svg)$/i,
+              test: /\.(jpe?g|png|gif|svg)$/i,
               loaders: [
-                'file?hash=sha512&digest=hex&name=[hash].[ext]',
-                'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+                  'file?hash=sha512&digest=hex&name=[hash].[ext]',
+                  'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
               ]
             }
+            // {
+            //   test: /.*\.(gif|png|jpe?g|svg)$/i,
+            //   loaders: [
+            //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
+            //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+            //   ]
+            // }
         ]
     },
     plugins: [

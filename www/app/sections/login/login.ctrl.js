@@ -1,17 +1,34 @@
 
 export default class Login {
 
-  constructor($location) {
+  constructor(...args) {
 
-    Object.assign(this, { $location });
+    Object.assign(this, ...args);
   }
 
   $onInit() { }
 
   signIn() { 
+  	console.log('this', this);
+    
+    if (!this.login || !this.password) {
+    	console.log('Uncorrect login or password', this.login, this.password);
+    	return;
+    }
 
-    this.$location.path('/home/task');
+    this.doLogin(this.login, this.password).then(res => {
+    	this.message = res.data.message
+    	console.log('res', res.data);
+    	if (res.data.success) {
+    		this.setToken(res.data.token);
+    		this.go('home.task');
+    	}
+    }, err => {
+    	console.log('something wrong err:', err);
+    })
   }
 
 }
+
+Login.$inject = ['$state', 'AuthService', 'authToken'];
 

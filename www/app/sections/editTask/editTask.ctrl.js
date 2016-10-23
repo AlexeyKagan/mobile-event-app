@@ -1,4 +1,4 @@
-import TasksActions from 'actions/tasks.actions.js';
+import * as TasksActions from 'actions/tasks.actions.js';
 
 export default class EditTask {
 
@@ -9,9 +9,10 @@ export default class EditTask {
     this.unsubscribe = $ngRedux.connect(this.mapStateToThis.bind(this), TasksActions)(this);
   }
 
-  mapStateToThis(state = []) {
+  mapStateToThis({ tasks: { tasks = [] } }) {
+
     return {
-      task: state.tasks.find(t => t.id === this.$state.params.id)
+      task: tasks.find(t => t.id === this.$state.params.id)
     }
   }
 
@@ -26,9 +27,9 @@ export default class EditTask {
     this.unsubscribe();
   }
 
-  deleteTask() {
+  removeTask() {
 
-    this.removeTask(this.task.id);
+    this.deleteTask(this.task.id);
 
     this.$state.go('home.task');
   }
