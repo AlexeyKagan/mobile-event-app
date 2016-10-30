@@ -1,5 +1,6 @@
 import { TASKS } from '../constants/tasks.js';
 import getAuthService from 'services/AuthService.js';
+import { API_URL } from 'core/consts.js';
 
 export function selectTask(task) {
   return {
@@ -24,7 +25,7 @@ export function requestTasks() {
 export function receiveTasks(data) {
   return {
     type: TASKS.RECEIVE_TASKS,    
-    tasks: data.tasks || [],
+    tasks: data.tasks || []
   }
 }
 
@@ -40,7 +41,7 @@ export function saveTask(task) {
   return dispatch => {
     dispatch(requestTasks());
 
-    return fetch(`api/notes`, {
+    return fetch(`${API_URL}/api/notes`, {
       method: 'POST',
       ...getHeadersForRequest(),
       body: JSON.stringify(task)
@@ -57,9 +58,9 @@ export function fetchTasks() {
 
 	return dispatch => {    
 
-		dispatch(requestTasks())	
+		dispatch(requestTasks());
 
-		return fetch(`api/notes`, getHeadersForRequest())
+		return fetch(`${API_URL}/api/notes`, getHeadersForRequest())
 	    .then(response => response.json())
       .then(data => dispatch(receiveTasks(data)))
       .catch(err => console.log('fetch api/notes err:', err))
@@ -69,9 +70,9 @@ export function fetchTasks() {
 export function deleteTask(id) {
   return dispatch => {
 
-    dispatch(requestTasks())
+    dispatch(requestTasks());
 
-    return fetch(`api/notes/${id}`, {
+    return fetch(`${API_URL}/api/notes/${id}`, {
       method: 'DELETE',
       ...getHeadersForRequest()
     })
@@ -94,7 +95,7 @@ function getHeadersForRequest() {
       authorization: authService.isLoggedIn(), 
       'content-type': 'application/json; charset=utf-8' 
     }
-  }
+  };
 
   return headers;
 }

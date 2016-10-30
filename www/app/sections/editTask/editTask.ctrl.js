@@ -31,7 +31,7 @@ export default class EditTask {
 
     this.deleteTask(this.task.id);
 
-    this.$state.go('home.task');
+    this.$state.go(`home.taskForCurrentDate`, { date: this.$state.params.date })
   }
 
 

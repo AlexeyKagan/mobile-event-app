@@ -1,5 +1,6 @@
 import { uuid } from 'core/utils.js';
 import * as TasksActions from 'actions/tasks.actions.js';
+import { getLocalDate } from 'core/date.utils.js';
 
 export default class AddTask {
 
@@ -36,9 +37,9 @@ export default class AddTask {
 
     this.saveTask(task);
 
-    this.$state.go('home.task');
+    this.$state.go(`home.taskForCurrentDate`, { date: getLocalDate(vm.date) })
   }
-  
+
   // TODO Rewrite this. shitty logic
   stringifyTime(time) {
 

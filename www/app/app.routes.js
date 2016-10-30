@@ -1,5 +1,7 @@
 angular.module('app.routes', [])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+    // TODO state metadata
 
     $stateProvider
       .state('login', {
@@ -14,7 +16,17 @@ angular.module('app.routes', [])
 
       .state('home', {
         url: '/home',
+        // abstract: true,
         template: '<task-view> </task-view>'
+      })
+
+      .state('home.calendar', {
+        url: '/calendar',
+        views: {
+          'menuContent': {
+            template: '<task-calendar />'
+          }
+        }
       })
 
       .state('home.addTask', {
@@ -26,13 +38,24 @@ angular.module('app.routes', [])
         }
       })
 
-      .state('home.task', {
-        url: '/task',
+      // .state('home.task', {
+      //   url: '/task',
+      //   views: {
+      //     'menuContent': {
+      //       template: '<task-view-lists> </task-view-lists>'
+      //     }
+      //   },
+      //   // cache: false
+      // })
+
+      .state('home.taskForCurrentDate', {
+        url: '/task/:date',
         views: {
           'menuContent': {
             template: '<task-view-lists> </task-view-lists>'
           }
-        }
+        },
+        // cache: false
       })
 
       .state('home.edit', {
@@ -45,5 +68,8 @@ angular.module('app.routes', [])
       });
 
     $urlRouterProvider.otherwise('/login');
+
+    // Disabled views cache
+    $ionicConfigProvider.views.maxCache(0)
 
   });

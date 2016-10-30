@@ -21,6 +21,10 @@ $ionicons-font-path: "../www/lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+[nav-view-transition][nav-view-direction] {
+  background-color: transparent;
+}
+
 body{
   font-size:100%;
   height: 100%;

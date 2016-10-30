@@ -9,16 +9,31 @@ export default class TaskViewLists {
     this.$scope = $scope;
     $scope.$ctrl = this;
 
-    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, TasksActions)(this);
+
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis.bind(this), TasksActions)(this);
+
+  }
+
+  getDateByParam() {
+
+    if (!this.$state.params.date) {
+      return new Date();
+    }
+
+    return new Date(...this.$state.params.date.split('.'))
+  }
+
+  compareDates(date, date1) {
+
   }
 
   mapStateToThis({ tasks = {} }) {
-    
-    console.log('mapStateToThis', tasks);
+
+    console.log('mapStateToThis', this.$state.params.date);
 
     return {
       state: tasks,
-      tasks: tasks.tasks
+      tasks: this.$state.params.date && tasks.tasks.filter(t => new Date(t.dateAt).toString() === this.getDateByParam().toString())
     }
   }
 
@@ -32,8 +47,8 @@ export default class TaskViewLists {
   }
 
   $onDestroy() {
-    // this.unsubscribe();
-    this.unsubscribe2();
+    console.warn('$onDestroy');
+    this.unsubscribe();
   }
 
   getTasks() {
@@ -43,7 +58,7 @@ export default class TaskViewLists {
 
   setCurrentDateTime() {
 
-    const date = new Date();
+    const date = this.getDateByParam();
 
     const dateTime = {
       day: dayName(date.getDay()),
@@ -56,7 +71,7 @@ export default class TaskViewLists {
   }
 
   getWeather() {
-
+    console.log('getWeather');
     // TODO Delete it from here.
     navigator.geolocation.getCurrentPosition((position) => {
 
@@ -65,7 +80,7 @@ export default class TaskViewLists {
 
       this.$http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
         .then(res => {
-
+          console.log('api.openweathermap', res)
           const icon = res.data.weather[0].icon;
           const temp = Math.round(res.data.main.temp - 275) + " °C";
           const img = document.querySelector("#img-weather");
@@ -73,7 +88,7 @@ export default class TaskViewLists {
           angular.element(img).attr("src", "http://openweathermap.org/img/w/" + icon + '.png');
 
           this.update({ temp });
-
+          console.log('api.openweathermap', this);
         }, function errorCallback(res) {
           console.log(res);
         });
@@ -81,7 +96,7 @@ export default class TaskViewLists {
     }, function (error) {
       console.log('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-    });
+    }, { timeout:10000 });
   }
 
   toUpperCase(str) {
@@ -116,7 +131,7 @@ export default class TaskViewLists {
 
   aboutTask(id) {
 
-    this.$state.go('home.edit', { id })
+    this.$state.go('home.edit', { id, date: this.$state.params.date })
   }
 
 }

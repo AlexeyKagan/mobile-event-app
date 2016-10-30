@@ -9705,7 +9705,7 @@ a.button {
   transition-property: opacity, transform, box-shadow; }
 
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
-  background-color: #000; }
+  background-color: transparent; }
 
 [nav-view-transition="ios"] [nav-view="active"],
 [nav-view-transition="ios"][nav-view-direction="forward"] [nav-view="entering"],

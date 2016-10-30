@@ -1,9 +1,11 @@
 <ion-side-menus>
   <ion-side-menu side="left">
     <ion-list>
-      <ion-item menu-close href="#/home/task"> Главная</ion-item>
+      <ion-item menu-close ng-click="$ctrl.goToMain()"> Главная</ion-item>
 
       <ion-item menu-close href="#/home/addTask"> Добавить задачу</ion-item>
+
+      <ion-item menu-close href="#/home/calendar"> Календарь </ion-item>
 
       <ion-item ng-click="$ctrl.exit()"> Выход</ion-item>
     </ion-list>
@@ -17,7 +19,8 @@
       <span class="main-home__search ion-android-search" id="search"></span>
     </div>
 
-    <ion-nav-view name="menuContent" class="sss"></ion-nav-view>
+    <ion-nav-view name="menuContent" nav-view-direction="enter"></ion-nav-view>
+
 
   </ion-side-menu-content>
 </ion-side-menus>

@@ -1,9 +1,10 @@
+import { getLocalDate } from 'core/date.utils.js';
 
 export default class TaskView {
 
-  constructor($ionicSideMenuDelegate) {
+  constructor($ionicSideMenuDelegate, $state) {
 
-    Object.assign(this, { $ionicSideMenuDelegate  });
+    Object.assign(this, { $ionicSideMenuDelegate, $state  });
   }
 
   exit() {
@@ -16,6 +17,11 @@ export default class TaskView {
     this.$ionicSideMenuDelegate.toggleLeft();
   }
 
+  goToMain() {
+
+
+    this.$state.go(`home.taskForCurrentDate`, { date: getLocalDate() })
+  }
+
 }
 
- 

@@ -1,4 +1,4 @@
-
+import { API_URL } from 'core/consts.js';
 let _AuthService = {};
 
 angular.module('app.auth', [])
@@ -7,13 +7,13 @@ angular.module('app.auth', [])
     const authFactory = {};	
 
     authFactory.doLogin = (username, password) => {
-        return $http.post('/api/login', {
+        return $http.post(`${API_URL}/api/login`, {
             username: username,
             password: password
         })
     };
 
-    authFactory.doSignup = data => $http.post('/api/signup', data);
+    authFactory.doSignup = data => $http.post(`${API_URL}/api/signup`, data);
 
     authFactory.doLogout = () => authToken.removeToken();
 
@@ -23,13 +23,14 @@ angular.module('app.auth', [])
 
         if (authToken.getToken()) {
 
-            return $http.get('/api/me', {cache: true});
+            return $http.get(`${API_URL}/api/me`, {cache: true});
         }
         
         return $q.reject({message: 'User has no token.'});
     };
 
     _AuthService = authFactory;
+
     return authFactory;
 })
 .factory('authToken', ($window) => {

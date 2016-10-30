@@ -4,14 +4,16 @@ import '../lib/angular-animate';
 import '../lib/angular-sanitize';
 import '../lib/angular-ui-router/release/angular-ui-router.min.js';
 
+
 import ngRedux from 'ng-redux';
 
 import '../lib/ionic/js/ionic.js';
 import '../lib/ionic/js/ionic-angular.js';
+import '../lib/onezone-datepicker/dist/onezone-datepicker.min.js';
 
 import 'ionic.app.scss';
 
-/** 
+/**
  * App
 */
 import './app.routes.js';
@@ -23,6 +25,7 @@ import './sections/taskView/taskView.component.js'
 import './sections/taskViewLists/taskViewLists.component.js';
 import './sections/editTask/editTask.component.js';
 import './sections/addTask/addTask.component.js';
+import './sections/taskCalendar/taskCalendar.component.js';
 
 // Ui Components
 import './components/app.uiComponents.js';
@@ -39,6 +42,7 @@ angular.module('mainApp', [
   'ionic',
   'app.routes',
   'app.ui.components',
+  'onezone-datepicker',
 
   ngRedux,
 
@@ -49,6 +53,7 @@ angular.module('mainApp', [
   'task.view.lists',
   'task.edit',
   'task.addTask',
+  'task.calendar',
 
   // services
   'app.auth'
@@ -76,7 +81,7 @@ angular.module('mainApp', [
   $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
 
     if (!AuthService.isLoggedIn()) {
-      
+
       console.log('$stateChangeStart', next.name);
 
       if (next.name !== 'login' && next.name !== 'signup') {
@@ -102,4 +107,4 @@ angular.module('mainApp', [
 
 
 
- 
+
