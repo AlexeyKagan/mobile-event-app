@@ -20,4 +20,49 @@
   border: 1px solid #59516f;
   font-weight: 300;
   font-size: 20px;
+  display: flex;
+}
+
+.item-text-arrow-down-icon {
+
+}
+.main-addTask-dropdown{
+  & select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0 48px 0 16px;
+    max-width: 65%;
+    border: none;
+    //background: #fff;
+    color: #333;
+    text-indent: .01px;
+    text-overflow: '';
+    white-space: nowrap;
+    font-size: 14px;
+    cursor: pointer;
+    direction: rtl;
+
+  }
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -3px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    color: white;
+    content: "";
+    pointer-events: none;
+
+  }
 }
