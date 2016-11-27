@@ -1,6 +1,7 @@
 import { TASKS } from '../constants/tasks.js';
 import getAuthService from 'services/AuthService.js';
 import { API_URL } from 'core/consts.js';
+import { createNotification } from 'core/Notifications.js';
 
 export function selectTask(task) {
   return {
@@ -18,19 +19,24 @@ export function invalidateTask(task) {
 
 export function requestTasks() {
   return {
-    type: TASKS.REQUEST_TASKS    
+    type: TASKS.REQUEST_TASKS
   }
 }
 
-export function receiveTasks(data) {
+export function receiveTasks(data = []) {
+  // LocalNotifications
+  createNotification(data.tasks);
+
   return {
-    type: TASKS.RECEIVE_TASKS,    
-    tasks: data.tasks || []
+    type: TASKS.RECEIVE_TASKS,
+    tasks: data.tasks
   }
 }
 
 export function updateAddedTask(task) {
-  console.warn('updateAddedTask', task);
+  // TODO bug if we create notification and after reload page it receive all task and also create notification
+  createNotification(task);
+
   return {
     type: TASKS.UPDATE_ADDED_TASK,
     task: task
@@ -48,7 +54,7 @@ export function saveTask(task) {
     })
     .then(response => response.json())
     .then(data => {
-      
+
       return data.success && dispatch(updateAddedTask(task))
     })
   }
@@ -56,13 +62,13 @@ export function saveTask(task) {
 
 export function fetchTasks() {
 
-	return dispatch => {    
+	return dispatch => {
 
 		dispatch(requestTasks());
 
 		return fetch(`${API_URL}/api/notes`, getHeadersForRequest())
 	    .then(response => response.json())
-      .then(data => dispatch(receiveTasks(data)))
+      .then(data => { console.log('fetchTasks', data); dispatch(receiveTasks(data)) })
       .catch(err => console.log('fetch api/notes err:', err))
 	}
 }
@@ -91,9 +97,9 @@ function getHeadersForRequest() {
   // TODO delete it.
   const authService = getAuthService();
   const headers = {
-    headers: { 
-      authorization: authService.isLoggedIn(), 
-      'content-type': 'application/json; charset=utf-8' 
+    headers: {
+      authorization: authService.isLoggedIn(),
+      'content-type': 'application/json; charset=utf-8'
     }
   };
 

@@ -2,7 +2,7 @@
   <div class="main-login__ok">
 
   </div>
-  
+
   <div class="main-login__form">
     <form ng-submit="$ctrl.signIn()">
 
@@ -17,9 +17,11 @@
       </div>
 
       <div class="main-login__form-button">
-        <button type="submit" class="main-login__button">Войти </button>
-      </div>
 
+        <button type="submit" class="main-login__button" ng-class="{ 'main-login__isLoading': $ctrl.isLoading, 'success': $ctrl.isSuccess }">Войти </button>
+
+        <!--<div ng-if="$ctrl.isSuccess" class="main-login__success"> hey </div>-->
+      </div>
     </form>
     <div class="main-login__href">
       <p>

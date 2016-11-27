@@ -49,6 +49,11 @@ module.exports = {
                    allChunks: true
                })
             },
+            { test: /\.json$/, loader: "json" },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
             {
                 test   : /\.woff/,
                 loader : 'url?prefix=font/&limit=10000&mimetype=application/font-woff&name=assets/[hash].[ext]'
@@ -96,7 +101,7 @@ module.exports = {
    // When requiring modules in your code, require and import will first look in this directories
    // so you won't need to wrie relative paths to them
     resolve: {
-        root: __dirname + "/www/",
+        root: __dirname + "/www",
         modulesDirectories: ["node_modules", "lib", "scss", "app", "core"],
         // you can add here scss extension if you want.
         // this will allow you to require('somejsfile') with out the .js extension

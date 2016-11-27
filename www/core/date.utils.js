@@ -56,3 +56,18 @@ export const getLocalDate = value => {
   return `${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`;
 };
 
+export function notifyDay(dateAt, timeAt, notifyOf) {
+
+  const day = new Date(dateAt);
+  const [ notifyOfMinutes ] = (notifyOf || '').split(' ');
+
+  if (timeAt) {
+    const [hour, minutes] = timeAt.split(':');
+    day.setHours(hour);
+    day.setMinutes(notifyOfMinutes ? (minutes - notifyOfMinutes) :  minutes);
+    day.setSeconds(0);
+  }
+
+  return day;
+}
+

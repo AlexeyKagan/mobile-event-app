@@ -134,18 +134,7 @@ body{
     margin-top: 10%;
     margin-bottom: 10%;
   }
-  &__button{
-    font-size: 1.2rem;
-    font-weight: 100;
-    color:white;
-    background: #ff3366;
-    border: none;
-    border-radius: 40px;
-    width: 100%;
-    height: auto;
-    padding: 4% 0;
-    margin: 0;
-  }
+
   &__href{
     font-size: 0.8rem;
     text-align: center;
@@ -482,9 +471,9 @@ ion-side-menus{
   color:white;
   background: inherit !important;
   //-webkit-background-image: image();
-
-
-
+  padding-bottom: 40px;
+  height: 100%;
+  overflow: scroll;
 
 
   &__title{
@@ -540,6 +529,9 @@ ion-side-menus{
     }
 
     &__description-title{
+      display:block;
+      font-size: 100%;
+      font-weight: 300;
       span{
         margin-right: 2%;
       }

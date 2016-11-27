@@ -1,4 +1,5 @@
 import * as TasksActions from 'actions/tasks.actions.js';
+import { getLocalDate } from 'core/date.utils.js';
 
 export default class EditTask {
 
@@ -31,7 +32,7 @@ export default class EditTask {
 
     this.deleteTask(this.task.id);
 
-    this.$state.go(`home.taskForCurrentDate`, { date: this.$state.params.date })
+    this.$state.go(`home.taskForCurrentDate`, { date: getLocalDate(this.task.dateAt) })
   }
 
 

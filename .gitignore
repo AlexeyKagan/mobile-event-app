@@ -6,3 +6,5 @@ platforms/
 plugins/
 .idea/*
 .idea/workspace.xml
+.io-config.json
+.ionic.config.json

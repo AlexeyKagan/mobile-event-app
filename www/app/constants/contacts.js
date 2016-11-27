@@ -1,0 +1,4 @@
+export const CONTACTS = {
+  RECEIVE_CONTACTS: 'RECEIVE_CONTACTS'
+
+};

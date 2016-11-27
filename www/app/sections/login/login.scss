@@ -1,0 +1,97 @@
+.main-login__button {
+  position: relative;
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: white;
+  background: #ff3366;
+  border: none;
+  border-radius: 40px;
+  width: 100%;
+  height: auto;
+  padding: 4% 0;
+  margin: 0 auto;
+  transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.2rem;
+    margin-top: -1.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 2px dotted #fff;
+    border-radius: 50%;
+    border-left: none;
+    border-bottom: none;
+    transition: opacity 0.1s 0.4s;
+    opacity: 0;
+  }
+
+  &.main-login__isLoading{
+    width: 3rem;
+    height: 3rem;
+    font-size: 0;
+    &:after{
+      opacity: 1;
+      animation: rotate 0.5s 0.4s infinite linear;
+    }
+  }
+
+  &.success {
+    transition: transform 0.3s 0.1s ease-out, opacity 0.1s 0.3s, background-color 0.1s 0.3s;
+    transform: scale(100);
+    opacity: 0.9;
+    font-size: 0;
+    //background-color: rgba(255,255,255,0.95);
+
+    &:after {
+      transition: opacity 0.1s 0s;
+      opacity: 0;
+      animation: none;
+    }
+  }
+
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+//.main-login__isLoading {
+//  //width: 100px;
+//  width: 30%;
+//  border-radius: 100px;
+//  transition: .3s;
+//
+//  &:after {
+//    content: "";
+//    position: absolute;
+//    top: 50%;
+//    left: 50%;
+//    margin-left: -1.5rem;
+//    margin-top: -1.5rem;
+//    width: 3rem;
+//    height: 3rem;
+//    border: 2px dotted #fff;
+//    border-radius: 50%;
+//    border-left: none;
+//    border-bottom: none;
+//    transition: opacity 0.1s 0.4s;
+//    opacity: 0;
+//  }
+//
+//  &.processing {
+//    width: 4rem;
+//    font-size: 0;
+//
+//    &:after {
+//      opacity: 1;
+//      animation: rotate 0.5s 0.4s infinite linear;
+//    }
+//  }
+//}

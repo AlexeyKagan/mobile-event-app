@@ -2,9 +2,12 @@ import { getLocalDate } from 'core/date.utils.js';
 
 export default class Login {
 
-  constructor(...args) {
+  constructor($state, AuthService, authToken, $scope, $ionicPush) {
 
-    Object.assign(this, ...args);
+    Object.assign(this, $state, AuthService, authToken, { $ionicPush });
+
+    this.$scope = $scope;
+    $scope.$ctrl = this;
   }
 
   $onInit() { }
@@ -17,14 +20,35 @@ export default class Login {
     	return;
     }
 
+    this.isLoading = true;
+
     this.doLogin(this.login, this.password).then(res => {
     	this.message = res.data.message;
 
     	console.log('res', res.data);
     	if (res.data.success) {
-    		this.setToken(res.data.token);
 
-        this.go(`home.taskForCurrentDate`, { date: getLocalDate() })
+
+        console.log('ionic push', this.$ionicPush);
+
+        // this.$ionicPush.register().then(function(t) {
+        //   debugger;
+        //   console.log('ionic push register', t);
+        //   return $ionicPush.saveToken(t);
+        // }).then(function(t) {
+        //   console.log('Token saved:', t.token);
+        // }).catch(err => console.log('$ionicPush err:', err));
+
+
+        setTimeout(() => {
+          this.isLoading = false;
+          this.isSuccess = true;
+          this.$scope.$apply();
+
+          this.setToken(res.data.token);
+          setTimeout(() => this.go(`home.taskForCurrentDate`, { date: getLocalDate() }), 300);
+
+        }, 1000);
     	}
     }, err => {
     	console.log('something wrong err:', err);
@@ -33,5 +57,5 @@ export default class Login {
 
 }
 
-Login.$inject = ['$state', 'AuthService', 'authToken'];
+Login.$inject = ['$state', 'AuthService', 'authToken', '$scope', '$ionicPush'];
 

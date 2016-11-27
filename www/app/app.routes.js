@@ -29,6 +29,15 @@ angular.module('app.routes', [])
         }
       })
 
+      .state('home.contacts', {
+        url: '/contacts',
+        views: {
+          'menuContent': {
+            template: '<contacts />'
+          }
+        }
+      })
+
       .state('home.addTask', {
         url: '/addTask',
         views: {
@@ -37,16 +46,6 @@ angular.module('app.routes', [])
           }
         }
       })
-
-      // .state('home.task', {
-      //   url: '/task',
-      //   views: {
-      //     'menuContent': {
-      //       template: '<task-view-lists> </task-view-lists>'
-      //     }
-      //   },
-      //   // cache: false
-      // })
 
       .state('home.taskForCurrentDate', {
         url: '/task/:date',
@@ -70,6 +69,8 @@ angular.module('app.routes', [])
     $urlRouterProvider.otherwise('/login');
 
     // Disabled views cache
-    $ionicConfigProvider.views.maxCache(0)
+    $ionicConfigProvider.views.maxCache(0);
+    // Disabled animations
+    $ionicConfigProvider.views.transition('android');
 
   });

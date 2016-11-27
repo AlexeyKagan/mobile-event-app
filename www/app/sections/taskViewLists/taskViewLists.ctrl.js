@@ -29,8 +29,6 @@ export default class TaskViewLists {
 
   mapStateToThis({ tasks = {} }) {
 
-    console.log('mapStateToThis', this.$state.params.date);
-
     return {
       state: tasks,
       tasks: this.$state.params.date && tasks.tasks.filter(t => new Date(t.dateAt).toString() === this.getDateByParam().toString())
@@ -41,8 +39,10 @@ export default class TaskViewLists {
 
     this.getWeather();
     this.setCurrentDateTime();
-
-    this.fetchTasks();
+    console.log('taskViewListInit', this.tasks);
+    if (this.tasks && !this.tasks.length) {
+      this.fetchTasks();
+    }
 
   }
 
@@ -96,7 +96,7 @@ export default class TaskViewLists {
     }, function (error) {
       console.log('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-    }, { timeout:10000 });
+    }, { timeout:10000, enableHighAccuracy: true });
   }
 
   toUpperCase(str) {

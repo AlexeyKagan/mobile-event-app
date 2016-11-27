@@ -3,9 +3,13 @@
   "version": "1.1.1",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --colors --content-base www/"
+    "start": "webpack-dev-server --hot --inline --colors --content-base www/",
+    "build": "gulp webpack && ionic build android"
   },
   "dependencies": {
+    "@ionic/cloud": "^0.14.0",
+    "angularjs-toaster": "^2.1.0",
+    "animate.css": "^3.5.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
@@ -26,6 +30,7 @@
     "file-loader": "^0.9.0",
     "gulp-util": "^2.2.14",
     "image-webpack-loader": "^2.0.0",
+    "json-loader": "^0.5.4",
     "ng-redux": "^3.4.0-beta.1",
     "node-sass": "^3.8.0",
     "open": "0.0.5",

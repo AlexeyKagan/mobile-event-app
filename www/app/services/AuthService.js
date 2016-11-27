@@ -4,9 +4,10 @@ let _AuthService = {};
 angular.module('app.auth', [])
 .factory('AuthService', ($http, authToken) => {
 
-    const authFactory = {};	
+    const authFactory = {};
 
     authFactory.doLogin = (username, password) => {
+
         return $http.post(`${API_URL}/api/login`, {
             username: username,
             password: password
@@ -25,7 +26,7 @@ angular.module('app.auth', [])
 
             return $http.get(`${API_URL}/api/me`, {cache: true});
         }
-        
+
         return $q.reject({message: 'User has no token.'});
     };
 
@@ -53,12 +54,12 @@ angular.module('app.auth', [])
 })
 .factory('AuthInterceptor', ($q, authToken, $location) => {
 	// console.log('AuthInterceptor', $state);
-    const interceptorFactory = {};		
+    const interceptorFactory = {};
 
     interceptorFactory.request = function (config) {
     	console.log('interceptorFactory', config);
         const token = authToken.getToken();
-        
+
         if (token) {
             // config.headers['x-access-token'] = token;
         }
@@ -77,8 +78,8 @@ angular.module('app.auth', [])
 
         return $q.reject(response);
     };
-    
-    
+
+
     return interceptorFactory;
 });
 

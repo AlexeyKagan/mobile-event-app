@@ -1,0 +1,16 @@
+.calendar-page{
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: 300;
+    font-size: 2rem;
+  }
+
+  &__calendar {
+    margin: 10% 1%;
+    height:100%;
+  }
+
+}

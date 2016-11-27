@@ -1,6 +1,6 @@
 import Login from './login.ctrl.js';
 import TEMPLATE from './login.tpl.html';
-// import './login.scss';
+import './login.scss';
 
 angular.module('task.login', [])
 .component('taskLogin', {
@@ -11,4 +11,3 @@ angular.module('task.login', [])
 
 
 
-  

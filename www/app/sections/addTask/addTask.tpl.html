@@ -9,7 +9,7 @@
 
     <div class="main-addTask__row clearfix">
       <div class="main-addTask__row__left">
-        <span class="ion-clock"></span> Время
+        <span class="ion-clock"></span> Время:
       </div>
       <div class="main-addTask__row__right">
         <input type="time" placeholder="" ng-model="$ctrl.time"/>
@@ -18,7 +18,7 @@
 
     <div class="main-addTask__row clearfix">
       <div class="main-addTask__row__left">
-        <span class="ion-calendar"></span> Дата
+        <span class="ion-calendar"></span> Дата:
       </div>
       <div class="main-addTask__row__right">
         <input type="date" placeholder="" ng-model="$ctrl.date"/>
@@ -27,7 +27,7 @@
 
     <div class="main-addTask__row clearfix">
       <div class="main-addTask__row__left">
-        <span class="ion-ios-paper-outline"></span> Заголовок
+        <span class="ion-ios-paper-outline"></span> Заголовок:
       </div>
       <div class="main-addTask__row__right">
         <input type="text" placeholder="" ng-model="$ctrl.title"/>
@@ -35,23 +35,48 @@
     </div>
 
     <div class="main-addTask__row clearfix">
-      <div class="main-addTask__row__description-title">
-        <span class="ion-ios-list-outline"></span> Описание
-      </div>
+      <label class="main-addTask__row__description-title" for="description">
+        <span class="ion-ios-list-outline"></span> Описание:
+      </label>
       <div class="main-addTask__row__right">
-        <textarea name="asd" rows="2" ng-model="$ctrl.description"></textarea>
+        <textarea id="description" name="asd" rows="2" ng-model="$ctrl.description"></textarea>
       </div>
     </div>
 
+    <label class="item item-input item-select main-addTask-dropdown">
+      <div class="">
+        <span class="ion-clock"></span> Оповестить за:
+      </div>
+      <select ng-model="$ctrl.notifyOf">
+        <option>15 минут</option>
+        <option selected>30 минут</option>
+        <option>45 минут</option>
+        <option>60 минут</option>
+      </select>
+    </label>
+
+
+    <ui-multi-select
+      header-text="Multiple"
+      allow-empty='false'
+      value="$ctrl.val.multiple"
+      text="$ctrl.countries_text_multiple"
+      items="$ctrl.contacts"
+      multi-select="true"
+      callback="$ctrl.multiSelectChanged(value)"
+    >
+
+    </ui-multi-select>
+
     <div class="main-login__form-button">
-      <button class="main-login__button" ng-click="$ctrl.submitTask()">
+      <button class="main-login__button animated" ng-class="{'shake': $ctrl.isNotCorrectInput, flipInY: $ctrl.flipInY}" ng-click="$ctrl.submitTask()">
         Добавить задачу
       </button>
     </div>
 
   </div>
 
-  <ui-nav-button></ui-nav-button>
+  <!--<ui-nav-button></ui-nav-button>-->
 
 </div>
 

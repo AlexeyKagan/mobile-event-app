@@ -1,20 +1,56 @@
 import { uuid } from 'core/utils.js';
 import * as TasksActions from 'actions/tasks.actions.js';
-import { getLocalDate } from 'core/date.utils.js';
+import { getLocalDate, notifyDay } from 'core/date.utils.js';
+import * as ContactsActions from 'actions/contacts.actions.js';
 
 export default class AddTask {
 
-  constructor($state, $ngRedux) {
+  constructor($state, $ngRedux, $timeout, $scope, toaster) {
 
-    Object.assign(this, { $state });
+    Object.assign(this, { $state, $timeout, $scope, toaster });
 
-    this.unsubscribe = $ngRedux.connect(null, TasksActions)(this);
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, Object.assign({}, TasksActions, ContactsActions))(this);
+
+    $scope.$ctrl = this;
+
+    this.getAllPhoneContacts();
+
+    this.countries_text_multiple = 'Выбирите контакты которые надо оповестить';
+    this.val =  {single: null, multiple: null};
   }
 
-  $onInit() {  }
+  multiSelectChanged(values) {
+    console.log('multiSelectChanged', values.map(v => v.text).join(','));
+
+    this.emails = values.map(v => v.text).join(',');
+  }
+
+  mapStateToThis(state) {
+    console.log('mapStateToThis', state.contacts.map(s =>s.emails && { id: s.emails[0].id, text: s.emails[0].value }).filter(d => d));
+
+    return {
+      // TODO rewrite this shit
+      contacts: state.contacts.map(s =>s.emails && { id: s.emails[0].id, text: s.emails[0].value }).filter(d => d)
+    }
+  }
+
+  $onInit() { this.flipInY = true; }
 
   $onDestroy() {
     this.unsubscribe();
+  }
+
+  showWarningToasty(text) {
+    this.flipInY = false;
+    this.isNotCorrectInput = true;
+
+    this.toaster.pop({
+      type: 'warning',
+      body: text,
+      timeout: 3000
+    });
+
+    this.$timeout(() => (this.isNotCorrectInput = false ), 500);
   }
 
   submitTask() {
@@ -24,7 +60,16 @@ export default class AddTask {
 
     if (!vm.title || !vm.description) {
 
-      return false;
+      this.showWarningToasty(`Введите ${vm.title ? 'описание' : 'заголовок' } задачи`);
+
+      return;
+    }
+
+    if (notifyDay(new Date(vm.date), this.stringifyTime(time), this.notifyOf) < new Date()) {
+
+      this.showWarningToasty(`Дату которую вы задали не может быть применена`);
+
+      return;
     }
 
     const task = {
@@ -32,7 +77,9 @@ export default class AddTask {
       title: vm.title,
       description: vm.description,
       timeAt: this.stringifyTime(time),
-      dateAt: new Date(vm.date)
+      dateAt: new Date(vm.date),
+      emails: this.emails,
+      notifyOf: this.notifyOf
     };
 
     this.saveTask(task);
