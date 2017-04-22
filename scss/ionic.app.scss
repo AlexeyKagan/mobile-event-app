@@ -192,6 +192,8 @@ body{
     margin-left: 35%;
     text-align: center;
     padding-top: 1.7rem;
+    // TODO add photo functional
+    opacity: 0;
 
   }
   .main-login__form-row{
@@ -246,6 +248,7 @@ ion-side-menus{
     color: white;
     font-size: 1.8rem;
     padding-top: 6%;
+    position: relative;
 
   }
   &__menu{
@@ -257,6 +260,8 @@ ion-side-menus{
     display: block;
     float: right;
     margin-right: 4%;
+    position: relative;
+    z-index: 999;
   }
 
   &__about-day{

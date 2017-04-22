@@ -3,12 +3,18 @@
 
     <button ng-click="hideItems()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
 
-    <h1 class="title">Список емаилов:</h1>
+    <h1 class="title">Список электронных адресов:</h1>
 
     <button ng-click="validate()" class="button button-positive button-icon ion-checkmark"></button>
 
   </ion-header-bar>
   <ion-content class="select-body-items">
+    <div ng-if="!items.length">
+      <p> В ваших контактах не указаны электронные адреса. </p>
+      <p>
+        Чтобы создать электронные адреса пройдите в раздел контактов в меню, или нажмите <a href="#/home/contacts"> здесь </a>
+      </p>
+    </div>
     <div class="list">
       <!-- Multi select -->
       <ion-toggle
@@ -35,5 +41,6 @@
         {{item.text}}
       </label>
     </div>
+
   </ion-content>
 </ion-view>

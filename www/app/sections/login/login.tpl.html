@@ -20,7 +20,6 @@
 
         <button type="submit" class="main-login__button" ng-class="{ 'main-login__isLoading': $ctrl.isLoading, 'success': $ctrl.isSuccess }">Войти </button>
 
-        <!--<div ng-if="$ctrl.isSuccess" class="main-login__success"> hey </div>-->
       </div>
     </form>
     <div class="main-login__href">
@@ -28,6 +27,6 @@
         Нет учетной записи? <a href="#/signup"> Регистрация  </a>
       </p>
     </div>
-
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-center'}"></toaster-container>
   </div>
 </div>

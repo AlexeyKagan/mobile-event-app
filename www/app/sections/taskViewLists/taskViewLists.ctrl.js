@@ -1,3 +1,4 @@
+// TODO module directory 'core'
 import { monthName, dayName } from '../../../core/date.utils.js';
 import * as TasksActions from 'actions/tasks.actions.js';
 
@@ -27,12 +28,19 @@ export default class TaskViewLists {
 
   }
 
-  mapStateToThis({ tasks = {} }) {
+  mapStateToThis({ tasks = {}, visibilityFilter }) {
 
     return {
       state: tasks,
-      tasks: this.$state.params.date && tasks.tasks.filter(t => new Date(t.dateAt).toString() === this.getDateByParam().toString())
+      tasks: this.$state.params.date && this.getFiltered(tasks.tasks.filter(t => new Date(t.dateAt).toString() === this.getDateByParam().toString()), visibilityFilter),
+      filter: visibilityFilter
     }
+  }
+
+  getFiltered(tasks, text) {
+    if (!text) { return tasks; }
+
+    return tasks.filter(d => d.title.includes(text));
   }
 
   $onInit() {
@@ -80,7 +88,7 @@ export default class TaskViewLists {
 
       this.$http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=6b19232ef146adecb4a1f928c4c9812a")
         .then(res => {
-          console.log('api.openweathermap', res)
+          console.log('api.openweathermap', res);
           const icon = res.data.weather[0].icon;
           const temp = Math.round(res.data.main.temp - 275) + " °C";
           const img = document.querySelector("#img-weather");
@@ -96,7 +104,7 @@ export default class TaskViewLists {
     }, function (error) {
       console.log('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-    }, { timeout:10000, enableHighAccuracy: true });
+    }, { timeout: 30000, enableHighAccuracy: true, maximumAge: 75000 });
   }
 
   toUpperCase(str) {

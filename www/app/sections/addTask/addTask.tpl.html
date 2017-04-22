@@ -25,36 +25,41 @@
       </div>
     </div>
 
-    <div class="main-addTask__row clearfix">
+    <div class="main-addTask__row main-addTask__title clearfix">
       <div class="main-addTask__row__left">
         <span class="ion-ios-paper-outline"></span> Заголовок:
       </div>
       <div class="main-addTask__row__right">
         <input type="text" placeholder="" ng-model="$ctrl.title"/>
       </div>
+      <div class="main-addTask__row__microphone" ng-click="$ctrl.speechRecognizer('title')">
+        <i class="ion-android-microphone" ng-class="{ 'isRecogniting': $ctrl.getIsRecogniting('title') }"></i>
+      </div>
     </div>
 
     <div class="main-addTask__row clearfix">
-      <label class="main-addTask__row__description-title" for="description">
-        <span class="ion-ios-list-outline"></span> Описание:
-      </label>
+      <div class="main-addTask__row__description-title">
+        <span> <i class="ion-ios-list-outline"></i> Описание: </span>
+        <div class="main-addTask__row__microphone" ng-click="$ctrl.speechRecognizer('description')">
+          <i class="ion-android-microphone" ng-class="{ 'isRecogniting': $ctrl.getIsRecogniting('description') }"></i>
+        </div>
+      </div>
       <div class="main-addTask__row__right">
         <textarea id="description" name="asd" rows="2" ng-model="$ctrl.description"></textarea>
       </div>
     </div>
 
-    <label class="item item-input  main-addTask-dropdown">
+    <label class="item item-input main-addTask-dropdown">
       <div class="">
         <span class="ion-clock"></span> Оповестить за:
       </div>
-      <select ng-model="$ctrl.notifyOf">
+      <select ng-model="$ctrl.notifyOf" style="color: white;">
         <option>15 минут</option>
         <option selected>30 минут</option>
         <option>45 минут</option>
         <option>60 минут</option>
       </select>
     </label>
-
 
     <ui-multi-select
       header-text="Multiple"

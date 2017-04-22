@@ -1,6 +1,6 @@
 import TaskView from './taskView.ctrl.js';
 import TEMPLATE from './taskView.tpl.html';
-// import './taskView.scss';
+import './taskView.scss';
 
 angular.module('task.view', [])
   .component('taskView', {

@@ -1,8 +1,9 @@
+import { getLocalDate } from 'core/date.utils.js';
 
 export default class UiNavButton {
-  constructor($element, $document, $scope) {
+  constructor($element, $document, $scope, $state) {
 
-    Object.assign(this, { $element, $document, $scope })
+    Object.assign(this, { $element, $document, $scope, $state })
   }
 
   $onInit() {
@@ -22,6 +23,10 @@ export default class UiNavButton {
   openNav(e) {
 
     this.isShown = !this.isShown;
+  }
+
+  goTo() {
+    this.$state.go(`home.taskForCurrentDate`, { date: getLocalDate() })
   }
 
 }

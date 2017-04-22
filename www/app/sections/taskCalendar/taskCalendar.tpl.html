@@ -1,11 +1,17 @@
 <ion-view view-title="My Pages">
   <ion-content class="calendar-page">
 
-      <div class="main-about-task__container">
-        <h1> Выберите дату: </h1>
-      </div>
+    <div class="main-about-task__container">
+      <h1> Выберите дату: </h1>
+    </div>
 
-      <onezone-datepicker class="calendar-page__calendar" datepicker-object="$ctrl.onezoneDatepicker" > </onezone-datepicker>
+    <ui-datepicker style="margin-top: 5%;" datepicker-object="$ctrl.onezoneDatepicker" selected-picker="$ctrl.selectedPicker"> </ui-datepicker>
+
+    <div class="main-login__form-button">
+      <button class="main-login__button" ng-class="{ 'main-login__isLoading': $ctrl.isLoading}" ng-click="$ctrl.savePdf()">
+        Сохранить в PDF за {{ $ctrl.getCurrentMonth() }}
+      </button>
+    </div>
 
   </ion-content>
 </ion-view>

@@ -33,3 +33,12 @@ export function TasksReducer2(state = initState, action) {
       return state
   }
 }
+
+export const visibilityFilter = (state = '', action) => {
+  switch (action.type) {
+    case TASKS.SET_VISIBILITY_FILTER:
+      return action.filter;
+    default:
+      return state
+  }
+};

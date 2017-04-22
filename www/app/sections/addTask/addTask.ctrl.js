@@ -15,7 +15,7 @@ export default class AddTask {
 
     this.getAllPhoneContacts();
 
-    this.countries_text_multiple = 'Выбирите контакты которые надо оповестить';
+    this.countries_text_multiple = 'Добавить контакты, которые необходимо оповестить';
     this.val =  {single: null, multiple: null};
   }
 
@@ -26,10 +26,9 @@ export default class AddTask {
   }
 
   mapStateToThis(state) {
-    console.log('mapStateToThis', state.contacts.map(s =>s.emails && { id: s.emails[0].id, text: s.emails[0].value }).filter(d => d));
 
     return {
-      // TODO rewrite this shit
+      // TODO rewrite this ...
       contacts: state.contacts.map(s =>s.emails && { id: s.emails[0].id, text: s.emails[0].value }).filter(d => d)
     }
   }
@@ -67,7 +66,7 @@ export default class AddTask {
 
     if (notifyDay(new Date(vm.date), this.stringifyTime(time), this.notifyOf) < new Date()) {
 
-      this.showWarningToasty(`Дату которую вы задали не может быть применена`);
+      this.showWarningToasty(`Дата, которую Вы задали, не может быть применена`);
 
       return;
     }
@@ -77,9 +76,10 @@ export default class AddTask {
       title: vm.title,
       description: vm.description,
       timeAt: this.stringifyTime(time),
-      dateAt: new Date(vm.date),
+      dateAt: new Date(vm.date).toString(),
       emails: this.emails,
-      notifyOf: this.notifyOf
+      notifyOf: this.notifyOf,
+      dateAtServer: vm.date && `${vm.date.getDate()}/${vm.date.getMonth()}/${vm.date.getFullYear()}`
     };
 
     this.saveTask(task);
@@ -87,7 +87,7 @@ export default class AddTask {
     this.$state.go(`home.taskForCurrentDate`, { date: getLocalDate(vm.date) })
   }
 
-  // TODO Rewrite this. shitty logic
+  // TODO Rewrite this trash.
   stringifyTime(time) {
 
     let hours;
@@ -115,6 +115,56 @@ export default class AddTask {
     return hours + ":" + min;
   }
 
+  speechRecognizer(type) {
+    this.recognitionType = type;
+    const recognition = new webkitSpeechRecognition();
 
+    this.isRecogniting = true;
+    recognition.continuous = false;
+    // recognition.interimResults = false;
+
+    // Change the recognition language here.
+    recognition.lang = 'ru';
+
+    recognition.start();
+
+    recognition.onresult = (event) => {
+
+      this[type] = event.results[0][0].transcript;
+      this.isRecogniting = false;
+      recognition.stop();
+      this.$scope.$apply();
+    };
+
+    const events = [
+      'onaudioend',
+      'onaudiostart',
+      'onend',
+      'onerror',
+      'onnomatch',
+      'onsoundend',
+      'onsoundstart',
+      'onspeechend',
+      'onspeechstart',
+      'onstart'
+    ];
+
+    events.forEach(e => recognition[e] = (...args) => {
+      console.warn('event: ', e, ...args);
+    });
+
+    recognition.onspeechend = (e) => {
+
+      this.isRecogniting = false;
+      recognition.stop();
+      this.$scope.$apply();
+    };
+
+  }
+
+  getIsRecogniting(type) {
+
+    return this.recognitionType === type && this.isRecogniting;
+  }
 }
 

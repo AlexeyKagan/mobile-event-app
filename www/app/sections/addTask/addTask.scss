@@ -18,3 +18,29 @@
     color:black;
   }
 }
+
+.main-addTask__row__microphone{
+  display: inline-block;
+  align-self: flex-end;
+  float: right;
+  padding-right: 4%;
+}
+
+.main-addTask {
+
+  & &__title{
+    display: flex;
+    .main-addTask__row__microphone{
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &__row__description-title{
+    width: 96%;
+  }
+}
+.isRecogniting {
+  color: #ff3366;
+}
+

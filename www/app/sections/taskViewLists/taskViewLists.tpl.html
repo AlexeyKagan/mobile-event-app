@@ -15,11 +15,15 @@
       </div>
 
       <div class="task">
-
+        <!--ng-repeat="t in $ctrl.tasks | filter: $ctrl.filter | orderBy:'timeAt' track by t.id"-->
+        <!--              ng-class-odd="'animated bounceInLeft'"
+               ng-class-even="'animated bounceInRight'"-->
         <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
 
-          <div class="task__row clearfix animated bounceInLeft"
-               ng-class-odd="'animated bounceInLeft'" ng-class-even="'animated bounceInRight'"
+          <div class="task__row clearfix"
+               ng-class="{ 'animated' : !$ctrl.filter }"
+               ng-class-odd="'bounceInLeft'"
+               ng-class-even="'bounceInRight'"
                ng-repeat="t in $ctrl.tasks | orderBy:'timeAt' track by t.id"
                ng-click="task.aboutTask(t.id)">
 
@@ -36,9 +40,6 @@
 
         </ion-scroll>
       </div>
-
-
-
 
     </div>
 

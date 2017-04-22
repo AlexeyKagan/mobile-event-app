@@ -1,7 +1,7 @@
 import { TASKS } from '../constants/tasks.js';
 import getAuthService from 'services/AuthService.js';
 import { API_URL } from 'core/consts.js';
-import { createNotification } from 'core/Notifications.js';
+import { createNotification, deleteNotification } from 'core/Notifications.js';
 
 export function selectTask(task) {
   return {
@@ -24,7 +24,7 @@ export function requestTasks() {
 }
 
 export function receiveTasks(data = []) {
-  // LocalNotifications
+
   createNotification(data.tasks);
 
   return {
@@ -34,7 +34,7 @@ export function receiveTasks(data = []) {
 }
 
 export function updateAddedTask(task) {
-  // TODO bug if we create notification and after reload page it receive all task and also create notification
+
   createNotification(task);
 
   return {
@@ -75,26 +75,21 @@ export function fetchTasks() {
 
 export function deleteTask(id) {
   return dispatch => {
+    deleteNotification(id);
 
     dispatch(requestTasks());
-
     return fetch(`${API_URL}/api/notes/${id}`, {
       method: 'DELETE',
       ...getHeadersForRequest()
     })
     .then(response => response.json())
-    .then(data => {
-      console.log('deleteTask', data);
-
-      return data.success && dispatch(receiveTasks(data))
-    })
-
+    .then(data => data.success && dispatch(receiveTasks(data)));
   }
 }
 
 
 function getHeadersForRequest() {
-  // TODO delete it.
+  // TODO move it.
   const authService = getAuthService();
   const headers = {
     headers: {

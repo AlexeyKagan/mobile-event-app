@@ -8,3 +8,4 @@ plugins/
 .idea/workspace.xml
 .io-config.json
 .ionic.config.json
+./taskManagerApiServer/node_modules/

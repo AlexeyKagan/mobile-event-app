@@ -3,11 +3,11 @@
     <h1>Контакты:</h1>
   </div>
   <div class="task">
-    <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+    <ion-scroll zooming="true" direction="xy" style="width: auto; height: 500px">
       <div class="task__row clearfix animated bounceInLeft"
            ng-class-odd="'animated bounceInLeft'" ng-class-even="'animated bounceInRight'"
            ng-repeat="t in $ctrl.contacts track by t.id"
-           ng-click="">
+           ng-click="$ctrl.editContact(t)">
 
         <div class="task__when">
           <i class="ion-person"></i>
@@ -16,9 +16,13 @@
         <div class="task__about">
           <p class="task__title">{{t.displayName}}</p>
           <p class="task__description">
-            Емайл:
+            электронный адрес:
             <p ng-repeat="e in t.emails"> {{ e.value }}</p>
           </p>
+        </div>
+
+        <div>
+          <i class="icon ion-edit"></i>
         </div>
 
       </div>

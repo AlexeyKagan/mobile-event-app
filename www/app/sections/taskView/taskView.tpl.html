@@ -17,11 +17,22 @@
   <ion-side-menu-content class="main-home__side-menu-content">
 
     <div class="main-home__top clearfix">
-      <span class="main-home__menu ion-android-menu" id="menu" ng-click="$ctrl.toggleLeft()"></span>
-      <span class="main-home__search ion-android-search" id="search"></span>
+      <!--<span class="main-home__menu ion-android-menu" id="menu" ng-click="$ctrl.toggleLeft()"></span>-->
+
+      <div class="hamburger" ng-class="{'is-active': $ctrl.isShownLeftMenu}" id="hamburger-6" ng-click="$ctrl.toggleLeft()">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+
+      <span class="main-home__search ion-android-search" id="search" ng-click="$ctrl.openFilterInput()"> </span>
+
+      <div class="search" ng-class="{ 'search-visible': $ctrl.showFilter }">
+          <input type="search" placeholder="Фильтр" ng-model="$ctrl.filter" ng-change="$ctrl.onFilterChanged()">
+      </div>
     </div>
 
-    <ion-nav-view name="menuContent" ></ion-nav-view>
+    <ion-nav-view name="menuContent"></ion-nav-view>
 
     <toaster-container toaster-options="{'position-class': 'toast-bottom-center'}"></toaster-container>
   </ion-side-menu-content>

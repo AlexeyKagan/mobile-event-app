@@ -2,6 +2,7 @@
   position: relative;
   display: block;
   font-size: 1.2rem;
+  line-height: 1.2rem;
   font-weight: 100;
   color: white;
   background: #ff3366;
@@ -61,37 +62,3 @@
     transform: rotate(360deg);
   }
 }
-
-//.main-login__isLoading {
-//  //width: 100px;
-//  width: 30%;
-//  border-radius: 100px;
-//  transition: .3s;
-//
-//  &:after {
-//    content: "";
-//    position: absolute;
-//    top: 50%;
-//    left: 50%;
-//    margin-left: -1.5rem;
-//    margin-top: -1.5rem;
-//    width: 3rem;
-//    height: 3rem;
-//    border: 2px dotted #fff;
-//    border-radius: 50%;
-//    border-left: none;
-//    border-bottom: none;
-//    transition: opacity 0.1s 0.4s;
-//    opacity: 0;
-//  }
-//
-//  &.processing {
-//    width: 4rem;
-//    font-size: 0;
-//
-//    &:after {
-//      opacity: 1;
-//      animation: rotate 0.5s 0.4s infinite linear;
-//    }
-//  }
-//}

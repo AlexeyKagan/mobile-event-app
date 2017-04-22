@@ -3,15 +3,15 @@
      id="task-button"
      ng-click="$ctrl.openNav($event)">
 
-  <a href="#" class="nav-item nav-item-1">
-    <span class="ion-ios-person-outline"></span>
+  <a href="#/home/calendar" class="nav-item nav-item-1">
+    <span class="ion-ios-calendar-outline"></span>
   </a>
 
   <a href="#/home/addTask" class="nav-item nav-item-2">
     <span class="ion-compose"></span>
   </a>
 
-  <a href="#/home/task" class="nav-item nav-item-3">
+  <a class="nav-item nav-item-3" ng-click="$ctrl.goTo()">
     <span class="ion-clipboard"></span>
   </a>
 

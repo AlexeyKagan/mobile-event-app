@@ -6,7 +6,6 @@ import '../lib/angular-ui-router/release/angular-ui-router.min.js';
 import '@ionic/cloud';
 import 'angularjs-toaster';
 // import '@ionic/cloud/dist/bundle/ionic.cloud.min.js';
-import { LocalNotifications } from 'ionic-native';
 
 import ngRedux from 'ng-redux';
 
@@ -73,80 +72,6 @@ angular.module('mainApp', [
 
 ])
 
-.config(function($ionicCloudProvider) {
-
-
-  const config = {
-    "core": {
-      "app_id": `${ConfigurateConsts.app_id}`
-    },
-    "push": {
-      "sender_id": `${ConfigurateConsts.sender_id}`,
-      "pluginConfig": {
-        "android": {
-          "iconColor": "#343434",
-          "badge": true,
-          "sound": true
-        }
-      }
-    }
-  };
-  console.log('ConfigurateConsts', config);
-  $ionicCloudProvider.init(config);
-
-})
-.run(($ionicPush, $rootScope) => {
-
-  const config = {
-    canShowAlert: true, //Can pushes show an alert on your screen?
-    canSetBadge: true, //Can pushes update app icon badges?
-    canPlaySound: true, //Can notifications play a sound?
-    canRunActionsOnWake: true, //Can run actions outside the app,
-    onNotification: function(notification) {
-
-      console.log('onNotification', notification);
-      // Handle new push notifications here
-      return true;
-    }
-  };
-
-  console.log('$ionicPush run', $ionicPush);
-
-  $ionicPush.register(config).then(function(t) {
-    console.log('ionic push register', t);
-    return $ionicPush.saveToken(t);
-  }).then(function(t) {
-    console.log('Token saved:', t.token);
-  }, function (err) {
-    console.log('reg device error', err);
-  });
-
-  console.log('$root$scope', $rootScope);
-
-  $rootScope.$on('cloud:push:notification', function(event, data) {
-
-    console.log('cloud:push:notification', event, data);
-
-    var msg = data.message;
-
-    LocalNotifications.schedule({
-      text: 'Delayed Notification',
-      at: new Date(new Date().getTime() + 2),
-      led: 'FF0000'
-    });
-
-    // LocalNotifications.schedule({
-    //   id: 1,
-    //   text: msg.text
-    // });
-  });
-
-  LocalNotifications.on('click', function (notification) {
-    console.log('notification', notification);
-  });
-
-})
-
 .run(($ionicPlatform, $ngRedux, $rootScope, AuthService, $state) => {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -188,10 +113,4 @@ angular.module('mainApp', [
 
   // @TODO create redux auth
   $httpProvider.interceptors.push('AuthInterceptor');
-})
-
-
-
-
-
-
+});
