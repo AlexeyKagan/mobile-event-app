@@ -1,0 +1,10 @@
+{
+    "apiPrefix": "http://localhost:8085",
+    "serverPort": "8085",
+    "db":{
+        "name": "taskManagerApiServer",
+        "host": "localhost",
+        "port": 27017
+    },
+    "secret": "DoWhatYouLike"
+}
