@@ -1,4 +1,6 @@
-# Cordova-ionic-mobile-task-manager-app
+# Mobile event app
+
+Make typical day events much easy on your mobile.
 
 Using for this app : cordova, ionic, angular, redux, sass and etc...
 
