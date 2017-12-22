@@ -2,7 +2,6 @@ angular.module('app.routes', [])
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // TODO state metadata
-
     $stateProvider
       .state('login', {
         url: '/login',

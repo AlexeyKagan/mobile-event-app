@@ -3,6 +3,7 @@ import {MONTH_NAME_RU, DAY_PREFFIX_NAME_RU, getLocalDate} from 'core/date.utils.
 import jsPDF from 'jspdf';
 import './html2canvas.js';
 import {getCurrentTasks, renderHtml, textToHtml} from './utils.js';
+import { DEFAULT_PDF_COLUMNS, DEFAULT_DATE_PICKER_PROPERTIES } from './consts';
 
 export default class TaskCalendar {
 
@@ -19,23 +20,12 @@ export default class TaskCalendar {
     const daysOfTheWeek = Object.keys(DAY_PREFFIX_NAME_RU).map(k => DAY_PREFFIX_NAME_RU[k]);
 
     this.onezoneDatepicker = {
+      ...DEFAULT_DATE_PICKER_PROPERTIES,
       date: new Date(), // MANDATORY
-      mondayFirst: true,
+      highlights: this.highlights,
       months,
       daysOfTheWeek,
-      disablePastDays: false,
-      disableSwipe: false,
-      showDatepicker: true,
-      showTodayButton: false,
-      calendarMode: true,
-      hideCancelButton: true,
-      hideSetButton: true,
-      highlights: this.highlights,
-      callback: value => {
-
-        $state.go(`home.taskForCurrentDate`, {date: getLocalDate(value)})
-      }
-
+      callback: value => $state.go(`home.taskForCurrentDate`, {date: getLocalDate(value)})
     };
 
   }
@@ -73,59 +63,43 @@ export default class TaskCalendar {
   savePdf() {
     const selectedMonth = this.selectedPicker.date.getMonth();
     const selectedYear = this.selectedPicker.date.getFullYear();
-    // TODO below hot fix, mote it in getCurrentTask method.
-    const rows = getCurrentTasks(this.tasks, selectedMonth, selectedYear).map(d => ({ ...d, dateAt: new Date(d.dateAt).toLocaleDateString() }));
 
-    const columns = [
-      { title: "Название", dataKey: "title" },
-      { title: "Описание", dataKey: "description" },
-      { title: "Дата", dataKey: "dateAt" },
-      { title: "Время", dataKey: "timeAt" },
-      { title: "Оповестить за", dataKey: "notifyOf" }
-    ];
+    const rows = getCurrentTasks(this.tasks, selectedMonth, selectedYear);
 
-    const html = renderHtml({rows, columns, dateAt: this.getCurrentMonth()});
+    const html = renderHtml({rows, columns: DEFAULT_PDF_COLUMNS, dateAt: this.getCurrentMonth()});
 
     this.exportAsPdf(html);
   }
 
+  // That method get a string of html markup.
+  // Create a document model in frame.
+  // Create a canvas from html.
+  // Create an Image from canvas.
+  // And convert image to pdf.
+  // Save to driver
+  //
+  // text -> html -> canvas -> image -> png -> pdf -> device root dir.
+  //TODO Hard. operation move this logic to backend
   exportAsPdf(html) {
 
     this.isLoading = true;
 
     html2canvas(textToHtml(html.replace(/<\/?script[^>]*?>/gi, '')), {
-
       onrendered: (canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const doc = new jsPDF('p', 'mm');
+
         doc.addImage(imgData, 'PNG', 10, 10);
+
         const pdfOutput = doc.output('blob');
         const pdfName = `Очет о задах за ${this.getCurrentMonth()}.pdf`;
 
-        // setTimeout(() => {
-        //   this.isLoading = false;
-        //   this.showToasty('Сохранение в PDF выполнено успешно', `Сохранено в: local/root`);
-        //   this.$scope.$apply();
-        // }, 1000);
-        // doc.save(pdfName);
-
+        //@TODO rewrite callback hell.
         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, (dir) => {
-
-          console.log("Access to the directory granted succesfully");
-
           dir.getFile(pdfName, {create: true}, (file) => {
-
-            console.log("File created succesfully.");
-
             file.createWriter((fileWriter) => {
-
-              console.log("Writing content to file");
-
               fileWriter.write(pdfOutput);
-
               fileWriter.onwriteend = () => {
-                console.log("Successful file write...");
-
                 this.isLoading = false;
                 this.showToasty('Сохранение в PDF выполнено успешно', `Сохранено в: ${cordova.file.externalRootDirectory}`);
                 this.$scope.$apply();

@@ -5,7 +5,6 @@ import '../lib/angular-sanitize';
 import '../lib/angular-ui-router/release/angular-ui-router.min.js';
 import '@ionic/cloud';
 import 'angularjs-toaster';
-// import '@ionic/cloud/dist/bundle/ionic.cloud.min.js';
 
 import ngRedux from 'ng-redux';
 
@@ -43,9 +42,6 @@ import { RootReducer } from './reducers';
 
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-
-// configurate consts
-import ConfigurateConsts from '../../ionic.config.json';
 
 angular.module('mainApp', [
   'ionic',
@@ -110,7 +106,6 @@ angular.module('mainApp', [
   $ngReduxProvider.createStoreWith(RootReducer, [thunk, createLogger()]);
 })
 .config(($httpProvider) => {
-
   // @TODO create redux auth
   $httpProvider.interceptors.push('AuthInterceptor');
 });

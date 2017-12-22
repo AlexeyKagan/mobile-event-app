@@ -1,17 +1,17 @@
-import { API_URL } from 'core/consts.js';
+import {API_URL} from 'core/consts.js';
 let _AuthService = {};
 
 angular.module('app.auth', [])
-.factory('AuthService', ($http, authToken) => {
+  .factory('AuthService', ($http, authToken) => {
 
     const authFactory = {};
 
     authFactory.doLogin = (username, password) => {
 
-        return $http.post(`${API_URL}/api/login`, {
-            username: username,
-            password: password
-        })
+      return $http.post(`${API_URL}/api/login`, {
+        username: username,
+        password: password
+      })
     };
 
     authFactory.doSignup = data => $http.post(`${API_URL}/api/signup`, data);
@@ -22,69 +22,69 @@ angular.module('app.auth', [])
 
     authFactory.getUser = () => {
 
-        if (authToken.getToken()) {
+      if (authToken.getToken()) {
 
-            return $http.get(`${API_URL}/api/me`, {cache: true});
-        }
+        return $http.get(`${API_URL}/api/me`, {cache: true});
+      }
 
-        return $q.reject({message: 'User has no token.'});
+      return $q.reject({message: 'User has no token.'});
     };
 
     _AuthService = authFactory;
 
     return authFactory;
-})
-.factory('authToken', ($window) => {
+  })
+  .factory('authToken', ($window) => {
 
-	const authToken = {};
+    const authToken = {};
 
     authToken.getToken = () => $window.localStorage.getItem('token');
 
     authToken.setToken = (token) => {
 
-        if (token) {
-            $window.localStorage.setItem('token', token);
-        }
+      if (token) {
+        $window.localStorage.setItem('token', token);
+      }
     };
 
     authToken.removeToken = () => $window.localStorage.removeItem('token');
 
 
     return authToken;
-})
-.factory('AuthInterceptor', ($q, authToken, $location) => {
-	// console.log('AuthInterceptor', $state);
+  })
+  .factory('AuthInterceptor', ($q, authToken, $location) => {
+    // console.log('AuthInterceptor', $state);
     const interceptorFactory = {};
 
     interceptorFactory.request = function (config) {
-    	console.log('interceptorFactory', config);
-        const token = authToken.getToken();
+      console.log('interceptorFactory', config);
+      const token = authToken.getToken();
 
-        if (token) {
-            // config.headers['x-access-token'] = token;
-        }
+      if (token) {
+        // config.headers['x-access-token'] = token;
+      }
 
-        return config;
+      return config;
     };
 
     interceptorFactory.responseError = function (response) {
 
-        if (response.status == 403) {
+      if (response.status == 403) {
 
-            authToken.removeToken();
+        authToken.removeToken();
 
-            $location.path('/login');
-        }
+        $location.path('/login');
+      }
 
-        return $q.reject(response);
+      return $q.reject(response);
     };
 
 
     return interceptorFactory;
-});
+  });
 
 function getAuthService() {
-    return _AuthService;
+  return _AuthService;
 }
 
 export default getAuthService;

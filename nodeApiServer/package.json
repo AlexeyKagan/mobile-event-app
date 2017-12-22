@@ -22,6 +22,5 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
-    "pdfcrowd": "^1.1.1"
   }
 }

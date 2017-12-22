@@ -12,7 +12,7 @@ export default class TaskView {
 
     this.unsubscribe = $ngRedux.connect(null, { setVisabilityFilter })(this);
 
-    $rootScope.$on('$ionicSideMenuClose', (...args) => {
+    $rootScope.$on('$ionicSideMenuClose', () => {
       this.isShownLeftMenu = false;
     })
   }

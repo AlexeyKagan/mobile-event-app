@@ -1,6 +1,23 @@
 export function getCurrentTasks(data, selectedMonth, selectedYear) {
+  return data.reduce((acc, curr) => {
+    if (!curr.dateAt) {
+      return acc;
+    }
 
-  return data.map(d => d.dateAt && new Date(d.dateAt).getMonth() === selectedMonth && new Date(d.dateAt).getFullYear() === selectedYear && { ...d }).filter(d => d);
+    if (new Date(curr.dateAt).getMonth() !== selectedMonth) {
+      return acc;
+    }
+
+    if (new Date(curr.dateAt).getFullYear() !== selectedYear) {
+      return acc;
+    }
+
+    return [
+      ...acc, {
+      ...curr,
+      dateAt: new Date(d.dateAt).toLocaleDateString()
+    }];
+  }, [])
 }
 
 export function renderHtml({ rows, columns, dateAt }) {

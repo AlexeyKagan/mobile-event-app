@@ -1,12 +1,9 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    // Our entry file for the app,
-    // You can specify multiple entry files using array.
     entry: "./www/app/app.js",
 
     devServer: {
-      /* Send API requests on localhost to API server get around CORS */
       proxy: {
         '/api': 'http://localhost:8085'
       }
@@ -70,14 +67,6 @@ module.exports = {
                   'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
               ]
             }
-            // production compress images.
-            // {
-            //   test: /.*\.(gif|png|jpe?g|svg)$/i,
-            //   loaders: [
-            //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
-            //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-            //   ]
-            // }
         ]
     },
     plugins: [
