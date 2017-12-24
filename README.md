@@ -22,7 +22,7 @@ Make typical day events much easy on your mobile. <br/>
 
 ### Some UI images:
 <br/>
-<br/>
+
 ![alt tag](https://pp.vk.me/c628131/v628131315/4633c/BkG1c6nhFz0.jpg)
 ![alt tag](https://pp.vk.me/c628131/v628131315/4635c/DfLj1ufuSCs.jpg)
 ![alt tag](https://pp.vk.me/c628131/v628131315/4634c/lXxRnDBDHFY.jpg)
