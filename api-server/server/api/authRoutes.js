@@ -18,7 +18,6 @@ export function login(req, res) {
       return;
     }
 
-    // TODO encode password here.
     if (user.password !== req.body.password) {
       res.send({success: false, msg: 'Authentication failed. Wrong password.'});
       return;
@@ -27,22 +26,17 @@ export function login(req, res) {
     // If user is found and password is right create a token.
     const token = jwt.sign({ username: user.username }, config.secret);
 
-    res.json({success: true, token: `${token}`});
+    res.json({success: true, token });
 
   });
 }
 
 export function signup(req, res) {
-
-  console.log('post signup', req.body.username, req.body.password);
-
   if (!req.body.username || !req.body.password) {
     res.json({ success: false, msg: 'Please pass name and password.'});
     return;
   }
 
-  // TODO don't foget logic for body.email
-  console.log('post signup', req.body.username, req.body.password, req.body.email, req.body.date, req.body.picture);
   const newUser = new noteSchema({
     username: req.body.username,
     password: req.body.password,

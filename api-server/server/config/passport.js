@@ -16,10 +16,8 @@ export const findUserWithJwtPayloadId = passport => {
 
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
 
-    console.log('jwt_payload', jwt_payload._id);
-
     UserNote.findOne({ _id: jwt_payload._id }, (err, user) => {
-      console.log('UserNote', err, user);
+
       if (err) {
         return done(err, false)
       }

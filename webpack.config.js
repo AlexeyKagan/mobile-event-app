@@ -7,7 +7,6 @@ module.exports = {
       proxy: {
         '/api': 'http://localhost:8085'
       }
-      // headers: {"Access-Control-Allow-Origin": "*"},
     },
 
     devtool: 'source-map',
@@ -22,7 +21,6 @@ module.exports = {
                 test: /.js$/,
                 loader: 'babel-loader',
                 exclude: [/www\/lib/, /node_modules/],
-                // presets for the babel loader, supporting stage-2 es6 funcitonality
                 query: {
                   presets: ['es2015', 'stage-2']
                 }
@@ -54,8 +52,7 @@ module.exports = {
                 test   : /\.svg/,
                 loader : 'file?prefix=font/&name=assets/[hash].[ext]'
             },
-            // we will load all html files raw, it will allow your to require html files as string templates
-            // inside your components, directives
+
             {
               test: /\.html$/,
               loader: "raw-loader"
