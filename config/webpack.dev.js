@@ -7,20 +7,14 @@ const API_PROXY = 'http://localhost:8085';
 
 const devConfig = {
   devtool: 'source-map',
-
+  mode: 'development',
   devServer: {
     proxy: {
       '/api': API_PROXY
-    }
-  },
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    'react-hot-loader/patch',
-    path.resolve(__dirname, './../src/client/app/index.jsx')
-  ],
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    },
+    publicPath: '/',
+    contentBase: path.resolve('www')
+  }
 };
 
 module.exports = merge(baseConfig, devConfig);

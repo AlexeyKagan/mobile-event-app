@@ -15,11 +15,10 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-// The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../www/lib/ionic/fonts" !default;
+$ionicons-font-path: "../../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "../../lib/ionic/scss/ionic";
 
 [nav-view-transition][nav-view-direction] {
   background-color: transparent;
@@ -48,7 +47,7 @@ body{
   width: 100%;
   height: 100%;
   position: relative;
-  background: url('../www/img/background/background-login.png');
+  background: url('../../img/background/background-login.png');
   background-size: 100% 100%;
 
   &__ok{
@@ -149,7 +148,7 @@ body{
 
 //####### SIGNUP-PAGE #######//
 .main-signup{
-  background: url("../www/img/background/background-signup.png");
+  background: url("../../img/background/background-signup.png");
   background-size: 100% 100%;
   width: 100%;
   height: 100%;
@@ -220,7 +219,7 @@ body{
 
 //####### HOME PAGE #######//
 ion-side-menus{
-    background: url("../www/img/background/background-home.png") no-repeat;
+    background: url("../../img/background/background-home.png") no-repeat;
     background-size: 100% 100%;
     transition: all 0.5s;
 }

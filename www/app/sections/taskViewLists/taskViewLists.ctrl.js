@@ -26,8 +26,8 @@ export default class TaskViewLists {
   }
 
   mapStateToThis({tasks = {}, visibilityFilter}) {
-    const tasks = currentTasks(tasks, this.$state.params.date);
-    const filteredTasks = this.getFiltered(tasks, visibilityFilter);
+    const selectedTasks = currentTasks(tasks, this.$state.params.date);
+    const filteredTasks = this.getFiltered(selectedTasks, visibilityFilter);
 
     return {
       tasks: filteredTasks,

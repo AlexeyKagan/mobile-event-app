@@ -13,7 +13,7 @@ import '../lib/ionic/js/ionic-angular.js';
 import '../lib/onezone-datepicker/dist/onezone-datepicker.min.js';
 
 // css
-import 'ionic.app.scss';
+import './scss/ionic.app.scss';
 import 'animate.css';
 import 'angularjs-toaster/toaster.min.css';
 
@@ -41,7 +41,7 @@ import './services/AuthService.js';
 import { RootReducer } from './reducers';
 
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger'
 
 angular.module('mainApp', [
   'ionic',
@@ -71,12 +71,10 @@ angular.module('mainApp', [
 .run(($ionicPlatform, $ngRedux, $rootScope, AuthService, $state) => {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
+      // Hide the accessory bar by default
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
+      // It stops the viewportfrom snapping when text inputs are focused. Ionic handles this internally for
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }

@@ -31,12 +31,12 @@ export function saveNote(req, res) {
 
   let day;
   const [ notifyOfMinutes ] = (req.body.notifyOf || '').split(' ');
-
+  // @TODO. Review this bullshit logic below.
   if (req.body.dateAtServer) {
     const [hour, minutes] = req.body.timeAt.split(':');
     const [day0, month, year] = req.body.dateAtServer.split('/');
 
-    day = new Date(year, month, day0, hour - 3, notifyOfMinutes ? (minutes - notifyOfMinutes) :  minutes, 0);
+    day = new Date(year, month, day0, hour, notifyOfMinutes ? (minutes - notifyOfMinutes) : minutes, 0);
   }
   if (day > new Date()) {
 
