@@ -1,0 +1,7 @@
+{
+  "name": "mobile-event-app-rewriter",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

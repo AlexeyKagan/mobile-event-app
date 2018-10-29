@@ -1,0 +1,44 @@
+<section class="main-login">
+  <div class="main-login__ok"></div>
+
+  <div class="main-login__form">
+    <form 
+      [formGroup]="loginForm"  
+      (ngSubmit)="onSubmit()" 
+    >
+      <div class="main-login__form-row">
+        <span class="main-login__row-icon">
+            <ion-icon name="person"></ion-icon>
+        </span>
+        <input type="text" placeholder="Login" formControlName="login" />
+      </div>
+
+      <div class="main-login__form-row">
+        <span class="main-login__row-icon">
+            <ion-icon name="lock"></ion-icon>
+        </span>
+        <input type="password" placeholder="Password" formControlName="password" />
+      </div>
+
+      <div class="main-login__form-button">
+        <button 
+          type="submit" 
+          class="main-login__button"
+          [ngClass]="{
+            'main-login__button_isLoading': isLoading,
+            'success': isSuccess
+          }"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+    <div class="main-login__href">
+      <p>
+        No account? <a routerLink="/signup"> Sign up </a>
+      </p>
+    </div>
+    <!-- TODO toaster -->
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-bottom-center'}"></toaster-container> -->
+  </div>
+</section>
