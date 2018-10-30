@@ -17,21 +17,18 @@ $photo-color: #c2bfce;
     color: getColor(pastel-purple);
   }
 
-  &__back {
-    font-size: 1.7rem;
-    color: getColor(white);
-    font-weight: 100;
-    padding-top: 6%;
-    margin-left: 4%;
-    cursor: pointer;
-  }
+  &__header {
+    margin-top: 20px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    line-height: 14px;
 
-  &__title {
-    margin-top: 4%;
-    margin-left: 9%;
-    h2 {
+    &-title {
+      margin-left: 10px;
       color: getColor(white);
       font-weight: 100;
+      font-size: 24px;
     }
   }
 
@@ -50,27 +47,4 @@ $photo-color: #c2bfce;
     opacity: 0;
   }
 
-  .main-login__form-row {
-    margin-bottom: 5%;
-  }
-
-  .main-login__form-button {
-    margin-top: 13%;
-  }
-
-  @media screen and (max-height: 550px) {
-    &__add-photo {
-      display: none;
-    }
-  }
-
-  @media screen and (max-height: 440px){
-    &__title {
-      display: none;
-    }
-
-    &__back {
-      display: none;
-    }
-  }
 }
