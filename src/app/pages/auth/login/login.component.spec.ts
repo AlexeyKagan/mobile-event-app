@@ -58,7 +58,7 @@ describe('LoginComponent', () => {
     component.onSubmit();
     tick(AFTER_SUBMIT_TIMER);
     expect(component.isSuccess).toBeTruthy();
-  }))
+  }));
 
   it('navigation should be called after submit', fakeAsync(() => {
     component.onSubmit();

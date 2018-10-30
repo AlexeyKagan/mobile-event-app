@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
   {
-    path: 'login',
-    loadChildren: './pages/login/login.module#LoginModule'
-  },
-  // { path: '**', redirectTo: 'heroes' } // bad routes redirect to not found
+    path: 'task-board',
+    loadChildren: './pages/task-board/task-board.module#TaskBoardModule',
+  }
 ];
 
 @NgModule({
