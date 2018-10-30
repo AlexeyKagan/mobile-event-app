@@ -9,7 +9,7 @@ import { delay } from 'rxjs/operators';
 @Component({
   selector: 'section-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../assets/auth.scss', './login.component.scss']
 })
 export class LoginComponent {
 

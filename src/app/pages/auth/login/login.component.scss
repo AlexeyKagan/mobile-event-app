@@ -1,0 +1,83 @@
+@import '../../../../assets/sass/variables';
+
+.main-login {
+  background: url('../../../../assets/images/sea-rocks.png');
+  background-size: 100%;
+
+  &__ok {
+    width: 43%;
+    height: 5.5%;
+    background: getColor(white);
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    margin-left: -13%;
+    transform: rotate(-45deg);
+    border-radius: 5px;
+    border-top-left-radius: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 150%;
+      width: 23%;
+      top: -150%;
+      border-radius: 5px;
+      background: getColor(white);
+      box-shadow: inset -0.2rem -2rem 2rem rgba(0,0,0,0.2);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -1.2rem;
+      margin-top: -1.2rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      border: 2px dotted getColor(white);
+      border-radius: 50%;
+      border-left: none;
+      border-bottom: none;
+      transition: opacity 0.1s 0.4s;
+      opacity: 0;
+    }
+  
+    &.success {
+      transition: transform 0.3s 0.1s ease-out, opacity 0.1s 0.3s, background-color 0.1s 0.3s;
+      transform: scale(100);
+      opacity: 0.9;
+      font-size: 0;
+  
+      &:after {
+        transition: opacity 0.1s 0s;
+        opacity: 0;
+        animation: none;
+      }
+    }
+  
+    &_isLoading {
+      width: 3rem;
+      height: 3rem;
+      font-size: 0;
+      &:after{
+        opacity: 1;
+        animation: rotate 0.5s 0.4s infinite linear;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

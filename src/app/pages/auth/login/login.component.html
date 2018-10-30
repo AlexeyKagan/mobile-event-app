@@ -1,29 +1,29 @@
-<section class="main-login">
+<section class="auth main-login">
   <div class="main-login__ok"></div>
 
-  <div class="main-login__form">
+  <div class="auth__form">
     <form 
       [formGroup]="loginForm"  
       (ngSubmit)="onSubmit()" 
     >
-      <div class="main-login__form-row">
-        <span class="main-login__row-icon">
+      <div class="auth__form-row">
+        <span class="auth__row-icon">
             <ion-icon name="person"></ion-icon>
         </span>
         <input type="text" placeholder="Login" formControlName="login" />
       </div>
 
-      <div class="main-login__form-row">
-        <span class="main-login__row-icon">
+      <div class="auth__form-row">
+        <span class="auth__row-icon">
             <ion-icon name="lock"></ion-icon>
         </span>
         <input type="password" placeholder="Password" formControlName="password" />
       </div>
 
-      <div class="main-login__form-button">
+      <div class="auth__form-button">
         <button 
           type="submit" 
-          class="main-login__button"
+          class="auth__button main-login__button"
           [ngClass]="{
             'main-login__button_isLoading': isLoading,
             'success': isSuccess
@@ -33,7 +33,7 @@
         </button>
       </div>
     </form>
-    <div class="main-login__href">
+    <div class="auth__href">
       <p>
         No account? <a routerLink="/signup"> Sign up </a>
       </p>

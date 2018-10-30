@@ -34,10 +34,10 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "src/assets/sass/ionic-variables.scss"
               },
               {
-                "input": "src/global.scss"
+                "input": "src/assets/sass/main.scss"
               }
             ],
             "scripts": []

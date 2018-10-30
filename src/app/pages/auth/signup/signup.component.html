@@ -1,0 +1,58 @@
+<div class="auth main-signup">
+    <div class="main-signup__back">
+      <a routerLink="/login"> 
+        <span class="auth__row-icon">
+          <ion-icon name="arrow-back"></ion-icon>
+        </span>
+      </a>
+    </div>
+  
+    <div class="main-signup__title">
+      <h2>Sign up</h2>
+    </div>
+  
+    <div class="main-signup__add-photo" ng-click="$ctrl.loadPicture()">
+      <span class="auth__row-icon">
+        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+      </span>
+    </div>
+  
+    <div class="auth__form">
+      <form ng-submit="$ctrl.signUp()">
+        <div class="auth__form-row">
+          <span class="auth__row-icon">
+            <ion-icon name="person"></ion-icon>
+          </span>
+          <input type="text" ng-model="$ctrl.login" placeholder="Login" />
+        </div>
+  
+        <div class="auth__form-row">
+          <span class="auth__row-icon">
+            <ion-icon name="mail"></ion-icon>
+          </span>
+          <input type="email" ng-model="$ctrl.email" placeholder="E-mail" />
+        </div>
+  
+        <div class="auth__form-row">
+          <span class="auth__row-icon">
+            <ion-icon name="lock"></ion-icon>
+          </span>
+          <input type="password" ng-model="$ctrl.password" placeholder="Password" />
+        </div>
+  
+        <div class="auth__form-row">
+          <span class="auth__row-icon">
+            <ion-icon name="calendar"></ion-icon>
+          </span>
+          <input type="date" ng-model="$ctrl.date" placeholder="Birthday" />
+        </div>
+  
+        <div class="auth__form-button">
+          <button type="submit" class="auth__button">Sign Up</button>
+        </div>
+      </form>
+  
+      <!-- <toaster-container toaster-options="{'position-class': 'toast-bottom-center'}"></toaster-container> -->
+    </div>
+  </div>
+  

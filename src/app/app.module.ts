@@ -7,12 +7,14 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
-import { SectionsModule } from './sections/sections.module';
+// import { SectionsModule } from './sections/sections.module';
+// import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './pages/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), SectionsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AuthModule],
   providers: [
     StatusBar,
     SplashScreen,

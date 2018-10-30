@@ -4,18 +4,19 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SectionsRoutingModule } from './sections-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signup/signup.component';
+import { AuthRoutingModule } from './auth-routing.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, // @todo ?
     IonicModule,
-    SectionsRoutingModule,
     ReactiveFormsModule,
+    AuthRoutingModule,
   ],
   declarations: [LoginComponent, SignUpComponent]
 })
-export class SectionsModule {}
+export class AuthModule {}

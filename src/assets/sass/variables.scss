@@ -1,0 +1,33 @@
+$colorMap: (
+  black              : #000000,
+  white              : #ffffff,
+
+  gray               : #bbbbbb,
+  ash-gray           : #cccccc,
+
+  pastel-purple      : #b3b3bc, // added
+  medium-purple      : #939294, // added
+
+  salmon             : #ff3b65, // use it instead of #ff3366
+  salmon-hover       : #ff5479, 
+  salmon-dark        : #d93256,
+
+  red                : #dd3333,
+  green              : #33dd33,
+);
+
+
+/**
+ * @param  {String}
+ * @param  {Map}
+ * @return {#rrggbb}
+ */
+@function getColor($colorName, $colorMap: $colorMap) {
+  @if map-has-key($colorMap, $colorName) {
+    @return map-get($colorMap, $colorName);
+  }
+
+  @warn "`#{$colorName}` is not found";
+
+  @return null;
+}
