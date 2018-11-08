@@ -3,6 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/task-board/main',
+    pathMatch: 'full'
+  },
+  {
     path: 'task-board',
     loadChildren: './pages/task-board/task-board.module#TaskBoardModule',
   }

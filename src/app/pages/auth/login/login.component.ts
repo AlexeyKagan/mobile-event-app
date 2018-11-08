@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -13,10 +13,13 @@ import { delay } from 'rxjs/operators';
 })
 export class LoginComponent {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    ) {}
 
   loginForm = new FormGroup({
-    login: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl('')
   });
 
@@ -38,22 +41,22 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    const { login, password } = this.loginForm.value;
+    const { value } = this.loginForm;
+    const { username, password } = value;
 
     this.isLoading = true;
-
-    if (!login || !password) {
-      console.log('Uncorrect login or password', password, password);
+    // @todo create validation
+    if (!username || !password) {
       this.isLoading = false;
-      // this.showWarningToasty('Please type login or password');
       return;
     }
 
-    of(this.loginForm.value)
+    this.authService
+      .login(value)
       .pipe(delay(1000))
       .subscribe(
         this.onSubmitSubscribe,
-        this.onSubmitError,
+        this.onSubmitError
       );
   }
 }

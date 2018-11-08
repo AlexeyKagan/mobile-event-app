@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToasterModule } from 'angular2-toaster';
 
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signup/signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
+import { AuthService } from './services/auth.service';
+import { JwtService } from './services/jwt.service';
 
 @NgModule({
   imports: [
@@ -16,7 +19,12 @@ import { AuthRoutingModule } from './auth-routing.module';
     IonicModule,
     ReactiveFormsModule,
     AuthRoutingModule,
+    ToasterModule.forRoot()
   ],
-  declarations: [LoginComponent, SignUpComponent]
+  declarations: [LoginComponent, SignUpComponent],
+  providers: [
+    AuthService,
+    JwtService,
+  ]
 })
 export class AuthModule {}

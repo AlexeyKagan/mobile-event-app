@@ -1,0 +1,43 @@
+<ion-menu class="menu_main" side="start" content-id="content">
+  <ion-content padding>
+    <ion-list>
+      <ion-item menu-close ng-click="$ctrl.goToMain()">Main</ion-item>
+  
+      <ion-item menu-close href="/home/add-task">Add task</ion-item>
+  
+      <ion-item menu-close href="/home/calendar">Calendar</ion-item>
+  
+      <ion-item menu-close href="/home/contacts">Contacts</ion-item>
+  
+      <ion-item ng-click="$ctrl.exit()">Exit</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="content">
+  <section class="task-board-container">
+    <div class="task-board-container__top">
+      <div class="hamburger" 
+           [ngClass]="{'is-active': isLeftMenuShown}"
+           id="hamburger-6" 
+           (click)="toggleLeftSideMenu()"
+      >
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+
+      <span class="main-home__search ion-android-search" id="search" ng-click="$ctrl.openFilterInput()"> </span>
+  
+      <div class="search" ng-class="{ 'search-visible': $ctrl.showFilter }">
+        <input type="search" placeholder="Фильтр" ng-model="$ctrl.filter" ng-change="$ctrl.onFilterChanged()">
+      </div>
+    </div>
+
+    <div class="task-board-container__router-container">
+        <ion-router-outlet></ion-router-outlet>
+    </div>
+  </section>
+
+  <toaster-container [toasterconfig]="config"></toaster-container>
+</ion-content>

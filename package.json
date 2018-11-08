@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^7.0.1",
     "@angular/common": "~6.1.1",
     "@angular/core": "~6.1.1",
     "@angular/forms": "~6.1.1",
@@ -25,6 +26,9 @@
     "@ionic-native/status-bar": "5.0.0-beta.21",
     "@ionic/angular": "4.0.0-beta.13",
     "@ionic/pro": "2.0.3",
+    "@ngrx/effects": "^6.1.1",
+    "@ngrx/store": "^6.1.1",
+    "angular2-toaster": "^6.1.0",
     "core-js": "^2.5.3",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"
