@@ -11,7 +11,9 @@ import { TaskBoardContainerComponent } from './task-board-container/task-board-c
 import { TaskBoardMainComponent } from './task-board-main/task-board-main.component';
 
 import { taskBoardReducer } from './reducers/task-board.reducer';
+import { WeatherService } from './services/weather.service';
 
+// @TODO s
 export const reducers: ActionReducerMap<any> = {
   taskBoardReducer,
 };
@@ -27,6 +29,12 @@ export const reducers: ActionReducerMap<any> = {
     StoreModule.forFeature('taskBoard', taskBoardReducer),
     // EffectsModule.forFeature([BookEffects, CollectionEffects]),
   ],
-  declarations: [TaskBoardContainerComponent, TaskBoardMainComponent]
+  declarations: [
+    TaskBoardContainerComponent, 
+    TaskBoardMainComponent
+  ],
+  providers: [
+    WeatherService
+  ]
 })
 export class TaskBoardModule { }

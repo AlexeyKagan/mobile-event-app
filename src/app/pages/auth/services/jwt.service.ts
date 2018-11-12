@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '../../../modules/storage/Storage';
+import { Storage } from '../../../common/services/Storage';
 
 
 @Injectable()
@@ -18,5 +18,5 @@ export class JwtService {
   destroyToken(): void {
     this.storage.removeItem('_token');
   }
-
 }
+

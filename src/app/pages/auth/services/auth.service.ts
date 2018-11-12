@@ -6,15 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import { User, Credentials } from '../models/auth';
 import { JwtService } from './jwt.service';
-
-
-// @todo  global constants
-// @todo Api service
-const SERVER_HOST = 'http://localhost:8085';
-const SERVER_API_PREFFIX = 'api'
-
-const SERVER_API = `${SERVER_HOST}/${SERVER_API_PREFFIX}`;
-
+import { SERVER_API } from '../../../common/constants/api.constant'
 
 @Injectable()
 export class AuthService {
