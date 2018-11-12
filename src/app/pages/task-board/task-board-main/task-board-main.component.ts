@@ -33,12 +33,13 @@ export class TaskBoardMainComponent implements OnInit {
     this.weatherService
       .fetchWeather()
       .subscribe(data => {
-        console.log('data', data);
-        const iconId = data.weather[0].icon;
-        const temp = Math.round(data.main.temp - 275) + " °C";
+        const { weather, main: { temp } } = data;
+
+        const iconId = weather[0].icon;
 
         this.iconId = iconId;
-        this.temp = temp;
+        // @TODO - wtf 275?
+        this.temp = Math.round(temp - 275) + " °C";
       });
   }
 
