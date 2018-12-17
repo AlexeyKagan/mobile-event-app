@@ -1,0 +1,24 @@
+<div class="task-board-list">
+    <!--ng-repeat="t in $ctrl.tasks | filter: $ctrl.filter | orderBy:'timeAt' track by t.id"-->
+    <!--              ng-class-odd="'animated bounceInLeft'"
+            ng-class-even="'animated bounceInRight'"-->
+    <!-- <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px"> -->
+
+      <div  class="task-board-list__row"
+            ng-class="{ 'animated' : !$ctrl.filter }"
+            ng-class-odd="'bounceInLeft'"
+            ng-class-even="'bounceInRight'"
+            *ngFor="let task of tasks"
+            (click)="aboutTask(task)"
+      >
+        <div class="task-board-list__when">
+          {{task.timeAt}}
+        </div>
+
+        <div class="task-board-list__about">
+          <p class="task-board-list__title">{{task.title}}</p>
+          <p class="task-board-list__description">{{task.description}}</p>
+        </div>
+      </div>
+    <!-- </ion-scroll> -->
+  </div>

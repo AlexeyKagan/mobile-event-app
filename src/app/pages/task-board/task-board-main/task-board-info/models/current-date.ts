@@ -3,4 +3,5 @@ export interface CurrentDate {
   dayNumber: number,
   monthNow: string,
   yearNow: number,
+  city?: string,
 }

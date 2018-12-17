@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'section-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../assets/auth.scss', './login.component.scss']
+  styleUrls: ['../assets/auth.scss', './login.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
 
@@ -58,5 +59,9 @@ export class LoginComponent {
         this.onSubmitSubscribe,
         this.onSubmitError
       );
+  }
+
+  onClickTest() {
+    console.log('----');
   }
 }

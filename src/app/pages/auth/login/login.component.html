@@ -3,8 +3,8 @@
 
   <div class="auth__form">
     <form 
-      [formGroup]="loginForm"  
-      (ngSubmit)="onSubmit()" 
+      [formGroup]="loginForm"
+      (submit)="onSubmit()"
     >
       <div class="auth__form-row">
         <span class="auth__row-icon">
@@ -23,7 +23,7 @@
       <div class="auth__form-button">
         <button 
           type="submit" 
-          class="auth__button main-login__button"
+          class="ui-button main-login__button"
           [ngClass]="{
             'main-login__button_isLoading': isLoading,
             'success': isSuccess

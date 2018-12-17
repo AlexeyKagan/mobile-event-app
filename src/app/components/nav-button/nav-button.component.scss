@@ -1,0 +1,90 @@
+// @TODO Fix this shit bellow
+.nav-button {
+  position: absolute;
+
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 50%;
+  right: 5%;
+  bottom: 11%;
+
+  transition: all 0.3s;
+  &:before{
+
+    content: '';
+    left: 0;
+    top:0;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transition:all .3s;
+    background: #ff3366;
+
+  }
+
+  .nav-plus-scale {
+    transition:all 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+
+    border-radius: 50%;
+
+    color: #fff;
+    background: #ff3366;
+    z-index: 99;
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+
+    &__icon {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  & .nav-item {
+    font-size: 2rem;
+    color: white;
+    padding-top: 7px;
+    padding-left: 19px;
+    transition:all 0.3s;
+    position: absolute;
+    z-index: 5;
+  }
+
+  //ANIMATION ON CLICK
+  &.nav-button_active {
+    will-change: transform;
+
+    &:before{
+      width: 320px;
+      height: 320px;
+      top: -100px;
+      left:-100px;
+
+      z-index: 1;
+    }
+
+    .nav-plus-scale {
+      transform: rotate(135deg);
+      background: #cf0e3f;
+      z-index: 99;
+    }
+
+    .nav-item-1 {
+      transform: translate(10px,-80px);
+    }
+    .nav-item-2 {
+      transform: translate(-55px,-45px);
+    }
+    .nav-item-3 {
+      transform: translate(-80px,25px);
+    }
+  }
+}

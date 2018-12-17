@@ -1,0 +1,103 @@
+.main-add-task {
+  color:white;
+  background: inherit !important;
+  padding-bottom: 40px;
+  height: 100%;
+  overflow: scroll;
+
+  &__title {
+    h2 {
+      color:white;
+      font-weight: 100;
+    }
+    margin-left: 4%;
+    margin-top: 5%;
+    margin-bottom: 6%;
+  }
+
+  &__row {
+    font-size: 1.2rem;
+    margin-bottom: 5%;
+    margin-left: 4%;
+    width: 100%;
+    font-weight: 100;
+
+    input {
+      color:white;
+      display: block;
+
+      border: none;
+      background: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding: 0;
+      margin: 0;
+      width: 100%;
+
+      &::-webkit-input-placeholder {
+        font-size: 1rem;
+        color:#b3b3bc;
+        font-weight: 200;
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+        line-height: 12px;
+      };
+    }
+
+    textarea {
+      margin-top: 4%;
+      width: 190%;
+      background: none;
+      resize: none;
+      color:white;
+      border: none;
+      border-bottom: 1px solid #59516f;
+    }
+  }
+
+  &__row-left {
+    padding-top: 2%;
+    padding-right: 4%;
+    width: 140px;
+  }
+
+  &__row-right {
+    width: 50%;
+  }
+
+  &__row-microphone {
+    align-self: flex-end;
+    float: right;
+    padding-right: 4%;
+  }
+
+  &__description-title {
+    display:block;
+    font-size: 100%;
+    font-weight: 300;
+    span {
+      margin-right: 2%;
+    }
+  }
+
+  &__dropdown {
+    background: none;
+    color:white;
+    border: none;
+    font-size:20px;
+    font-weight: 300;
+  
+    select {
+      background: none;
+      color:white;
+      font-size: 14px;
+    }
+  
+    select option {
+      color:black;
+    }
+  }
+}
+
+.isRecogniting {
+  color: #ff3366;
+}

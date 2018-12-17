@@ -1,0 +1,14 @@
+<div class="task-board-info">
+  <div class="task-board-info__container task-board-info-row">
+    <span class="task-board-info-row__header">{{currentDate.day}}</span>
+    <span class="task-board-info-row__placeholder">{{getFormattedDate()}}</span>
+  </div>
+
+  <div class="task-board-info__container task-board-info-row">
+    <span class="task-board-info-row__header">
+      <img *ngIf="iconId" src="http://openweathermap.org/img/w/{{iconId}}.png">
+      {{ temp }}
+    </span>
+    <span class="task-board-info-row__placeholder">{{currentDate.city}}</span>
+  </div>
+</div>

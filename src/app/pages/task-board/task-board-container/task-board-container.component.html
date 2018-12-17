@@ -1,24 +1,42 @@
-<ion-menu class="menu_main" side="start" content-id="content">
+<ion-menu
+  class="menu_main" 
+  side="start" 
+  content-id="content" 
+  (ionDidClose)="onMenuClosed()"
+  (ionDidOpen)="onMenuOpen()"
+>
   <ion-content padding>
     <ion-list>
-      <ion-item menu-close ng-click="$ctrl.goToMain()">Main</ion-item>
-  
-      <ion-item menu-close href="/home/add-task">Add task</ion-item>
-  
-      <ion-item menu-close href="/home/calendar">Calendar</ion-item>
-  
-      <ion-item menu-close href="/home/contacts">Contacts</ion-item>
+      <ion-menu-toggle>
+        <ion-item routerLink="/task-board/main">
+          Main
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item routerLink="/task-board/add-task">Add task</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item routerLink="/task-board/calendar">Calendar</ion-item>
+      </ion-menu-toggle>
+      
+      <ion-menu-toggle>
+        <ion-item routerLink="/task-board/contacts">Contacts</ion-item>
+      </ion-menu-toggle>
   
       <ion-item ng-click="$ctrl.exit()">Exit</ion-item>
+
     </ion-list>
   </ion-content>
 </ion-menu>
 
 <ion-content id="content">
+  <!-- TODO Review everything here. Make separate components -->
   <section class="task-board-container">
     <div class="task-board-container__top">
       <div class="hamburger" 
-           [ngClass]="{'is-active': isLeftMenuShown}"
+           [ngClass]="{'hamburger_active': isLeftMenuShown}"
            id="hamburger-6" 
            (click)="toggleLeftSideMenu()"
       >
@@ -35,7 +53,7 @@
     </div>
 
     <div class="task-board-container__router-container">
-        <ion-router-outlet></ion-router-outlet>
+      <ion-router-outlet class="asd"></ion-router-outlet>
     </div>
   </section>
 

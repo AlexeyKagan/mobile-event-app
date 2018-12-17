@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from '../services/weather.service';
-import { MONTH_NAME, DAY_NAME } from '../../../common/constants/calendar.constants';
-import { CurrentDate } from './models/current-date';
+
 
 @Component({
   selector: 'app-task-board-main',
@@ -10,54 +8,25 @@ import { CurrentDate } from './models/current-date';
 })
 export class TaskBoardMainComponent implements OnInit {
 
-  constructor(private weatherService: WeatherService) { }
+  constructor() { }
 
   iconId: string = null;
   temp: string = '';
 
-  currentDate: CurrentDate = {
-    day: '',
-    dayNumber: 0,
-    monthNow: '',
-    yearNow: 0,
-  };
+  tasks: Array<any> = new Array(10)
+    .fill(0)
+    .map((_, i) => ({
+      id: i,
+      timeAt: '11:1' + i,
+      title: 'title: ' + i,
+      description: 'description: ' + i,
+    }));
 
   ngOnInit() {
-    this.initWeather();
-    this.initCurrentDate();
   }
 
-  async initWeather() {
-    await this.weatherService.initCurrentCoordinates();
-
-    this.weatherService
-      .fetchWeather()
-      .subscribe(data => {
-        const { weather, main: { temp } } = data;
-
-        const iconId = weather[0].icon;
-
-        this.iconId = iconId;
-        // @TODO - wtf 275?
-        this.temp = Math.round(temp - 275) + " °C";
-      });
-  }
-
-  initCurrentDate(): void {
-    const date = new Date();
-
-    this.currentDate = {
-      day: DAY_NAME[date.getDay()],
-      dayNumber: date.getDate(),
-      monthNow: MONTH_NAME[date.getMonth()],
-      yearNow: date.getFullYear()
-    };
-  }
-
-  getCurrentDate(): string {
-    const { monthNow, dayNumber, yearNow } = this.currentDate;
-
-    return `${monthNow} ${dayNumber},${yearNow}`;
+  aboutTask(task: string): void {
+    console.log('task', task);
   }
 
 }

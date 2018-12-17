@@ -1,0 +1,35 @@
+@import '../../../../../assets/sass/variables.scss';
+
+.task-board-info { 
+  display: flex;
+  padding-top: 6%;
+  align-items: center;
+  justify-content: space-between;
+
+  &__container {
+    margin: 0 4%;
+  }
+}
+
+.task-board-info-row {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    color: getColor(white);
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 30px;
+    height: 40px;
+  }
+
+  &__placeholder {
+    padding: 0;
+    margin: 0;
+    padding-top: 8%;
+    color: getColor(blue-haze);
+    font-size: 13px;
+  }
+}

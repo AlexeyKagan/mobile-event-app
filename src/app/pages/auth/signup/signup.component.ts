@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription, } from "rxjs";
+import { Subscription, } from 'rxjs';
 import { ToasterService, ToasterConfig, BodyOutputType } from 'angular2-toaster';
 
 import { AuthService } from '../services/auth.service';
 import validateErrors from '../utils/validateErrors';
-import { SIGNUP_VALIDATION_MESSAGES } from './consts'
+import { SIGNUP_VALIDATION_MESSAGES } from './consts';
 
 
 
@@ -24,8 +24,8 @@ export class SignUpComponent implements OnInit {
     private toasterService: ToasterService,
     ) { }
 
-  public config: ToasterConfig = new ToasterConfig({ 
-    animation: 'fade', 
+  public config: ToasterConfig = new ToasterConfig({
+    animation: 'fade',
     positionClass: 'toast-bottom-center'
   });
 
@@ -53,14 +53,14 @@ export class SignUpComponent implements OnInit {
   validateError(): void {
     const { controls } = this.signupForm;
 
-    const arrayOfErrorMessages = validateErrors(controls, SIGNUP_VALIDATION_MESSAGES)
+    const arrayOfErrorMessages = validateErrors(controls, SIGNUP_VALIDATION_MESSAGES);
 
     this.presentToast(arrayOfErrorMessages);
   }
 
   onSubmit(): void {
     const { value, invalid } = this.signupForm;
-    
+
     if (invalid) {
       this.validateError();
       return;

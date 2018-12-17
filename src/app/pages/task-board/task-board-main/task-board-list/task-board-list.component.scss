@@ -1,0 +1,59 @@
+// @TODO Move it in appropriate component
+.task-board-list {
+  width: 100%;
+  color:white;
+  margin-top: 13%;
+  font-weight: 100;
+  display: flex;
+  flex-direction: column;
+  // background: inherit;
+
+  //overflow-scrolling: 40px;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__row {
+    margin-left: 6%;
+    margin-bottom: 5%;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+  }
+
+  &__when {
+    float:left;
+    font-size: 1.2rem;
+    padding-top: 2%;
+  }
+
+  &__about {
+    float:left;
+    margin-left: 6%;
+    width: 81%;
+    border-bottom: 1px #736e92 solid;
+    padding-bottom: 3%;
+    &:hover{
+      border-bottom: 1px solid #7f6f9f;
+    }
+  } 
+
+  &__title {
+
+  }
+
+  &__description {
+    font-size: 0.8rem;
+    color:#bfbbd2;
+  }
+
+  &__btn-delete {
+    width: 60px;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    right: 40px;
+  }
+}

@@ -17,6 +17,6 @@ const validateError = (controls: Controls, validationMessages: ValidationMessage
     }, [])
     .map(error => `<p>${error.message}</p>`)
     .join('');
-}
+};
 
 export default validateError;

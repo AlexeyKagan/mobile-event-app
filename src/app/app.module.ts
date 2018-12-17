@@ -15,6 +15,11 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { ToasterModule } from 'angular2-toaster';
+
+// @TODO - Rethink
+
+import { ComponentsModule } from './components/components.module';
+
 // TODO create shared modules
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +36,8 @@ import { ToasterModule } from 'angular2-toaster';
     // EffectsModule.forRoot([]),
 
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,

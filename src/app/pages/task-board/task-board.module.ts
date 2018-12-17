@@ -9,9 +9,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { TaskBoardRoutingModule } from './task-board-routing.module';
 import { TaskBoardContainerComponent } from './task-board-container/task-board-container.component';
 import { TaskBoardMainComponent } from './task-board-main/task-board-main.component';
+import { TaskBoardInfoComponent } from './task-board-main/task-board-info/task-board-info.component';
+import { TaskBoardListComponent } from './task-board-main/task-board-list/task-board-list.component';
+
+import { TaskBoardAddTaskComponent } from './task-board-add-task/task-board-add-task.component';
 
 import { taskBoardReducer } from './reducers/task-board.reducer';
 import { WeatherService } from './services/weather.service';
+
+import { ComponentsModule } from '../../components/components.module';
+import { from } from 'rxjs';
 
 // @TODO s
 export const reducers: ActionReducerMap<any> = {
@@ -28,10 +35,14 @@ export const reducers: ActionReducerMap<any> = {
 
     StoreModule.forFeature('taskBoard', taskBoardReducer),
     // EffectsModule.forFeature([BookEffects, CollectionEffects]),
+    ComponentsModule,
   ],
   declarations: [
     TaskBoardContainerComponent, 
-    TaskBoardMainComponent
+    TaskBoardMainComponent,
+    TaskBoardInfoComponent,
+    TaskBoardListComponent,
+    TaskBoardAddTaskComponent,
   ],
   providers: [
     WeatherService

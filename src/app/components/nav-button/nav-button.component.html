@@ -1,0 +1,25 @@
+<div class="nav-button"
+     id="task-button"
+     (click)="onOpen()"
+     [ngClass]="{
+      'nav-button_active': isShown
+    }"
+  >
+
+  <a routerLink="/task-board/calendar" class="nav-item nav-item-1">
+    <ion-icon name="calendar"></ion-icon>
+  </a>
+
+  <a routerLink="/task-board/add-task" class="nav-item nav-item-2">
+    <ion-icon name="create"></ion-icon>
+  </a>
+
+  <a routerLink="/task-board/main" class="nav-item nav-item-3">
+    <ion-icon name="clipboard"></ion-icon>
+  </a>
+
+  <span class="nav-plus-scale">
+    <ion-icon name="add" class="nav-plus-scale__icon"></ion-icon>
+  </span>
+
+</div>
